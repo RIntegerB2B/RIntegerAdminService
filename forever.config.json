@@ -1,0 +1,7 @@
+{
+    "uid": "rinteger-admin",
+    "append": true,
+    "watch": true,
+    "script": "server.js",
+    "sourceDir": "/home/ubuntu/app/rinteger-admin-service/src"
+}
