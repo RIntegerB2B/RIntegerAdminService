@@ -44,8 +44,7 @@ exports.create = function (req, res) {
 exports.signIn = function (req, res) {
     ServiceProvider.findOne({
         'userName': req.body.userName,
-        'password': req.body.password,
-        'isActive' : 1
+        'password': req.body.password
     }, function (err, userDetail) {
         if (err) {
             res.status(500).send({

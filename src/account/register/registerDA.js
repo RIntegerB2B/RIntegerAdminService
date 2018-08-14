@@ -11,7 +11,7 @@ exports.create = function (req, res,registeredId) {
     spAccount.website = req.body.website;
     spAccount.location = req.body.location;
     spAccount.password= req.body.password;
-    spAccount.isActive = 0
+    spAccount.isActive = 1
     spAccount.save(function (err, spData) {
         if (err) {
             res.send(err);
