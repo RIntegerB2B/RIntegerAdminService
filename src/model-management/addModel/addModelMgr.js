@@ -1,6 +1,7 @@
 var addModelDA = require('./addModelDA');
 const multer = require('multer');
 var mkdirp = require('mkdirp');
+var appSetting = require('../../config/appSetting');
 
 exports.createModel = function (req, res) {
     try {
@@ -12,7 +13,7 @@ exports.createModel = function (req, res) {
 
 exports.createportFolioImage = function (req, res) {
     try {
-        const DIR = './models/serviceproviders/';
+        const DIR = appSetting.imageUploadPath;
         const PATH = DIR + req.params.modelName;
 
         mkdirp(PATH);
