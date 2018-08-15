@@ -1,4 +1,4 @@
-/* 'use strict';
+ 'use strict';
 
 var signInMgr = require('./sign-in/signinMgr');
 var viewBookingMgr = require('./view-booking/viewBookingMgr');
@@ -7,7 +7,7 @@ var notificationMgr = require('../admin/notification/notificationMgr');
 
 
 module.exports = function (app) {
-
+/*
         app.route('/admin')
                 .post(signInMgr.create);
 
@@ -48,10 +48,12 @@ module.exports = function (app) {
         app.route('/order/:id')
                 .get(updateStatusMgr.orderStatus);
 
+                */ 
+
         app.route('/pushnotification')
                 .post(notificationMgr.pushNotification);
 
         app.route('/pushnotificationsubscribe')
                 .post(notificationMgr.addPushSubscriber);
 
-} */ 
+} 

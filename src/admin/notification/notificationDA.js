@@ -142,7 +142,7 @@ exports.pushNotificationToUsers = function (req, res) {
                 "notification": {
                     "title": req.body.title,
                     "body": req.body.notificationBody,
-                    "icon": "assets/rinteger.png",
+                    "icon": "https://rinteger.com/assets/images/logo.jpg",
                     "vibrate": [100, 50, 100],
                     "data": {
                         "dateOfArrival": Date.now(),
