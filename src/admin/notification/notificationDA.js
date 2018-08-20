@@ -25,7 +25,7 @@ exports.pushNotificationOld = function (req, res) {
                     }
                 }
             };
-            var allSubscriptions= [];
+            var allSubscriptions = [];
             allSubscriptions.push(subscriptionData.userSubscriptions);
             Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
                     sub, JSON.stringify(notificationPayload))))
@@ -60,29 +60,31 @@ exports.bookingStatus = function (req, res) {
                     });
                 } else {
                     /* res.status(200).json({data}) */
-                    const subscriptions =[];
+                    const subscriptions = [];
                     subscriptions.push(data.userSubscriptions);
-                    
-                        const notificationPayload = {
-                            "notification": {
-                                "title": "Notification fromRipsil",
-                                "body": "Photo Shoot Completed!",
-                                "icon": "assets/main-page-logo-small-hat.png",
-                                "vibrate": [100, 50, 100],
-                                "data": {
-                                    "dateOfArrival": Date.now(),
-                                    "primaryKey": 1
-                                }
+
+                    const notificationPayload = {
+                        "notification": {
+                            "title": "Notification fromRipsil",
+                            "body": "Photo Shoot Completed!",
+                            "icon": "assets/main-page-logo-small-hat.png",
+                            "vibrate": [100, 50, 100],
+                            "data": {
+                                "dateOfArrival": Date.now(),
+                                "primaryKey": 1
                             }
-                        };
-                    
-                        Promise.all(subscriptions.map(subscription => webpush.sendNotification(
-                            subscription, JSON.stringify(notificationPayload) )))
-                            .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-                            .catch(err => {
-                                console.error("Error sending notification, reason: ", err);
-                                res.sendStatus(500);
-                            });
+                        }
+                    };
+
+                    Promise.all(subscriptions.map(subscription => webpush.sendNotification(
+                            subscription, JSON.stringify(notificationPayload))))
+                        .then(() => res.status(200).json({
+                            message: 'Newsletter sent successfully.'
+                        }))
+                        .catch(err => {
+                            console.error("Error sending notification, reason: ", err);
+                            res.sendStatus(500);
+                        });
                 }
             });
         }
@@ -128,8 +130,11 @@ exports.pushNotificationToAdmin = function (req, res) {
 
 exports.pushNotificationToUsers = function (req, res) {
     var notificationDetail = new NotificationDetail(req.body);
+    var mobNos = req.body.mobileNumber.toString().split(',');
     NotificationDetail.find({
-        'mobileNumber': notificationDetail.mobileNumber
+        'mobileNumber': {
+            '$in': mobNos
+        }
     }, function (err, subscriptionData) {
         if (err) {
             res.status(500).send({
@@ -142,7 +147,7 @@ exports.pushNotificationToUsers = function (req, res) {
                 "notification": {
                     "title": req.body.title,
                     "body": req.body.notificationBody,
-                    "icon": "https://rinteger.com/assets/images/logo.jpg",
+                    "icon": req.body.imageUrl != null ? req.body.imageUrl : "https://rinteger.com/assets/images/logo.jpg",
                     "vibrate": [100, 50, 100],
                     "data": {
                         "dateOfArrival": Date.now(),
@@ -153,7 +158,7 @@ exports.pushNotificationToUsers = function (req, res) {
             Promise.all(subscriptionData.map(sub => webpush.sendNotification(
                     sub.userSubscriptions, JSON.stringify(notificationPayload))))
                 .then(() => res.status(200).json({
-                    message: 'Push notification sent successfully.'
+                    message: subscriptionData
                 }))
                 .catch(err => {
                     console.error("Error sending notification, reason: ", err);
