@@ -13,5 +13,5 @@ const StatusSchema = new mongoose.Schema({
     materialReturn: Boolean
 });
 
-const Status = mongoose.model('bookingStatus', StatusSchema);
+const Status = mongoose.model('status', StatusSchema);
 module.exports = Status;

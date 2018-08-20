@@ -20,6 +20,25 @@ exports.findModels = function (req, res) {
     }
 }
 
+exports.deleteModel = function (req, res) {
+    try {
+        viewModelDA.deleteModel(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.findModel = function (req, res) {
+    try {
+        viewModelDA.findModel(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 /* exports.approvedModels = function (req, res) {
     try {
         viewModelDA.approvedModels(req, res)

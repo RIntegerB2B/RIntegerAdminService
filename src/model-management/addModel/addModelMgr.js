@@ -46,3 +46,11 @@ exports.createportFolioImage = function (req, res) {
         console.log(error);
     }
 }
+exports.updateModel = function (req, res) {
+    try {
+        addModelDA.updateModel(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}

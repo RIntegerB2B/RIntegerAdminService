@@ -39,7 +39,7 @@ exports.findDirectBooking = function (req, res) {
 }
 exports.findStatus = function (req, res) {
     Status.find({
-        'bookingId': req.params.id
+        'bookingOrderId': req.params.id
        }, function (err, statusDetail) {
         if (err) {
             res.status(500).send({

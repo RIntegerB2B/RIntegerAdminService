@@ -38,6 +38,45 @@ exports.findModels = function (req, res) {
             });
 }
 
+exports.deleteModel = function (req, res) {
+    ModelDetail.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            res.status(500).send({
+                "result": 0
+            });
+        } else {
+            ModelDetail.find({}).select('').exec(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        message: "Some error occurred while retrieving notes."
+                    });
+                } else {
+                    var arraylength =models.length-1;
+                    for (var i= 0; i<=arraylength; i++)
+                    {
+                        models[i].portfolioImageName = appSetting.imageServerPath  + models[i].userName + '/' + models[i].portfolioImageName;
+                    }
+                    res.status(200).json(models);
+                }
+            });
+        }
+    });
+}
+exports.findModel = function (req, res) {
+    ModelDetail.findOne({
+        '_id': req.params.id
+    }, function (err, models) {
+        if (err) {
+            res.status(500).send({
+                "result": 0
+            });
+        } else {
+                models.portfolioImageName = appSetting.imageServerPath  + models.userName + '/' + models.portfolioImageName;
+           
+            res.status(200).json(models);
+        }
+    });
+}
 
 /* exports.approvedModels = function (req, res) {
     ModelDetail.find({

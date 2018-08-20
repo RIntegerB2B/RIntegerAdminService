@@ -5,7 +5,7 @@ var ServiceProvider = require('../../model/serviceProvider.model');
 exports.signInToSite = function (req, res) {
     AdminAccount.findOne({
         'userName': req.body.userName,
-        'password': req.body.password
+        'password': req.body.password,
     }, function (err, userDetail) {
         if (err) {
             res.status(500).send({

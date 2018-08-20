@@ -12,4 +12,41 @@ exports.createModel = function (req, res) {
         }
     });
 }
- 
+exports.updateModel = function (req, res) {
+   /*  var modelDetail = new ModelDetail(req.body); */
+    ModelDetail.findById(req.params.id, function (err, models) {
+        if (err) return handleError(err);
+        else {
+            models.userName = req.body.userName;
+            models.description = req.body.description;
+            models.description = req.body.description;
+            models.mobileNumber = req.body.mobileNumber;
+            models.emailId = req.body.emailId;
+            models.faceBook = req.body.faceBook;
+            models.whatsapp = req.body.whatsapp;
+            models.portfolioImageName = req.body.portfolioImageName;
+            models.modelType = req.body.modelType;
+            models.categoryType  = req.body.categoryType;
+            models.save(
+                function (err) {
+                    if (err) { // if it contains error return 0
+                        res.status(500).send({
+                            "result": 0
+                        });
+                    } else {
+                        ModelDetail.find({}).select().exec(function (err, models) {
+                            if (err) {
+                                res.status(500).json({
+                                    "result": 0
+                                })
+                            } else {
+                                res.status(200).json(models)
+                            }
+                        })
+
+                    }
+                });
+        }
+    });
+
+}

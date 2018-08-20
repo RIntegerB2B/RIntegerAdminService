@@ -36,10 +36,10 @@ module.exports = function (app) {
         app.route('/booking/:no/status/:id/delivery')
                 .get(updateStatusMgr.deliveryStatus); 
 
-        /* app.route('/booking/:no/status/:id/payment')
-                .get(updateStatusMgr.paymentStatus); */
+        app.route('/booking/:no/status/:id/payment')
+                .get(updateStatusMgr.paymentStatus); 
 
-       /*  app.route('/booking/:no/status/:id/payment')
+        app.route('/booking/:no/status/:id/payment')
                 .get(updateStatusMgr.paymentStatus);
 
         app.route('/booking/:no/status/:id/materialReturn')
