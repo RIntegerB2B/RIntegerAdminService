@@ -38,7 +38,8 @@ exports.createportFolioImage = function (req, res) {
             //do all database record saving activity
             return res.json({
                 originalname: req.file.originalname,
-                uploadname: req.file.filename
+                uploadname: req.file.filename,
+                path: PATH
             });
         });
 
