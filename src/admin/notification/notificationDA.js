@@ -1,5 +1,6 @@
 var NotificationDetail = require('../../model/notification.model');
 const webpush = require('web-push');
+var appSetting = require('../../config/appSetting');
 
 exports.pushNotificationOld = function (req, res) {
 
@@ -147,7 +148,7 @@ exports.pushNotificationToUsers = function (req, res) {
                 "notification": {
                     "title": req.body.title,
                     "body": req.body.notificationBody,
-                    "icon": req.body.imageUrl != null ? req.body.imageUrl : "https://rinteger.com/assets/images/logo.jpg",
+                    "icon": req.body.imageUrl != null ? req.body.imageUrl : appSetting.imageUrl,
                     "vibrate": [100, 50, 100],
                     "data": {
                         "dateOfArrival": Date.now(),

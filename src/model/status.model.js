@@ -3,14 +3,15 @@ var mongoose = require('mongoose');
 const StatusSchema = new mongoose.Schema({
     mobileNumber: Number,
     bookingId: String,
+    bookingOrderId: String,
     bookingDate: String,
     order: Boolean,
-    materialPickedUp: Boolean,
-    shootCompleted: Boolean,
-    imageEditing: Boolean,
-    delivery: Boolean,
-    payment: Boolean,
-    materialReturn: Boolean
+    materialPickedUp: Number,
+    shootCompleted: Number,
+    imageEditing: Number,
+    delivery: Number,
+    payment: Number,
+    materialReturn: Number
 });
 
 const Status = mongoose.model('status', StatusSchema);
