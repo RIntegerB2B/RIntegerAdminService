@@ -130,6 +130,7 @@ exports.pushNotificationToAdmin = function (req, res) {
 };
 
 exports.pushNotificationToUsers = function (req, res) {
+    
     var notificationDetail = new NotificationDetail(req.body);
     var mobNos = req.body.mobileNumber.toString().split(',');
     NotificationDetail.find({
@@ -170,16 +171,53 @@ exports.pushNotificationToUsers = function (req, res) {
 };
 
 exports.notificationSubscription = function (req, res) {
-    var notification = new NotificationDetail(req.body);
-    notification.save(function (err, notfn) {
+    NotificationDetail.findOne({
+        'mobileNumber': req.body.mobileNumber
+    }, function (err, notificationDetail) {
         if (err) {
-            res.status(500).send(err);
-            console.log(err);
-        } else {
-            res.status(200).json({
-                message: "Subscription added successfully."
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
             });
-            console.log(notfn);
+        } else {
+            if (notificationDetail == null) {
+                var notification = new NotificationDetail(req.body);
+                notification.save(
+                    function (err,notificationData) {
+                        if (err) {
+                            res.status(500).send({
+                                "result": err
+                            });
+                        } else {
+                            res.status(200).json(notificationData)
+                        }
+                    });
+            } else if (notificationDetail != null) {
+                NotificationDetail.findOne({
+                        'mobileNumber': req.body.mobileNumber
+                    },
+                    function (err, notification) {
+                        if (err) { // if it contains error return 0
+                            res.status(500).send({
+                                "result": 0
+                            });
+                        } else {
+                            notification.mobileNumber = req.body.mobileNumber;
+                            notification.userSubscriptions = req.body.userSubscriptions;
+                            notification.save(function (err, notfn) {
+                                if (err) {
+                                    res.status(500).send(err);
+                                    console.log(err);
+                                } else {
+                                    res.status(200).json({
+                                        message: "Subscription added successfully."
+                                    });
+                                    console.log(notfn);
+                                }
+                            });
+                        }
+                    })
+            }
+
         }
     });
 };
