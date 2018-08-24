@@ -172,7 +172,8 @@ exports.pushNotificationToUsers = function (req, res) {
 
 exports.notificationSubscription = function (req, res) {
     NotificationDetail.findOne({
-        'mobileNumber': req.body.mobileNumber
+        'mobileNumber': req.body.mobileNumber,
+        'userSubscriptions':req.body.userSubscriptions
     }, function (err, notificationDetail) {
         if (err) {
             res.status(500).send({
@@ -191,33 +192,7 @@ exports.notificationSubscription = function (req, res) {
                             res.status(200).json(notificationData)
                         }
                     });
-            } else if (notificationDetail != null) {
-                NotificationDetail.findOne({
-                        'mobileNumber': req.body.mobileNumber
-                    },
-                    function (err, notification) {
-                        if (err) { // if it contains error return 0
-                            res.status(500).send({
-                                "result": 0
-                            });
-                        } else {
-                            notification.mobileNumber = req.body.mobileNumber;
-                            notification.userSubscriptions = req.body.userSubscriptions;
-                            notification.save(function (err, notfn) {
-                                if (err) {
-                                    res.status(500).send(err);
-                                    console.log(err);
-                                } else {
-                                    res.status(200).json({
-                                        message: "Subscription added successfully."
-                                    });
-                                    console.log(notfn);
-                                }
-                            });
-                        }
-                    })
-            }
-
+            } 
         }
     });
 };
