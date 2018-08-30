@@ -15,8 +15,30 @@ exports.findBooking = function (req, res) {
     });
    
 }
+exports.approvedBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'1'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });  
+}
+exports.cancelledBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'2'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
 exports.findModelBooking = function (req, res) {
-    BookingDetail.find({'bookingType': 'model booking'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingType': 'model booking','bookingStatus':  '0'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -27,7 +49,7 @@ exports.findModelBooking = function (req, res) {
     });
 }
 exports.findDirectBooking = function (req, res) {
-    BookingDetail.find({'bookingType': 'direct booking'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingType': 'direct booking' ,'bookingStatus':  '0'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -37,6 +59,54 @@ exports.findDirectBooking = function (req, res) {
         }
     });
 }
+
+exports.bookingApproval = function (req, res) {
+    BookingDetail.findOne({
+        'mobileNumber': req.params.no,
+        'bookingOrderId':req.params.id
+       }, function (err, bookingDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            bookingDetail.bookingStatus = 1;
+            bookingDetail.save({},function(err,details) {
+                if(err){
+                    console.log(err)
+                }
+                else {
+                    console.log(details);
+                    res.status(200).json(details);
+                }
+            })
+        }
+    });
+}
+ exports.cancelBooking = function (req, res) {
+    BookingDetail.findOne({
+        'mobileNumber': req.params.no,
+        'bookingOrderId':req.params.id
+       }, function (err, bookingDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            bookingDetail.bookingStatus = 2;
+            bookingDetail.save({},function(err,details) {
+                if(err){
+                    console.log(err)
+                }
+                else {
+                    console.log(details);
+                    res.status(200).json(details);
+                }
+            })
+        }
+    });
+} 
+
 exports.findStatus = function (req, res) {
     Status.find({
         'bookingOrderId': req.params.id

@@ -12,7 +12,8 @@ const BookingSchema = new mongoose.Schema({
     bookingType: String,
     modelsName: String,
     modelId: String,
-    bookingOrderId: String
+    bookingOrderId: String,
+    bookingStatus: Number
 });
 
 const BookingDetail = mongoose.model('bookingDetail', BookingSchema);

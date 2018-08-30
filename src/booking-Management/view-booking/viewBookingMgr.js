@@ -8,6 +8,23 @@ exports.findBooking = function (req, res) {
         console.log(error);
     }
 }
+
+exports.approvedBooking = function (req, res) {
+    try {
+        viewBookingDA.approvedBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelledBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.findModelBooking = function (req, res) {
     try {
         viewBookingDA.findModelBooking(req, res)
@@ -17,6 +34,22 @@ exports.findModelBooking = function (req, res) {
     }
 }
 
+exports.bookingApproval = function (req, res) {
+    try {
+        viewBookingDA.bookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.findDirectBooking = function (req, res) {
     try {
         viewBookingDA.findDirectBooking(req, res)

@@ -8,6 +8,19 @@ module.exports = function (app) {
 
     app.route('/booking')
         .get(viewBookingMgr.findBooking);
+        
+    
+    app.route('/booking/:no/approve/:id')
+        .get(viewBookingMgr.bookingApproval);
+
+     app.route('/booking/:no/cancel/:id')
+        .get(viewBookingMgr.cancelBooking);
+
+    app.route('/cancelled')
+        .get(viewBookingMgr.cancelledBooking);
+
+     app.route('/approved')
+        .get(viewBookingMgr.approvedBooking);
 
     app.route('/modelbooking')
         .get(viewBookingMgr.findModelBooking);
@@ -84,5 +97,8 @@ module.exports = function (app) {
     app.route('/booking/:no/false/:id/materialReturn')
         .get(updateStatusMgr.notCompletedMaterialReturnStatus);
         
+        //  cancel the order
+         app.route('/booking/:no/cancel/:id')
+        .get(updateStatusMgr.cancelBooking);
 
 }

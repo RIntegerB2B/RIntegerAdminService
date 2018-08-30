@@ -997,3 +997,37 @@ exports.notCompletedMaterialReturnStatus = function (req, res) {
         }
     });
 }
+
+
+/* exports.cancelBooking = function (req, res) {
+    Status.find({
+        'mobileNumber': req.params.no
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            Status.findOne({
+                '_id': req.params.id
+            }, function (err, data) {
+                if (err) {
+                    res.status(500).send({
+                        message: 0
+                    });
+                } else {
+                    data.orderStatus = 1;
+                    data.save({}, function (err, updatedData) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                           res.status(200).json(updatedData);
+                        }
+                    })
+                }
+            })
+        }
+    });
+} */

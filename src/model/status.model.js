@@ -11,7 +11,8 @@ const StatusSchema = new mongoose.Schema({
     imageEditing: Number,
     delivery: Number,
     payment: Number,
-    materialReturn: Number
+    materialReturn: Number,
+    orderStatus:Number
 });
 
 const Status = mongoose.model('status', StatusSchema);
