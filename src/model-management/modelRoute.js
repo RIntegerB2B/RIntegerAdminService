@@ -10,13 +10,12 @@ module.exports = function (app) {
     app.route('/serviceprovider/:id/model')
         .get(viewModelMgr.viewModels); //view  unapproved models for sp
 
-    /*  app.route('/serviceprovider/:id/approvedmodel')
-         .get(viewModelMgr.approvedModels);  */ //approved models for sp
+     //approved models for sp
 
     app.route('/models')
         .get(viewModelMgr.findModels); //view unapproved models for admin
 
-    app.route('/admin/:id/aprove')
+    app.route('/model/:name/Approval/:num')
         .get(modelApprovalMgr.giveApproval); //admin gives approval for model
 
     app.route('/portFolioImage/:modelName')

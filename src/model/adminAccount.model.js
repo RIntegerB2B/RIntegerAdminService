@@ -5,7 +5,8 @@ const AdminAccountSchema = new mongoose.Schema({
     password: String,
     emailId: String,
     mobileNumber: Number,
-    role: Boolean
+    role: String,
+    isActive: Boolean
 });
 
 const AdminAccount = mongoose.model('adminAccount', AdminAccountSchema);

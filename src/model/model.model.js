@@ -8,6 +8,7 @@ const ModelSchema = new mongoose.Schema({
     emailId: String,
     faceBook: String,
     whatsapp: String,
+    location: String,
     portfolioImageName: String,
     catalogImageName: String,
     modelType: String,
@@ -16,9 +17,13 @@ const ModelSchema = new mongoose.Schema({
     measurements: String,
     shoulder: String,
     shoeSize: String,
+    password: String,
+    modelId: String,
     serviceProviderId: String,
     serviceProviderName: String,
-    serviceProviderCompanyName: String
+    serviceProviderCompanyName: String,
+    isActive: Boolean,
+    Id: String
 });
 
  const ModelDetail = mongoose.model('model', ModelSchema);

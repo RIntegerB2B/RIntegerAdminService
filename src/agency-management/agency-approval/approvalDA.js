@@ -1,10 +1,8 @@
-var Model = require('../../model/model.model');
+var Agency = require('../../model/agency.model');
 var AdminAccount = require('../../model/adminAccount.model');
 
-
-
-exports. giveApproval = function (req, res) {
-    Model.findOne({
+exports.giveApproval = function(req,res) {
+    Agency.findOne({
         'userName': req.params.name,
         'mobileNumber':req.params.num
  }, function (err, data) {
@@ -14,7 +12,7 @@ exports. giveApproval = function (req, res) {
          data.save(function(err,updatedData){
              if(err){
                  res.status(500).send({
-                    message:"data  not found in model account"
+                     message:"data is not found in service Provider account"
                  }
              );
              }
@@ -31,7 +29,7 @@ exports. giveApproval = function (req, res) {
                     data.save(function(err,savedData){
                         if(err) {
                             res.status(500).send({
-                                message:"data  not found in admin account"
+                                message:"data is not found in admin account"
                             })
                         }
                         else{
@@ -46,4 +44,6 @@ exports. giveApproval = function (req, res) {
          })
      }
  });
+
+
 }

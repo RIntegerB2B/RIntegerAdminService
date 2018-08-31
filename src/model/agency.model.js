@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var Models= require('./model.model');
 
-const ServiceProviderSchema = new mongoose.Schema({
+
+const AgencySchema = new mongoose.Schema({
     Id: String,
     userName: String,
     companyName: String,
@@ -15,5 +15,5 @@ const ServiceProviderSchema = new mongoose.Schema({
     
 });
 
-const ServiceProviderDetailSchema = mongoose.model('serviceProvider', ServiceProviderSchema);
-module.exports = ServiceProviderDetailSchema;
+const AgencyDetailSchema = mongoose.model('agency', AgencySchema);
+module.exports = AgencyDetailSchema;

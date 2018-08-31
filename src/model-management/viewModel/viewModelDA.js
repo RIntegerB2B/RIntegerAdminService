@@ -21,7 +21,7 @@ exports.viewModels = function (req, res) {
 }
 
 exports.findModels = function (req, res) {
-    ModelDetail.find({
+    ModelDetail.find({'isActive': 0
             }).select('-password').exec(function (err, models) {
                 if (err) {
                     res.status(500).send({
@@ -78,15 +78,3 @@ exports.findModel = function (req, res) {
     });
 }
 
-/* exports.approvedModels = function (req, res) {
-    ModelDetail.find({
-        'serviceProviderId': req.params.id,
-        'isActive': 1
-    }, function (err, data) {
-        if (err) res.status(500).json(0);
-        else {
-            res.status(200).json(data)
-            
-        }
-    });
-} */

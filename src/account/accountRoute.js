@@ -10,13 +10,14 @@ module.exports = function (app) {
     app.route('/validate')
         .post(signInMgr.signInToSite);  //admin & sp
 
-    app.route('/serviceProvider')
-        .post(registerMgr.create);  //serviceProvider
 
- app.route('/serviceProvider/validate')
+    app.route('/user')
+        .post(registerMgr.create);
+
+ app.route('/user/validate')
         .post(signInMgr.signIn);        //serviceProvider signin
 
-    app.route('/serviceProviderApproval/:id')
+    app.route('/serviceProvider/:name/Approval/:num')
         .get(approvalMgr.giveApproval); //serviceProvider approval
 
     app.route('/serviceProviders')
@@ -24,4 +25,8 @@ module.exports = function (app) {
 
     app.route('/serviceProviderApproved')
         .get(approvalMgr.approved);    //approved service providers
+
+
+
+    
 }
