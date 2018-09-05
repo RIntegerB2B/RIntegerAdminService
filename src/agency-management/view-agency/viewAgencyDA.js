@@ -13,3 +13,17 @@ exports.findAgency = function (req, res) {
     }
 });
 }
+
+exports.findApproved = function (req, res) {
+    Agency.find({'isActive': 1
+}).select('-password').exec(function (err, agency) {
+    if (err) {
+        res.status(500).send({
+            message: "Some error occurred while retrieving notes."
+        });
+    } else {
+       
+        res.status(200).json(agency);
+    }
+});
+}

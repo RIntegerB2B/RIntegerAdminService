@@ -13,7 +13,20 @@ exports.signInToSite = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-                res.send(userDetail);
+            ServiceProvider.findOne({
+                    'userName': req.body.userName,
+                    'password': req.body.password,
+                    'isActive':1
+                }, function (err, userDetail) {
+                    if (err) {
+                        res.status(500).send({
+                            message: "Some error occurred while retrieving notes."
+                        });
+                    } else {
+                            res.send(userDetail);
+                            console.log(userDetail);
+                    }
+                });
         }
     });
 

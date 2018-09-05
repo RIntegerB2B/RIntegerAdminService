@@ -9,3 +9,11 @@ exports.findAgency = function (req, res) {
     }
 }
 
+
+exports.findApproved = function (req, res) {
+    try {
+        viewAgencyDA.findApproved(req, res);
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -10,7 +10,7 @@ const ModelSchema = new mongoose.Schema({
     whatsapp: String,
     location: String,
     portfolioImageName: String,
-    catalogImageName: String,
+    ecommerceImageName: [String],
     modelType: String,
     categoryType: String,
     height: String,

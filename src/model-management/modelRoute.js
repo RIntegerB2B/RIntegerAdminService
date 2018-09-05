@@ -21,6 +21,15 @@ module.exports = function (app) {
     app.route('/portFolioImage/:modelName')
         .put(addModelMgr.createportFolioImage);
 
+    app.route('/ecommerceImage/:id/name/:modelName')
+        .put(addModelMgr.createecommerceImage);  //upload product image
+
+    app.route('/portraitImage/:id/name/:modelName')
+        .put(addModelMgr.createportraitImage);
+        
+     app.route('/productImage/:id/name/:modelName')
+        .put(addModelMgr.createproductImage);
+
     app.route('/model/:id')
         .delete(viewModelMgr.deleteModel);
 

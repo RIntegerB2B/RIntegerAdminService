@@ -11,6 +11,29 @@ exports.createModel = function (req, res) {
             console.log(contentData);
         }
     });
+} 
+exports.createecommerceImage = function(req,file,res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id':req.params.id
+    },function(err,modelDetail) {
+        if(err) {
+            console.log(err);
+
+        }
+        else{
+            modelDetail.ecommerceImageName = file;
+            modelDetail.save(function(err,data){
+                if(err) {
+                    console.log(err);
+                }
+                else{
+                    console.log(data);
+                }
+            })
+        }
+    });
+
 }
 exports.updateModel = function (req, res) {
    /*  var modelDetail = new ModelDetail(req.body); */
