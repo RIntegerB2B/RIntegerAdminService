@@ -1,6 +1,7 @@
 var addModelMgr = require('../model-management/addModel/addModelMgr');
 var viewModelMgr = require('../model-management/viewModel/viewModelMgr');
 var modelApprovalMgr = require('../model-management/model-approval/modelApprovalMgr');
+var viewProfileMgr = require('./viewProfile/viewProfileMgr');
 
 module.exports = function (app) {
 
@@ -18,16 +19,17 @@ module.exports = function (app) {
     app.route('/model/:name/Approval/:num')
         .get(modelApprovalMgr.giveApproval); //admin gives approval for model
 
-    app.route('/portFolioImage/:modelName')
+    app.route('/portFolioImage/:modelName/sp/:spName')
         .put(addModelMgr.createportFolioImage);
+       
 
-    app.route('/ecommerceImage/:id/name/:modelName')
+    app.route('/ecommerceImage/:sp/id/:id/name/:modelName')
         .put(addModelMgr.createecommerceImage);  //upload product image
 
-    app.route('/portraitImage/:id/name/:modelName')
+    app.route('/portraitImage/:sp/id/:id/name/:modelName')
         .put(addModelMgr.createportraitImage);
         
-     app.route('/productImage/:id/name/:modelName')
+     app.route('/productImage/:sp/id/:id/name/:modelName')
         .put(addModelMgr.createproductImage);
 
     app.route('/model/:id')
@@ -38,4 +40,9 @@ module.exports = function (app) {
 
      app.route('/model/:id')
         .put(addModelMgr.updateModel);
+
+  // profile images view from sp
+  app.route('/serviceprovider/:name/modelimages/:id')
+  .get(viewProfileMgr.findImages);
+
 }

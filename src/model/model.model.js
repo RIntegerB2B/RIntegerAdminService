@@ -11,6 +11,8 @@ const ModelSchema = new mongoose.Schema({
     location: String,
     portfolioImageName: String,
     ecommerceImageName: [String],
+    productImageName: [String],
+    portraitImageName: [String],
     modelType: String,
     categoryType: String,
     height: String,

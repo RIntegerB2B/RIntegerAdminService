@@ -15,9 +15,10 @@ exports.createModel = function (req, res) {
 exports.createportFolioImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + req.params.modelName;
-
-        mkdirp(PATH);
+       // const IMG = '/mainimage'
+        const PATH = DIR + 'SP_'+ req.params.spName + '_models'+ '/' + req.params.modelName ;
+       // const PATH1 = PATH + IMG;
+     mkdirp(PATH);
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
@@ -28,7 +29,7 @@ exports.createportFolioImage = function (req, res) {
         });
         let upload = multer({
             storage: storage
-        }).single('file'); //multiple
+        }).single('file');
         upload(req, res, function (err) {
             if (err) {
                 console.log(err);
@@ -52,7 +53,7 @@ exports.createportFolioImage = function (req, res) {
 exports.createecommerceImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + req.params.modelName ;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
@@ -67,7 +68,7 @@ exports.createecommerceImage = function (req, res) {
       
         let upload = multer({
             storage: storage
-        }).array('uploads[]',10); //only 10 images can be uploaded
+        }).array('uploads[]',20); //only 10 images can be uploaded
         upload(req,res, function (err) {
             if (err) {
                 console.log(err);
@@ -92,13 +93,13 @@ exports.createecommerceImage = function (req, res) {
 exports.createportraitImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + req.params.modelName;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                console.log(file.originalname);
+                addModelDA.createportraitImage(req,file.originalname,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);
@@ -108,7 +109,7 @@ exports.createportraitImage = function (req, res) {
       
         let upload = multer({
             storage: storage
-        }).array('uploads[]',10); //multiple
+        }).array('uploads[]',20); //multiple
         upload(req, res, function (err) {
             if (err) {
                 console.log(err);
@@ -132,13 +133,13 @@ exports.createportraitImage = function (req, res) {
 exports.createproductImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + req.params.modelName;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                console.log(file.originalname);
+                addModelDA.createproductImage(req,file.originalname,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);
@@ -147,7 +148,7 @@ exports.createproductImage = function (req, res) {
       
         let upload = multer({
             storage: storage
-        }).array('uploads[]',10); //multiple
+        }).array('uploads[]',20); //multiple
         upload(req, res, function (err) {
             if (err) {
                 console.log(err);

@@ -13,7 +13,7 @@ exports.viewModels = function (req, res) {
             var arraylength =models.length-1;
             for (var i= 0; i<=arraylength; i++)
             {
-                models[i].portfolioImageName = appSetting.imageServerPath  + models[i].userName + '/' + models[i].portfolioImageName;
+                models[i].portfolioImageName = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].portfolioImageName;
             }
             res.status(200).json(models);
         }

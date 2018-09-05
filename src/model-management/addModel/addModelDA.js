@@ -22,7 +22,53 @@ exports.createecommerceImage = function(req,file,res) {
 
         }
         else{
-            modelDetail.ecommerceImageName = file;
+            modelDetail.ecommerceImageName.push(file);
+            modelDetail.save(function(err,data){
+                if(err) {
+                    console.log(err);
+                }
+                else{
+                    console.log(data);
+                }
+            })
+        }
+    });
+
+}
+exports.createportraitImage = function(req,file,res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id':req.params.id
+    },function(err,modelDetail) {
+        if(err) {
+            console.log(err);
+
+        }
+        else{
+            modelDetail.productImageName.push(file);
+            modelDetail.save(function(err,data){
+                if(err) {
+                    console.log(err);
+                }
+                else{
+                    console.log(data);
+                }
+            })
+        }
+    });
+
+}
+exports.createproductImage = function(req,file,res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id':req.params.id
+    },function(err,modelDetail) {
+        if(err) {
+            console.log(err);
+
+        }
+        else{
+            modelDetail.portraitImageName.push(file);
             modelDetail.save(function(err,data){
                 if(err) {
                     console.log(err);
@@ -36,7 +82,6 @@ exports.createecommerceImage = function(req,file,res) {
 
 }
 exports.updateModel = function (req, res) {
-   /*  var modelDetail = new ModelDetail(req.body); */
     ModelDetail.findById(req.params.id, function (err, models) {
         if (err) return handleError(err);
         else {
