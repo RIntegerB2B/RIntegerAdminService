@@ -45,4 +45,17 @@ module.exports = function (app) {
   app.route('/serviceprovider/:name/modelimages/:id')
   .get(viewProfileMgr.findImages);
 
+  //delete  ecommerce images from sp
+  app.route('/serviceprovider/:name/model/:id/ecomm/:image')
+  .delete(viewProfileMgr.deleteEcomImage);
+
+  // delete portrait images from sp
+  app.route('/serviceprovider/:name/model/:id/portrait/:image')
+  .delete(viewProfileMgr.deletePortraitImage);
+
+  //delete product images from sp
+  app.route('/serviceprovider/:name/model/:id/product/:image')
+  .delete(viewProfileMgr.deleteProductImage);
+
+
 }
