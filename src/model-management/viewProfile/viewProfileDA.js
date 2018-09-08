@@ -13,7 +13,7 @@ exports.findImages = function (req, res) {
                 message: 'some thing went wrong'
             })
         } else {
-            data.portfolioImageName = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + data.portfolioImageName;
+            data.primeImage = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + data.primeImage;
 
             var ecommerceImages = data.ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
@@ -29,6 +29,11 @@ exports.findImages = function (req, res) {
             var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portraitImages[i];
+            }
+            var portFolioImages = data.portFolioImageName;
+            var portFolioLength = portFolioImages.length - 1;
+            for (var i = 0; i <= portFolioLength; i++) {
+                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
             }
 
             res.status(200).json(data);
@@ -58,7 +63,7 @@ exports.deleteEcomImage = function (req, res) {
                             message: "somethong went wrong while deleting data"
                         });
                     } else {
-                        models.portfolioImageName = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.portfolioImageName;
+                        models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
             var ecommerceImages = data.ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
@@ -75,7 +80,12 @@ exports.deleteEcomImage = function (req, res) {
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
             }
-                        res.status(200).json(models);
+            var portFolioImages = data.portFolioImageName;
+            var portFolioLength = portFolioImages.length - 1;
+            for (var i = 0; i <= portFolioLength; i++) {
+                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
+            }
+             res.status(200).json(models);
                     }
                 });
             } else {
@@ -108,7 +118,7 @@ exports.deletePortraitImage = function (req, res) {
                             message: "somethong went wrong while deleting data"
                         });
                     } else {
-                        models.portfolioImageName = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.portfolioImageName;
+                        models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
                         var ecommerceImages = data.ecommerceImageName;
                         var arrayLength = ecommerceImages.length - 1;
@@ -124,6 +134,11 @@ exports.deletePortraitImage = function (req, res) {
                         var portraitLength = portraitImages.length - 1;
                         for (var i = 0; i <= portraitLength; i++) {
                             portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+                        }
+                        var portFolioImages = data.portFolioImageName;
+                        var portFolioLength = portFolioImages.length - 1;
+                        for (var i = 0; i <= portFolioLength; i++) {
+                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
                         }
                     }
                 });
@@ -158,7 +173,7 @@ exports.deleteProductImage = function (req, res) {
                             message: "somethong went wrong while deleting data"
                         });
                     } else {
-                        models.portfolioImageName = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.portfolioImageName;
+                        models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
             var ecommerceImages = data.ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
@@ -174,6 +189,66 @@ exports.deleteProductImage = function (req, res) {
             var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+            }
+            var portFolioImages = data.portFolioImageName;
+            var portFolioLength = portFolioImages.length - 1;
+            for (var i = 0; i <= portFolioLength; i++) {
+                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
+            }
+                    }
+                });
+            } else {
+                res.status(500).send({
+                    message: "image is not there in the array"
+                })
+            }
+
+        }
+    })
+}
+exports.deletePortFolioImage = function(req,res) {
+    var element = req.params.image;
+    ModelDetail.findOne({
+        'serviceProviderName': req.params.name,
+        '_id': req.params.id
+
+    }, function (err, data) {
+        if (err) {
+            res.status(500).send({
+                message: 'some thing went wrong'
+            })
+        } else {
+            var list = data.portFolioImageName;
+            const index = list.indexOf(element);
+            if (index !== -1) {
+                list.splice(index, 1);
+                data.save(function (err, models) {
+                    if (err) {
+                        res.status(500).send({
+                            message: "somethong went wrong while deleting data"
+                        });
+                    } else {
+                        models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+
+            var ecommerceImages = data.ecommerceImageName;
+            var arrayLength = ecommerceImages.length - 1;
+            for (var i = 0; i <= arrayLength; i++) {
+                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
+            }
+            var productImages = data.productImageName;
+            var productLength = productImages.length - 1;
+            for (var i = 0; i <= productLength; i++) {
+                productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
+            }
+            var portraitImages = data.portraitImageName;
+            var portraitLength = portraitImages.length - 1;
+            for (var i = 0; i <= portraitLength; i++) {
+                portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+            }
+            var portFolioImages = data.portFolioImageName;
+            var portFolioLength = portFolioImages.length - 1;
+            for (var i = 0; i <= portFolioLength; i++) {
+                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
             }
                     }
                 });

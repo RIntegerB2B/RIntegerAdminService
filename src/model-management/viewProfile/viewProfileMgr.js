@@ -34,3 +34,12 @@ exports.deleteProductImage = function(req,res) {
         console.log(error);
     }
 }
+
+exports.deletePortFolioImage = function(req,res) {
+    try{
+    viewProfileDA.deletePortFolioImage(req,res)
+    }
+    catch(error) {
+        console.log(error);
+    }
+}

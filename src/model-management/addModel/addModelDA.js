@@ -81,37 +81,51 @@ exports.createproductImage = function(req,file,res) {
     });
 
 }
+exports.createportFolioImage = function(req,file,res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id':req.params.id
+    },function(err,modelDetail) {
+        if(err) {
+            console.log(err);
+
+        }
+        else{
+            modelDetail.portFolioImageName.push(file);
+            modelDetail.save(function(err,data){
+                if(err) {
+                    console.log(err);
+                }
+                else{
+                    console.log(data);
+                }
+            })
+        }
+    });
+
+}
+
 exports.updateModel = function (req, res) {
     ModelDetail.findById(req.params.id, function (err, models) {
         if (err) return handleError(err);
         else {
-            models.userName = req.body.userName;
+           // models.userName = req.body.userName;
             models.description = req.body.description;
-            models.description = req.body.description;
+            models.availability = req.body.availability;
             models.mobileNumber = req.body.mobileNumber;
             models.emailId = req.body.emailId;
             models.faceBook = req.body.faceBook;
             models.whatsapp = req.body.whatsapp;
-            models.portfolioImageName = req.body.portfolioImageName;
             models.modelType = req.body.modelType;
             models.categoryType  = req.body.categoryType;
             models.save(
-                function (err) {
+                function (err,data) {
                     if (err) { // if it contains error return 0
                         res.status(500).send({
                             "result": 0
                         });
                     } else {
-                        ModelDetail.find({}).select().exec(function (err, models) {
-                            if (err) {
-                                res.status(500).json({
-                                    "result": 0
-                                })
-                            } else {
-                                res.status(200).json(models)
-                            }
-                        })
-
+                        res.status(200).json(data);
                     }
                 });
         }

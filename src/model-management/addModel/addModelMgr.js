@@ -12,7 +12,7 @@ exports.createModel = function (req, res) {
     }
 }
 
-exports.createportFolioImage = function (req, res) {
+exports.createPrime = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
        // const IMG = '/mainimage'
@@ -170,6 +170,45 @@ exports.createproductImage = function (req, res) {
     }
 }
 
+exports.createportFolioImage = function (req, res) {
+    try {
+        const DIR = appSetting.imageUploadPath;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
+
+        mkdirp(PATH);
+        let storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, PATH);
+                addModelDA.createportFolioImage(req,file.originalname,res);
+            },
+            filename: (req, file, cb) => {
+                cb(null, file.originalname);
+            }
+        });
+      
+        let upload = multer({
+            storage: storage
+        }).array('uploads[]',20); //multiple
+        upload(req, res, function (err) {
+            if (err) {
+                console.log(err);
+                return res.status(501).json({
+                    error: err
+                });
+            }
+            //do all database record saving activity
+           /*  return res.json({
+                originalname: req.file.originalname,
+                uploadname: req.file.filename,
+                path: PATH
+            }); */
+            
+        });
+       
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.updateModel = function (req, res) {
     try {
         addModelDA.updateModel(req, res)

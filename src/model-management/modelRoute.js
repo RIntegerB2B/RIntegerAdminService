@@ -20,7 +20,7 @@ module.exports = function (app) {
         .get(modelApprovalMgr.giveApproval); //admin gives approval for model
 
     app.route('/portFolioImage/:modelName/sp/:spName')
-        .put(addModelMgr.createportFolioImage);
+        .put(addModelMgr.createPrime);
        
 
     app.route('/ecommerceImage/:sp/id/:id/name/:modelName')
@@ -32,7 +32,10 @@ module.exports = function (app) {
      app.route('/productImage/:sp/id/:id/name/:modelName')
         .put(addModelMgr.createproductImage);
 
-    app.route('/model/:id')
+     app.route('/portFolioImage/:sp/id/:id/name/:modelName')
+        .put(addModelMgr.createportFolioImage);
+
+    app.route('/model/:id/sp/:name')
         .delete(viewModelMgr.deleteModel);
 
     app.route('/model/:id')
@@ -56,6 +59,10 @@ module.exports = function (app) {
   //delete product images from sp
   app.route('/serviceprovider/:name/model/:id/product/:image')
   .delete(viewProfileMgr.deleteProductImage);
+
+  //delete portFolio images from sp
+  app.route('/serviceprovider/:name/model/:id/portFolio/:image')
+  .delete(viewProfileMgr.deletePortFolioImage);
 
 
 }

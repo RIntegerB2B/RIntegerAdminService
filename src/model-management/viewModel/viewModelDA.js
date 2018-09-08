@@ -13,7 +13,7 @@ exports.viewModels = function (req, res) {
             var arraylength =models.length-1;
             for (var i= 0; i<=arraylength; i++)
             {
-                models[i].portfolioImageName = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].portfolioImageName;
+                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
             }
             res.status(200).json(models);
         }
@@ -31,7 +31,7 @@ exports.findModels = function (req, res) {
                     var arraylength =models.length-1;
                     for (var i= 0; i<=arraylength; i++)
                     {
-                        models[i].portfolioImageName = appSetting.imageServerPath  + models[i].userName + '/' + models[i].portfolioImageName;
+                        models[i].primeImage = appSetting.imageServerPath  + models[i].userName + '/' + models[i].primeImage;
                     }
                     res.status(200).json(models);
                 }
@@ -45,7 +45,7 @@ exports.deleteModel = function (req, res) {
                 "result": 0
             });
         } else {
-            ModelDetail.find({}).select('').exec(function (err, models) {
+            ModelDetail.find({'serviceProviderName':req.params.name}).select('').exec(function (err, models) {
                 if (err) {
                     res.status(500).send({
                         message: "Some error occurred while retrieving notes."
@@ -54,7 +54,8 @@ exports.deleteModel = function (req, res) {
                     var arraylength =models.length-1;
                     for (var i= 0; i<=arraylength; i++)
                     {
-                        models[i].portfolioImageName = appSetting.imageServerPath  + models[i].userName + '/' + models[i].portfolioImageName;
+                        models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                   console.log(models[i]);
                     }
                     res.status(200).json(models);
                 }
@@ -71,7 +72,7 @@ exports.findModel = function (req, res) {
                 "result": 0
             });
         } else {
-                models.portfolioImageName = appSetting.imageServerPath  + models.userName + '/' + models.portfolioImageName;
+                models.primeImage = appSetting.imageServerPath  + models.userName + '/' + models.primeImage;
            
             res.status(200).json(models);
         }
