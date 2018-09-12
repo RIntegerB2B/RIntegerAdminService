@@ -4,6 +4,7 @@ var modelRoutes = require('./model-management/modelRoute');
 var adminRoutes = require('./admin/adminRoute');
 var customerRoutes = require('./customer-management/customerRoute');
 var agencyRoutes = require('./agency-management/agencyRoute');
+var catalogRoutes = require('./catalog-settings/catalogRoute');
 
 exports.loadRoutes = function (app) {
     accountRoutes(app);
@@ -12,4 +13,5 @@ exports.loadRoutes = function (app) {
     adminRoutes(app);
     customerRoutes(app);
     agencyRoutes(app);
+    catalogRoutes(app);
 };
