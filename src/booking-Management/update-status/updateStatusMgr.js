@@ -168,14 +168,7 @@ exports.notCompletedMaterialReturnStatus = function (req, res) {
         console.log(error);
     }
 }
-exports.cancelBooking = function (req, res) {
-    try {
-        updateStatusDA.cancelBooking(req, res)
-   
-    } catch (error) {
-        console.log(error);
-    }
-}
+
 
 
 

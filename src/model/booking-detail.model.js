@@ -13,7 +13,7 @@ const BookingSchema = new mongoose.Schema({
     modelsName: String,
     modelId: String,
     bookingOrderId: String,
-    bookingStatus: Number
+    bookingStatus: String
 });
 
 const BookingDetail = mongoose.model('bookingDetail', BookingSchema);

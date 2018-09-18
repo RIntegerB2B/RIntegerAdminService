@@ -16,7 +16,7 @@ exports.findBooking = function (req, res) {
    
 }
 exports.approvedBooking = function (req, res) {
-    BookingDetail.find({'bookingStatus':'1'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingStatus':'Booking Approved'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -27,7 +27,7 @@ exports.approvedBooking = function (req, res) {
     });  
 }
 exports.cancelledBooking = function (req, res) {
-    BookingDetail.find({'bookingStatus':'2'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingStatus':'Booking Cancelled'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -38,7 +38,7 @@ exports.cancelledBooking = function (req, res) {
     });
 }
 exports.findModelBooking = function (req, res) {
-    BookingDetail.find({'bookingType': 'model booking','bookingStatus':  '0'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingType': 'Model Booking','bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -49,7 +49,40 @@ exports.findModelBooking = function (req, res) {
     });
 }
 exports.findDirectBooking = function (req, res) {
-    BookingDetail.find({'bookingType': 'direct booking' ,'bookingStatus':  '0'}).select().exec(function (err, details) {
+    BookingDetail.find({'bookingType': 'Direct Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
+exports.findCatalogBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Catalog Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
+exports.findRegistrationBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Registration Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
+exports.findMarketingBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Marketing Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -60,7 +93,7 @@ exports.findDirectBooking = function (req, res) {
     });
 }
 
-exports.bookingApproval = function (req, res) {
+ exports.bookingApproval = function (req, res) {
     BookingDetail.findOne({
         'mobileNumber': req.params.no,
         'bookingOrderId':req.params.id
@@ -70,13 +103,12 @@ exports.bookingApproval = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            bookingDetail.bookingStatus = 1;
+            bookingDetail.bookingStatus = 'Booking Approved';
             bookingDetail.save({},function(err,details) {
                 if(err){
                     console.log(err)
                 }
                 else {
-                    console.log(details);
                     res.status(200).json(details);
                 }
             })
@@ -93,13 +125,12 @@ exports.bookingApproval = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            bookingDetail.bookingStatus = 2;
+            bookingDetail.bookingStatus = 'Booking Cancelled';
             bookingDetail.save({},function(err,details) {
                 if(err){
                     console.log(err)
                 }
                 else {
-                    console.log(details);
                     res.status(200).json(details);
                 }
             })

@@ -28,6 +28,15 @@ module.exports = function (app) {
     app.route('/directbooking')
         .get(viewBookingMgr.findDirectBooking);
 
+    app.route('/catalogbooking')
+        .get(viewBookingMgr.findCatalogBooking);
+
+     app.route('/registrationbooking')
+        .get(viewBookingMgr.findRegistrationBooking);
+
+    app.route('/marketingbooking')
+        .get(viewBookingMgr.findMarketingBooking);
+
     app.route('/booking/:id/status')
         .get(viewBookingMgr.findStatus);
 
@@ -97,8 +106,7 @@ module.exports = function (app) {
     app.route('/booking/:no/false/:id/materialReturn')
         .get(updateStatusMgr.notCompletedMaterialReturnStatus);
         
-        //  cancel the order
-         app.route('/booking/:no/cancel/:id')
-        .get(updateStatusMgr.cancelBooking);
+      
+        
 
 }

@@ -58,6 +58,32 @@ exports.findDirectBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.findCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.findCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.findRegistrationBooking = function (req, res) {
+    try {
+        viewBookingDA.findRegistrationBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.findMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.findMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.findStatus = function (req, res) {
     try {
         viewBookingDA.findStatus(req, res)
