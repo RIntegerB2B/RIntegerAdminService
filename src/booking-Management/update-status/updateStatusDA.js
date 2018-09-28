@@ -1,4 +1,5 @@
 var Status = require('../../model/status.model');
+var BookingDetail = require('../../model/booking-detail.model');
 
 exports.progressMaterialStatus = function (req, res) {
     Status.find({
@@ -595,7 +596,7 @@ exports.materialReturnStatus = function (req, res) {
             });
         } else {
             Status.findOne({
-                '_id': req.params.id
+                'bookingOrderId': req.params.id
             }, function (err, data) {
                 if (err) {
                     res.status(500).send({
@@ -609,33 +610,54 @@ exports.materialReturnStatus = function (req, res) {
                                 message: 1
                             });
                         } else {
-                            Status.find({
-                                'mobileNumber': req.params.no
-                            }, function (err, statusDetail) {
+                            BookingDetail.findOne({'bookingOrderId':req.params.id}, function (err, bookingDetail) {
                                 if (err) {
                                     res.status(500).send({
                                         message: 0
                                     });
                                 } else {
-                                    Status.find({
-                                        '_id': req.params.id
-                                    }, function (err, data) {
+                                    bookingDetail.bookingStatus = "Order Completed";
+                                    bookingDetail.save({}, function (err, savedData) {
                                         if (err) {
                                             res.status(500).send({
-                                                message: 2
+                                                message: 0
                                             });
                                         } else {
-                                            res.status(200).json(data);
+                                            Status.find({
+                                                'mobileNumber': req.params.no
+                                            }, function (err, statusDetail) {
+                                                if (err) {
+                                                    res.status(500).send({
+                                                        message: 0
+                                                    });
+                                                } else {
+                                                    Status.find({
+                                                        'bookingOrderId': req.params.id
+                                                    }, function (err, data) {
+                                                        if (err) {
+                                                            res.status(500).send({
+                                                                message: 2
+                                                            });
+                                                        } else {
+                                                            res.status(200).json(data);
+                
+                                                        }
+                                                    })
+                                                }
+
+                                            })
                                         }
                                     })
                                 }
                             })
+                            
                         }
                     })
                 }
             })
         }
     });
+
 }
 
 exports.orderStatus = function (req, res) {

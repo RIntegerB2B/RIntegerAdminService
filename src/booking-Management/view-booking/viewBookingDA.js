@@ -81,8 +81,20 @@ exports.findRegistrationBooking = function (req, res) {
         }
     });
 }
-exports.findMarketingBooking = function (req, res) {
-    BookingDetail.find({'bookingType': 'Marketing Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+exports.findEditingBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Editing Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            console.log(details);
+            res.status(200).json(details);
+        }
+    });
+}
+exports.findCreativeBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Creative Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -92,7 +104,6 @@ exports.findMarketingBooking = function (req, res) {
         }
     });
 }
-
  exports.bookingApproval = function (req, res) {
     BookingDetail.findOne({
         'mobileNumber': req.params.no,

@@ -84,6 +84,22 @@ exports.findMarketingBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.findEditingBooking = function (req, res) {
+    try {
+        viewBookingDA.findEditingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCreativeBooking = function (req, res) {
+    try {
+        viewBookingDA.findCreativeBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.findStatus = function (req, res) {
     try {
         viewBookingDA.findStatus(req, res)

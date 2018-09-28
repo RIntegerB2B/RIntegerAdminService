@@ -37,6 +37,13 @@ module.exports = function (app) {
     app.route('/marketingbooking')
         .get(viewBookingMgr.findMarketingBooking);
 
+    app.route('/creativebooking')
+        .get(viewBookingMgr.findCreativeBooking);
+
+    app.route('/editingbooking')
+        .get(viewBookingMgr.findEditingBooking);
+
+
     app.route('/booking/:id/status')
         .get(viewBookingMgr.findStatus);
 
