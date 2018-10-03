@@ -173,7 +173,8 @@ exports.pushNotificationToUsers = function (req, res) {
 exports.notificationSubscription = function (req, res) {
     NotificationDetail.findOne({
         'mobileNumber': req.body.mobileNumber,
-        'userSubscriptions':req.body.userSubscriptions
+        'userSubscriptions':req.body.userSubscriptions,
+        'user':req.body.user
     }, function (err, notificationDetail) {
         if (err) {
             res.status(500).send({

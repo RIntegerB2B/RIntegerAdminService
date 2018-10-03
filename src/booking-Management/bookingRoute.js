@@ -113,7 +113,8 @@ module.exports = function (app) {
     app.route('/booking/:no/false/:id/materialReturn')
         .get(updateStatusMgr.notCompletedMaterialReturnStatus);
         
-      
-        
+     // find status  editing booking 
+     app.route('/editingbooking/:id/status')
+     .get(viewBookingMgr.findEditingStatus);
 
 }

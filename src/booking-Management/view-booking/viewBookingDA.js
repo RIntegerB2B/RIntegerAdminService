@@ -1,6 +1,7 @@
 'use strict';
 var BookingDetail = require ('../../model/booking-detail.model');
 var Status = require ('../../model/status.model');
+var EditingStatus = require('../../model/editingStatus.model')
 
 
 exports.findBooking = function (req, res) {
@@ -162,7 +163,20 @@ exports.findStatus = function (req, res) {
         }
     });
 }
+exports.findEditingStatus = function (req, res) {
+    EditingStatus.find({
+        'bookingOrderId': req.params.id,
 
+       }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(statusDetail);
+        }
+    });
+}
 exports.bookingStatusForOne = function (req, res) {
     Status.findOne({
         'mobileNumber': req.params.no,

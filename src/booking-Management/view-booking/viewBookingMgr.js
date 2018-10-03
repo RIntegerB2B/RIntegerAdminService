@@ -117,3 +117,11 @@ exports.bookingStatusForOne = function (req, res) {
         console.log(error);
     }
 }
+exports.findEditingStatus = function (req, res) {
+    try {
+        viewBookingDA.findEditingStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
