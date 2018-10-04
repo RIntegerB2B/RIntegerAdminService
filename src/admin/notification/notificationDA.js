@@ -143,7 +143,7 @@ exports.pushNotificationToUsers = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            console.log('Total subscriptions', subscriptionData);
+           /*  console.log('Total subscriptions', subscriptionData); */
 
             const notificationPayload = {
                 "notification": {

@@ -125,3 +125,12 @@ exports.findEditingStatus = function (req, res) {
         console.log(error);
     }
 }
+
+exports.findCreativeStatus = function (req, res) {
+    try {
+        viewBookingDA.findCreativeStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}

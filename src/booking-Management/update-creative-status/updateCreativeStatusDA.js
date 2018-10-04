@@ -1,9 +1,8 @@
-var EditingStatus = require('../../model/editingStatus.model');
+var CreativeStatus = require('../../model/creativeStatus.model');
 var BookingDetail = require('../../model/booking-detail.model');
 
-exports.imgReceivedStatus = function (req, res) {
-
-    EditingStatus.find({
+exports.materialReceivedStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -12,14 +11,14 @@ exports.imgReceivedStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            statusDetail[0].imageReceived = req.params.val;
+            statusDetail[0].materialPickedUp = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -36,9 +35,8 @@ exports.imgReceivedStatus = function (req, res) {
         }
     });
 }
-
-exports.imgEditingStatus = function (req, res) {
-    EditingStatus.find({
+exports.shootPlanningStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -47,14 +45,14 @@ exports.imgEditingStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            statusDetail[0].editing = req.params.val;
+            statusDetail[0].shootPlanning = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -71,8 +69,8 @@ exports.imgEditingStatus = function (req, res) {
         }
     });
 }
-exports.imgDeliveryStatus = function (req, res) {
-    EditingStatus.find({
+exports.shootingStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -81,14 +79,14 @@ exports.imgDeliveryStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].imageDelivery = req.params.val;
+            statusDetail[0].shootCompleted = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -105,8 +103,8 @@ exports.imgDeliveryStatus = function (req, res) {
         }
     });
 }
-exports.imgPaymentStatus = function (req, res) {
-    EditingStatus.find({
+exports.postProductionWorkStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -115,14 +113,14 @@ exports.imgPaymentStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].payment = req.params.val;
+            statusDetail[0].postProductionWork = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -139,11 +137,8 @@ exports.imgPaymentStatus = function (req, res) {
         }
     });
 }
-
-//completed
-
-exports.imgReceivedCompletedStatus = function (req, res) {
-    EditingStatus.find({
+exports.creativePaymentStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -152,14 +147,14 @@ exports.imgReceivedCompletedStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].imageReceived = req.params.val;
+            statusDetail[0].payment = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -176,9 +171,8 @@ exports.imgReceivedCompletedStatus = function (req, res) {
         }
     });
 }
-
-exports.imgEditingCompletedStatus = function (req, res) {
-    EditingStatus.find({
+exports.creativeMaterialReturnStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -187,14 +181,14 @@ exports.imgEditingCompletedStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].editing = req.params.val;
+            statusDetail[0].materialReturn = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -211,8 +205,9 @@ exports.imgEditingCompletedStatus = function (req, res) {
         }
     });
 }
-exports.imgDeliveryCompletedStatus = function (req, res) {
-    EditingStatus.find({
+//completed status
+exports.materialReceivedCompletedStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -221,14 +216,14 @@ exports.imgDeliveryCompletedStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].imageDelivery = req.params.val;
+            statusDetail[0].materialPickedUp = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
@@ -245,9 +240,8 @@ exports.imgDeliveryCompletedStatus = function (req, res) {
         }
     });
 }
-
-exports.imgPaymentCompletedStatus = function (req, res) {
-    EditingStatus.find({
+exports.shootPlanningCompletedStatus = function (req, res) {
+    CreativeStatus.find({
         'mobileNumber': req.params.no,
         'bookingOrderId': req.params.id,
     }, function (err, statusDetail) {
@@ -256,14 +250,150 @@ exports.imgPaymentCompletedStatus = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-   statusDetail[0].payment = req.params.val;
+            statusDetail[0].shootPlanning = req.params.val;
             statusDetail[0].save({}, function (err, updatedData) {
                 if (err) {
                     res.status(500).send({
                         message: 1
                     });
                 } else {
-                    EditingStatus.find({
+                    CreativeStatus.find({
+                        'mobileNumber': req.params.no,
+                        'bookingOrderId': req.params.id,
+                    }, function (err, data) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
+exports.shootingCompletedStatus = function (req, res) {
+    CreativeStatus.find({
+        'mobileNumber': req.params.no,
+        'bookingOrderId': req.params.id,
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            statusDetail[0].shootCompleted = req.params.val;
+            statusDetail[0].save({}, function (err, updatedData) {
+                if (err) {
+                    res.status(500).send({
+                        message: 1
+                    });
+                } else {
+                    CreativeStatus.find({
+                        'mobileNumber': req.params.no,
+                        'bookingOrderId': req.params.id,
+                    }, function (err, data) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
+exports.postProductionCompletedStatus = function (req, res) {
+    CreativeStatus.find({
+        'mobileNumber': req.params.no,
+        'bookingOrderId': req.params.id,
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            statusDetail[0].postProductionWork = req.params.val;
+            statusDetail[0].save({}, function (err, updatedData) {
+                if (err) {
+                    res.status(500).send({
+                        message: 1
+                    });
+                } else {
+                    CreativeStatus.find({
+                        'mobileNumber': req.params.no,
+                        'bookingOrderId': req.params.id,
+                    }, function (err, data) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
+exports.creativePaymentCompletedStatus = function (req, res) {
+    CreativeStatus.find({
+        'mobileNumber': req.params.no,
+        'bookingOrderId': req.params.id,
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            statusDetail[0].payment = req.params.val;
+            statusDetail[0].save({}, function (err, updatedData) {
+                if (err) {
+                    res.status(500).send({
+                        message: 1
+                    });
+                } else {
+                    CreativeStatus.find({
+                        'mobileNumber': req.params.no,
+                        'bookingOrderId': req.params.id,
+                    }, function (err, data) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
+exports.creativeMaterialReturnCompletedStatus = function (req, res) {
+    CreativeStatus.find({
+        'mobileNumber': req.params.no,
+        'bookingOrderId': req.params.id,
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            statusDetail[0].materialReturn = req.params.val;
+            statusDetail[0].save({}, function (err, updatedData) {
+                if (err) {
+                    res.status(500).send({
+                        message: 1
+                    });
+                } else {
+                    CreativeStatus.find({
                         'mobileNumber': req.params.no,
                         'bookingOrderId': req.params.id,
                     }, function (err, data) {
