@@ -4,6 +4,7 @@ var viewBookingMgr = require('./view-booking/viewBookingMgr');
 var updateStatusMgr = require('./update-status/updateStatusMgr');
 var updateEditingStatusMgr = require('./update-editing-status/updateEditingStatusMgr');
 var updateCreativeStatusMgr = require('./update-creative-status/updateCreativeStatusMgr');
+var updateCatalogStatusMgr = require('./update-catalog-status/updateCatalogStatusMgr');
 
 module.exports = function (app) {
 
@@ -159,7 +160,7 @@ module.exports = function (app) {
       app.route('/creative/:no/shoot/:id/value/:val')
       .get(updateCreativeStatusMgr.shootingStatus);
 
-      app.route('/creative/:no/postroduction/:id/value/:val')
+      app.route('/creative/:no/postproduction/:id/value/:val')
       .get(updateCreativeStatusMgr.postProductionWorkStatus);
 
       app.route('/creative/:no/payment/:id/value/:val')
@@ -187,4 +188,41 @@ module.exports = function (app) {
 
       app.route('/creative/:no/materialReturncompleted/:id/value/:val')
       .get(updateCreativeStatusMgr.creativeMaterialReturnCompletedStatus);
+
+      
+       // find status  catalog booking 
+     app.route('/catalogbooking/:id/status')
+     .get(viewBookingMgr.findCatalogingStatus);
+
+     //update catalog status 
+
+     app.route('/catalog/:no/imagereceived/:id/value/:val')
+      .get(updateCatalogStatusMgr.imageReceivedStatus);
+
+      app.route('/catalog/:no/productdetails/:id/value/:val')
+      .get(updateCatalogStatusMgr.productDetailsStatus);
+
+      app.route('/catalog/:no/logincredentials/:id/value/:val')
+      .get(updateCatalogStatusMgr.credentialStatus);
+
+      app.route('/catalog/:no/catalogcontent/:id/value/:val')
+      .get(updateCatalogStatusMgr.catalogContentStatus);
+
+      app.route('/catalog/:no/catalogupload/:id/value/:val')
+      .get(updateCatalogStatusMgr.catalogUploadStatus);
+
+      app.route('/catalog/:no/qcprocessing/:id/value/:val')
+      .get(updateCatalogStatusMgr.qcprocessingStatus);
+
+      app.route('/catalog/:no/inventoryupdate/:id/value/:val')
+      .get(updateCatalogStatusMgr.inventoryUpdateStatus);
+
+      app.route('/catalog/:no/productlive/:id/value/:val')
+      .get(updateCatalogStatusMgr.productLiveStatus);
+
+      app.route('/catalog/:no/payment/:id/value/:val')
+      .get(updateCatalogStatusMgr.catalogPaymentStatus);
+
+     
+
 }

@@ -37,7 +37,7 @@ exports.addPushSubscriber = function (req, res) {
 
     const sub = req.body;
 
-    console.log('Received Subscription on the server: ', sub);
+   /*  console.log('Received Subscription on the server: ', sub); */
 
     notificationDA.notificationSubscription(req, res);
 }

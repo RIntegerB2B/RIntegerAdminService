@@ -3,6 +3,7 @@ var BookingDetail = require ('../../model/booking-detail.model');
 var Status = require ('../../model/status.model');
 var EditingStatus = require('../../model/editingStatus.model');
 var CreativeStatus = require('../../model/creativeStatus.model');
+var CatalogingStatus = require('../../model/catalogingStatus.model');
 
 
 exports.findBooking = function (req, res) {
@@ -180,6 +181,20 @@ exports.findEditingStatus = function (req, res) {
 }
 exports.findCreativeStatus = function (req, res) {
     CreativeStatus.find({
+        'bookingOrderId': req.params.id,
+
+       }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(statusDetail);
+        }
+    });
+}
+exports.findCatalogingStatus = function (req, res) {
+    CatalogingStatus.find({
         'bookingOrderId': req.params.id,
 
        }, function (err, statusDetail) {

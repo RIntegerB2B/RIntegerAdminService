@@ -134,3 +134,11 @@ exports.findCreativeStatus = function (req, res) {
         console.log(error);
     }
 }
+exports.findCatalogingStatus = function (req, res) {
+    try {
+        viewBookingDA.findCatalogingStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
