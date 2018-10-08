@@ -5,6 +5,8 @@ var updateStatusMgr = require('./update-status/updateStatusMgr');
 var updateEditingStatusMgr = require('./update-editing-status/updateEditingStatusMgr');
 var updateCreativeStatusMgr = require('./update-creative-status/updateCreativeStatusMgr');
 var updateCatalogStatusMgr = require('./update-catalog-status/updateCatalogStatusMgr');
+var updateRegistrationStatusMgr = require('./update-registration-status/updateRegistrationStatusMgr');
+var updateAplusStatusMgr = require('./update-aplus-status/updateAplusStatusMgr');
 
 module.exports = function (app) {
 
@@ -44,6 +46,9 @@ module.exports = function (app) {
 
     app.route('/editingbooking')
         .get(viewBookingMgr.findEditingBooking);
+
+     app.route('/aplusbooking')
+        .get(viewBookingMgr.findAplusBooking);
 
 
     app.route('/booking/:id/status')
@@ -223,6 +228,73 @@ module.exports = function (app) {
       app.route('/catalog/:no/payment/:id/value/:val')
       .get(updateCatalogStatusMgr.catalogPaymentStatus);
 
-     
+        // find status  registration booking 
+        app.route('/registrationbooking/:id/status')
+        .get(viewBookingMgr.findRegistrationStatus);
+
+         //update regsitration status 
+         
+         app.route('/registration/:no/documents/:id/value/:val')
+         .get(updateRegistrationStatusMgr.documentsRequiredStatus);
+
+         app.route('/registration/:no/accountcreation/:id/value/:val')
+         .get(updateRegistrationStatusMgr.accountCreationStatus);
+
+         app.route('/registration/:no/brandregistration/:id/value/:val')
+         .get(updateRegistrationStatusMgr.brandRegistrationStatus);
+         
+         app.route('/registration/:no/verification/:id/value/:val')
+         .get(updateRegistrationStatusMgr.verificationStatus);
+
+         app.route('/registration/:no/activation/:id/value/:val')
+         .get(updateRegistrationStatusMgr.activationStatus);
+
+         app.route('/registration/:no/details/:id/value/:val')
+         .get(updateRegistrationStatusMgr.detailsStatus);
+
+         app.route('/registration/:no/payment/:id/value/:val')
+         .get(updateRegistrationStatusMgr.paymentStatus);
+
+           // find status  aplus booking 
+        app.route('/aplusbooking/:id/status')
+        .get(viewBookingMgr.findAplusStatus);
+
+        //update aplus status
+
+        app.route('/aplus/:no/materialpickup/:id/value/:val')
+        .get(updateAplusStatusMgr.materialPickUpStatus);
+
+        app.route('/aplus/:no/shootplanning/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusShootPlanningStatus);
+
+        app.route('/aplus/:no/shoot/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusShootStatus);
+
+        app.route('/aplus/:no/postproduction/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusPostProductionStatus);
+
+        app.route('/aplus/:no/logincredentials/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusLoginCredentialStatus);
+
+        app.route('/aplus/:no/content/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusContentStatus);
+
+        app.route('/aplus/:no/catalogupload/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusCatalogUploadStatus);
+
+        app.route('/aplus/:no/qcprocessing/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusQcProcessingStatus);
+
+        app.route('/aplus/:no/inventory/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusInventoryStatus);
+
+        app.route('/aplus/:no/productlive/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusProductLiveStatus);
+
+        app.route('/aplus/:no/payment/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusPaymentStatus);
+
+        app.route('/aplus/:no/materialreturn/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusMaterialReturnStatus);
 
 }

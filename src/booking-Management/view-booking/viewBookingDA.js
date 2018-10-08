@@ -4,6 +4,8 @@ var Status = require ('../../model/status.model');
 var EditingStatus = require('../../model/editingStatus.model');
 var CreativeStatus = require('../../model/creativeStatus.model');
 var CatalogingStatus = require('../../model/catalogingStatus.model');
+var RegistrationStatus = require('../../model/registrationStatus.model');
+var AplusStatus = require('../../model/aplusStatus.model');
 
 
 exports.findBooking = function (req, res) {
@@ -107,6 +109,18 @@ exports.findCreativeBooking = function (req, res) {
         }
     });
 }
+
+exports.findAplusBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'A+ Cataloging Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
  exports.bookingApproval = function (req, res) {
     BookingDetail.findOne({
         'mobileNumber': req.params.no,
@@ -195,6 +209,34 @@ exports.findCreativeStatus = function (req, res) {
 }
 exports.findCatalogingStatus = function (req, res) {
     CatalogingStatus.find({
+        'bookingOrderId': req.params.id,
+
+       }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(statusDetail);
+        }
+    });
+}
+exports.findRegistrationStatus = function (req, res) {
+    RegistrationStatus.find({
+        'bookingOrderId': req.params.id,
+
+       }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(statusDetail);
+        }
+    });
+}
+exports.findAplusStatus = function (req, res) {
+    AplusStatus.find({
         'bookingOrderId': req.params.id,
 
        }, function (err, statusDetail) {

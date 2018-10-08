@@ -100,6 +100,15 @@ exports.findCreativeBooking = function (req, res) {
         console.log(error);
     }
 }
+
+exports.findAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.findAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.findStatus = function (req, res) {
     try {
         viewBookingDA.findStatus(req, res)
@@ -142,3 +151,21 @@ exports.findCatalogingStatus = function (req, res) {
         console.log(error);
     }
 }
+exports.findRegistrationStatus = function (req, res) {
+    try {
+        viewBookingDA.findRegistrationStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findAplusStatus = function (req, res) {
+    try {
+        viewBookingDA.findAplusStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
