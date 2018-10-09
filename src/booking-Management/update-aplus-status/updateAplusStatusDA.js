@@ -104,6 +104,40 @@ exports.aplusShootStatus = function (req, res) {
         }
     });
 }
+exports.aplusProductDetailsStatus = function (req, res) {
+    AplusStatus.find({
+        'mobileNumber': req.params.no,
+        'bookingOrderId': req.params.id,
+    }, function (err, statusDetail) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            statusDetail[0].productDetailsReceived = req.params.val;
+            statusDetail[0].save({}, function (err, updatedData) {
+                if (err) {
+                    res.status(500).send({
+                        message: 1
+                    });
+                } else {
+                    AplusStatus.find({
+                        'mobileNumber': req.params.no,
+                        'bookingOrderId': req.params.id,
+                    }, function (err, data) {
+                        if (err) {
+                            res.status(500).send({
+                                message: 1
+                            });
+                        } else {
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
 exports.aplusPostProductionStatus = function (req, res) {
     AplusStatus.find({
         'mobileNumber': req.params.no,

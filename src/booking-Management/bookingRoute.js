@@ -270,6 +270,9 @@ module.exports = function (app) {
         app.route('/aplus/:no/shoot/:id/value/:val')
         .get(updateAplusStatusMgr.aplusShootStatus);
 
+        app.route('/aplus/:no/productdetails/:id/value/:val')
+        .get(updateAplusStatusMgr.aplusProductDetailsStatus);
+
         app.route('/aplus/:no/postproduction/:id/value/:val')
         .get(updateAplusStatusMgr.aplusPostProductionStatus);
 

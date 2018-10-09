@@ -26,6 +26,15 @@ exports.aplusShootStatus = function (req, res) {
         console.log(error);
     }
 }
+exports.aplusProductDetailsStatus = function (req, res) {
+    try {
+        updateAplusStatusDA.aplusProductDetailsStatus(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.aplusPostProductionStatus = function (req, res) {
     try {
         updateAplusStatusDA.aplusPostProductionStatus(req, res)
