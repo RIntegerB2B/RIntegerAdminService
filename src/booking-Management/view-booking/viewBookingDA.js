@@ -64,6 +64,17 @@ exports.findDirectBooking = function (req, res) {
         }
     });
 }
+exports.findMarketingBooking = function (req, res) {
+    BookingDetail.find({'bookingType': 'Marketing Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
 exports.findCatalogBooking = function (req, res) {
     BookingDetail.find({'bookingType': 'Catalog Booking' ,'bookingStatus':  'Waiting for approval'}).select().exec(function (err, details) {
         if (err) {

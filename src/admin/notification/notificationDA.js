@@ -154,7 +154,13 @@ exports.pushNotificationToUsers = function (req, res) {
                     "data": {
                         "dateOfArrival": Date.now(),
                         "primaryKey": 1
-                    }
+                    },
+                    /* "actions": [
+                        {
+                          "action": "opentweet",
+                          "title": "Open tweet"
+                        }
+                      ], */
                 }
             };
             Promise.all(subscriptionData.map(sub => webpush.sendNotification(
@@ -166,6 +172,7 @@ exports.pushNotificationToUsers = function (req, res) {
                     console.error("Error sending notification, reason: ", err);
                     res.sendStatus(500);
                 });
+                
         }
     });
 };
