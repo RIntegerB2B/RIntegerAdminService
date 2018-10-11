@@ -24,7 +24,6 @@ exports.signInToSite = function (req, res) {
                         });
                     } else {
                             res.send(userDetail);
-                            console.log(userDetail);
                     }
                 });
         }

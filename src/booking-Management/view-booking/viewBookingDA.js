@@ -6,6 +6,7 @@ var CreativeStatus = require('../../model/creativeStatus.model');
 var CatalogingStatus = require('../../model/catalogingStatus.model');
 var RegistrationStatus = require('../../model/registrationStatus.model');
 var AplusStatus = require('../../model/aplusStatus.model');
+var ProductDetail = require('../../model/booking-detail.model')
 
 
 exports.findBooking = function (req, res) {
@@ -19,6 +20,18 @@ exports.findBooking = function (req, res) {
         }
     });
    
+}
+
+exports.findProductDetails = function (req, res) {
+    BookingDetail.find({'bookingOrderId':req.params.id}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
 }
 exports.approvedBooking = function (req, res) {
     BookingDetail.find({'bookingStatus':'Booking Approved'}).select().exec(function (err, details) {

@@ -300,4 +300,10 @@ module.exports = function (app) {
         app.route('/aplus/:no/materialreturn/:id/value/:val')
         .get(updateAplusStatusMgr.aplusMaterialReturnStatus);
 
+
+        // view product shoot booking details
+        app.route('/productbooking/:id/view')
+        .get(viewBookingMgr.findProductDetails);
+
+
 }

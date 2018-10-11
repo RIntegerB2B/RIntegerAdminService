@@ -33,7 +33,14 @@ exports.findModelBooking = function (req, res) {
         console.log(error);
     }
 }
-
+exports.findProductDetails = function (req, res) {
+    try {
+        viewBookingDA.findProductDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.bookingApproval = function (req, res) {
     try {
         viewBookingDA.bookingApproval(req, res)
