@@ -13,18 +13,17 @@ module.exports = function (app) {
     app.route('/booking')
         .get(viewBookingMgr.findBooking);
         
-    
-    app.route('/booking/:no/approve/:id')
+     
+    app.route('/booking/:id/approve')   // product shoot approval
         .get(viewBookingMgr.bookingApproval);
 
-     app.route('/booking/:no/cancel/:id')
-        .get(viewBookingMgr.cancelBooking);
+   
 
     app.route('/cancelled')
         .get(viewBookingMgr.cancelledBooking);
 
-     app.route('/approved')
-        .get(viewBookingMgr.approvedBooking);
+    /*  app.route('/approved')
+        .get(viewBookingMgr.approvedBooking); */
 
     app.route('/modelbooking')
         .get(viewBookingMgr.findModelBooking);
@@ -305,5 +304,64 @@ module.exports = function (app) {
         app.route('/productbooking/:id/view')
         .get(viewBookingMgr.findProductDetails);
 
+        app.route('/approvedproductbooking')
+        .get(viewBookingMgr.findApprovedProductBooking);
+
+        app.route('/cancelledproductbooking')
+        .get(viewBookingMgr.findCancelledProductBooking);
+
+        app.route('/completedproductbooking')
+        .get(viewBookingMgr.findCompletedProductBooking);
+
+        app.route('/cancelledbooking/:id/approve')
+        .get(viewBookingMgr.updateCancelledBooking);
+
+        app.route('/booking/:id/cancel')
+        .get(viewBookingMgr.cancelBooking);
+
+        app.route('/newproductbooking/:id/cancel')
+        .get(viewBookingMgr.cancelNewBooking);
+
+        /// view model booking
+        app.route('/modelbooking/:id/view')
+        .get(viewBookingMgr.findModelDetails);
+
+        app.route('/approvedmodelbooking')
+        .get(viewBookingMgr.findApprovedModelBooking);
+
+        app.route('/modelbooking/:id/approve')   
+        .get(viewBookingMgr.modelBookingApproval);
+
+        app.route('/newmodelbooking/:id/cancel')
+        .get(viewBookingMgr.cancelNewModelBooking);
+
+        app.route('/cancelledmodelbooking')
+        .get(viewBookingMgr.findCancelledModelBooking);
+
+        app.route('/modelbooking/:id/cancel')
+        .get(viewBookingMgr.cancelModelBooking);
+
+        app.route('/cancelledmodelbooking/:id/approve')
+        .get(viewBookingMgr.updateCancelledModelBooking);
+
+        app.route('/completedmodelbooking')
+        .get(viewBookingMgr.findCompletedModelBooking);
+
+        // editing booking
+
+        app.route('/approvededitingbooking')
+        .get(viewBookingMgr.findApprovedEditingBooking);
+
+        app.route('/cancellededitingbooking')
+        .get(viewBookingMgr.findCancelledEditingBooking);
+
+        app.route('/completededitingbooking')
+        .get(viewBookingMgr.findCompletedEditingBooking);
+
+        app.route('/editingbooking/:id/approve')   
+        .get(viewBookingMgr.editingBookingApproval);
+
+        app.route('/neweditingbooking/:id/cancel')
+        .get(viewBookingMgr.cancelNewEditingBooking);
 
 }

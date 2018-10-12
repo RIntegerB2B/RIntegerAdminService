@@ -6,7 +6,8 @@ var CreativeStatus = require('../../model/creativeStatus.model');
 var CatalogingStatus = require('../../model/catalogingStatus.model');
 var RegistrationStatus = require('../../model/registrationStatus.model');
 var AplusStatus = require('../../model/aplusStatus.model');
-var ProductDetail = require('../../model/booking-detail.model')
+var ProductDetail = require('../../model/directBooking.model');
+var ModelBookingDetail = require('../../model/modelBooking.model');
 
 
 exports.findBooking = function (req, res) {
@@ -23,7 +24,7 @@ exports.findBooking = function (req, res) {
 }
 
 exports.findProductDetails = function (req, res) {
-    BookingDetail.find({'bookingOrderId':req.params.id}).select().exec(function (err, details) {
+    ProductDetail.find({'bookingOrderId':req.params.id}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -33,8 +34,53 @@ exports.findProductDetails = function (req, res) {
         }
     }); 
 }
-exports.approvedBooking = function (req, res) {
-    BookingDetail.find({'bookingStatus':'Booking Approved'}).select().exec(function (err, details) {
+
+exports.findApprovedProductBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Approved','bookingType':'Direct Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
+}
+exports.findModelDetails = function (req, res) {
+    ModelBookingDetail.find({'bookingOrderId':req.params.id}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
+}
+exports.findApprovedModelBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Approved','bookingType':'Model Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
+}
+exports.findApprovedEditingBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Approved','bookingType':'Editing Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
+}
+exports.findCancelledProductBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Cancelled','bookingType':'Direct Booking'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -43,6 +89,163 @@ exports.approvedBooking = function (req, res) {
             res.status(200).json(details);
         }
     });  
+}
+exports.findCancelledEditingBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Cancelled','bookingType':'Editing Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    }); 
+}
+exports.findCompletedProductBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Order Completed','bookingType':'Direct Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });  
+}
+exports.findCompletedEditingBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Order Completed','bookingType':'Editing Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });
+}
+exports.editingBookingApproval = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Approved';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Editing Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.cancelEditingBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Booking Approved'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.cancelNewModelBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.cancelNewEditingBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
 }
 exports.cancelledBooking = function (req, res) {
     BookingDetail.find({'bookingStatus':'Booking Cancelled'}).select().exec(function (err, details) {
@@ -117,7 +320,6 @@ exports.findEditingBooking = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            console.log(details);
             res.status(200).json(details);
         }
     });
@@ -146,50 +348,275 @@ exports.findAplusBooking = function (req, res) {
     });
 }
  exports.bookingApproval = function (req, res) {
-    BookingDetail.findOne({
-        'mobileNumber': req.params.no,
-        'bookingOrderId':req.params.id
-       }, function (err, bookingDetail) {
-        if (err) {
-            res.status(500).send({
-                message: "Some error occurred while retrieving notes."
-            });
-        } else {
-            bookingDetail.bookingStatus = 'Booking Approved';
-            bookingDetail.save({},function(err,details) {
-                if(err){
-                    console.log(err)
-                }
-                else {
-                    res.status(200).json(details);
-                }
-            })
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Approved';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Direct Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
         }
     });
 }
- exports.cancelBooking = function (req, res) {
-    BookingDetail.findOne({
-        'mobileNumber': req.params.no,
-        'bookingOrderId':req.params.id
-       }, function (err, bookingDetail) {
+exports.modelBookingApproval = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Approved';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.cancelNewModelBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.findCancelledModelBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Booking Cancelled','bookingType':'Model Booking'}).select().exec(function (err, details) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            bookingDetail.bookingStatus = 'Booking Cancelled';
-            bookingDetail.save({},function(err,details) {
-                if(err){
-                    console.log(err)
-                }
-                else {
-                    res.status(200).json(details);
-                }
-            })
+            res.status(200).json(details);
+        }
+    });  
+}
+exports.updateCancelledBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Approved';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Direct Booking',
+                        'bookingStatus':  'Booking Cancelled'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.updateCancelledModelBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Approved';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Booking Cancelled'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.findCompletedModelBooking = function (req, res) {
+    BookingDetail.find({'bookingStatus':'Order Completed','bookingType':'Model Booking'}).select().exec(function (err, details) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+            res.status(200).json(details);
+        }
+    });  
+}
+ exports.cancelBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Direct Booking',
+                        'bookingStatus':  'Booking Approved'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
         }
     });
 } 
+exports.cancelModelBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Model Booking',
+                        'bookingStatus':  'Booking Approved'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
 
+
+
+                    }
+                });
+                
+        }
+    });
+}
+exports.cancelNewBooking = function (req, res) {
+    BookingDetail.findById(req.params.id, function (err, details) {
+        if (err) return handleError(err);
+        else {
+            details.bookingStatus = 'Booking Cancelled';
+            details.save(
+                function (err) {
+                    if (err) { 
+                        res.status(500).send({
+                            "result": 'Some error occured'
+                        });
+                    } else {
+                        BookingDetail.find({'bookingType':'Direct Booking',
+                        'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
+                            if (err) {
+                                res.status(500).send({
+                                    message: "Some error occurred while retrieving notes."
+                                });
+                            } else {
+                                res.status(200).json(detail);
+                            }
+                        });
+
+
+
+                    }
+                });
+                
+        }
+    });
+}
 exports.findStatus = function (req, res) {
     Status.find({
         'bookingOrderId': req.params.id
