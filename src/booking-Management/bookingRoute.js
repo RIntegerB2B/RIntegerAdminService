@@ -349,6 +349,9 @@ module.exports = function (app) {
 
         // editing booking
 
+        app.route('/editingbooking/:id/view')
+        .get(viewBookingMgr.findEditingDetails);
+
         app.route('/approvededitingbooking')
         .get(viewBookingMgr.findApprovedEditingBooking);
 
@@ -363,5 +366,96 @@ module.exports = function (app) {
 
         app.route('/neweditingbooking/:id/cancel')
         .get(viewBookingMgr.cancelNewEditingBooking);
+
+        app.route('/editingbooking/:id/cancel')
+        .get(viewBookingMgr.cancelEditingBooking);
+
+        app.route('/cancellededitingbooking/:id/approve')
+        .get(viewBookingMgr.updateCancelledEditingBooking);
+
+        // creative booking
+
+        app.route('/creativebooking/:id/view')
+        .get(viewBookingMgr.findCreativeDetails);
+
+        app.route('/approvededcreativebooking')
+        .get(viewBookingMgr.findApprovedCreativeBooking);
+
+        app.route('/creativebooking/:id/approve')   
+        .get(viewBookingMgr.creativeBookingApproval);
+
+        app.route('/creativebooking/:id/cancel')
+        .get(viewBookingMgr.cancelCreativeBooking);
+
+        app.route('/cancelledcreativebooking')
+        .get(viewBookingMgr.findCancelledCreativeBooking);
+
+        app.route('/completedcreativebooking')
+        .get(viewBookingMgr.findCompletedCreativeBooking);
+
+        app.route('/newcreativebooking/:id/cancel')
+        .get(viewBookingMgr.cancelNewCreativeBooking);
+
+        app.route('/cancelledcreativebooking/:id/approve')
+        .get(viewBookingMgr.updateCancelledCreativeBooking);
+     
+
+        // registration booking
+
+        app.route('/registrationbooking/:id/approve')   
+        .get(viewBookingMgr.registrationBookingApproval);
+
+        app.route('/approvedregistrationbooking')
+        .get(viewBookingMgr.findApprovedRegistrationBooking);
+
+        app.route('/newregistrationbooking/:id/cancel')
+        .get(viewBookingMgr.cancelNewRegistrationBooking);
+
+        app.route('/cancelledregistrationbooking')
+        .get(viewBookingMgr.findCancelledRegistrationBooking);
+
+        app.route('/registrationbooking/:id/cancel')
+        .get(viewBookingMgr.cancelRegistrationBooking);
+
+        app.route('/cancelledregistrationbooking/:id/approve')
+        .get(viewBookingMgr.updateCancelledRegistrationBooking);
+
+        app.route('/completedregistrationbooking')
+        .get(viewBookingMgr.findCompletedRegistrationBooking);
+
+        app.route('/registrationbooking/:id/view')
+        .get(viewBookingMgr.findRegistrationDetails);
+
+// digital -mgmt booking
+
+
+app.route('/digitalmarketingbooking')
+.get(viewBookingMgr.findDigitalMarketingBooking);
+
+
+app.route('/digitalmarketingbooking/:id/approve')   
+.get(viewBookingMgr.digitalBookingApproval);
+
+app.route('/approveddigitalmarketingbooking')
+.get(viewBookingMgr.findApprovedDigitalMarketingBooking);
+
+app.route('/newdigitalmarketingbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewDigitalMarketingBooking);
+
+app.route('/cancelleddigitalmarketingbooking')
+.get(viewBookingMgr.findCancelledDigitalMarketingBooking);
+
+
+app.route('/digitalmarketingbooking/:id/cancel')
+.get(viewBookingMgr.cancelDigitalMarketingBooking);
+
+app.route('/cancelleddigitalmarketingbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledDigitalMarketingBooking);
+
+app.route('/completeddigitalmarketingbooking')
+.get(viewBookingMgr.findCompletedDigitalMarketingBooking);
+
+app.route('/digitalmarketingbooking/:id/view')
+.get(viewBookingMgr.findDigitalMarketingDetails);
 
 }
