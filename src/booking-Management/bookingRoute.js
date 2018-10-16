@@ -31,23 +31,16 @@ module.exports = function (app) {
     app.route('/directbooking')
         .get(viewBookingMgr.findDirectBooking);
 
-    app.route('/catalogbooking')
-        .get(viewBookingMgr.findCatalogBooking);
 
      app.route('/registrationbooking')
         .get(viewBookingMgr.findRegistrationBooking);
 
-    app.route('/marketingbooking')
-        .get(viewBookingMgr.findMarketingBooking);
 
     app.route('/creativebooking')
         .get(viewBookingMgr.findCreativeBooking);
 
     app.route('/editingbooking')
         .get(viewBookingMgr.findEditingBooking);
-
-     app.route('/aplusbooking')
-        .get(viewBookingMgr.findAplusBooking);
 
 
     app.route('/booking/:id/status')
@@ -458,4 +451,151 @@ app.route('/completeddigitalmarketingbooking')
 app.route('/digitalmarketingbooking/:id/view')
 .get(viewBookingMgr.findDigitalMarketingDetails);
 
+// aplus booking
+
+app.route('/aplusbooking')
+.get(viewBookingMgr.findAplusBooking);
+
+app.route('/approvedaplusbooking')
+.get(viewBookingMgr.findApprovedAplusBooking);
+
+app.route('/aplusbooking/:id/approve')   
+.get(viewBookingMgr.aplusBookingApproval);
+
+app.route('/newaplusbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewAplusBooking);
+
+app.route('/cancelledaplusbooking')
+.get(viewBookingMgr.findCancelledAplusBooking);
+
+app.route('/aplusbooking/:id/cancel')
+.get(viewBookingMgr.cancelAplusBooking);
+
+app.route('/cancelledaplusbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledAplusBooking);
+
+app.route('/aplusbooking/:id/view')
+.get(viewBookingMgr.findAplusDetails);
+
+app.route('/completedaplusbooking')
+.get(viewBookingMgr.findCompletedAplusBooking);
+
+// cataloging
+
+
+app.route('/catalogbooking')
+.get(viewBookingMgr.findCatalogBooking);
+
+app.route('/approvedcatalogbooking')
+.get(viewBookingMgr.findApprovedCatalogBooking);
+
+app.route('/catalogbooking/:id/approve')   
+.get(viewBookingMgr.catalogBookingApproval);
+
+app.route('/newcatalogbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewCatalogBooking);
+
+app.route('/cancelledcatalogbooking')
+.get(viewBookingMgr.findCancelledCatalogBooking);
+
+app.route('/catalogbooking/:id/cancel')
+.get(viewBookingMgr.cancelCatalogBooking);
+
+app.route('/cancelledcatalogbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledCatalogBooking);
+
+app.route('/completedcatalogbooking')
+.get(viewBookingMgr.findCompletedCatalogBooking);
+
+app.route('/catalogbooking/:id/view')
+.get(viewBookingMgr.findCatalogDetails);
+
+//marketing- services booking
+
+
+app.route('/marketingbooking')
+.get(viewBookingMgr.findMarketingBooking);
+
+app.route('/marketingbooking/:id/approve')   
+.get(viewBookingMgr.marketingBookingApproval);
+
+app.route('/approvedmarketingbooking')
+.get(viewBookingMgr.findApprovedMarketingBooking);
+
+app.route('/newmarketingbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewMarketingBooking);
+
+
+app.route('/cancelledmarketingbooking')
+.get(viewBookingMgr.findCancelledMarketingBooking);
+
+app.route('/marketingbooking/:id/cancel')
+.get(viewBookingMgr.cancelMarketingBooking);
+
+app.route('/cancelledmarketingbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledMarketingBooking);
+
+app.route('/marketingbooking/:id/view')
+.get(viewBookingMgr.findMarketingDetails);
+
+app.route('/completedmarketingbooking')
+.get(viewBookingMgr.findCompletedMarketingBooking);
+
+// it-services booking
+
+app.route('/itbooking')
+.get(viewBookingMgr.findITBooking);
+
+app.route('/itbooking/:id/approve')   
+.get(viewBookingMgr.itBookingApproval);
+
+app.route('/approveditbooking')
+.get(viewBookingMgr.findApprovedITBooking);
+
+
+app.route('/newitbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewITBooking);
+
+app.route('/cancelledITbooking')
+.get(viewBookingMgr.findCancelledITBooking);
+
+app.route('/itbooking/:id/cancel')
+.get(viewBookingMgr.cancelITBooking);
+
+app.route('/cancelleditbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledITBooking);
+
+app.route('/completeditbooking')
+.get(viewBookingMgr.findCompletedITBooking);
+
+app.route('/itbooking/:id/view')
+.get(viewBookingMgr.findITDetails);
+
+
+
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
 }

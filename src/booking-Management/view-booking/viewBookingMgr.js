@@ -480,6 +480,70 @@ exports.findCatalogBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.findApprovedCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.findApprovedCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.catalogBookingApproval = function (req, res) {
+    try {
+        viewBookingDA.catalogBookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelNewCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelNewCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCancelledCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.findCancelledCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.updateCancelledCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.updateCancelledCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCompletedCatalogBooking = function (req, res) {
+    try {
+        viewBookingDA.findCompletedCatalogBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCatalogDetails = function (req, res) {
+    try {
+        viewBookingDA.findCatalogDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 exports.findRegistrationBooking = function (req, res) {
     try {
@@ -498,6 +562,145 @@ exports.findMarketingBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.marketingBookingApproval = function (req, res) {
+    try {
+        viewBookingDA.marketingBookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findApprovedMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.findApprovedMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelNewMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelNewMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCancelledMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.findCancelledMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.updateCancelledMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.updateCancelledMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findMarketingDetails = function (req, res) {
+    try {
+        viewBookingDA.findMarketingDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCompletedMarketingBooking = function (req, res) {
+    try {
+        viewBookingDA.findCompletedMarketingBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+exports.findITBooking = function (req, res) {
+    try {
+        viewBookingDA.findITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.itBookingApproval = function (req, res) {
+    try {
+        viewBookingDA.itBookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findApprovedITBooking = function (req, res) {
+    try {
+        viewBookingDA.findApprovedITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelNewITBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelNewITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCancelledITBooking = function (req, res) {
+    try {
+        viewBookingDA.findCancelledITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelITBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.updateCancelledITBooking = function (req, res) {
+    try {
+        viewBookingDA.updateCancelledITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCompletedITBooking = function (req, res) {
+    try {
+        viewBookingDA.findCompletedITBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findITDetails = function (req, res) {
+    try {
+        viewBookingDA.findITDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.findEditingBooking = function (req, res) {
     try {
         viewBookingDA.findEditingBooking(req, res)
@@ -523,6 +726,71 @@ exports.findAplusBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.findApprovedAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.findApprovedAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.aplusBookingApproval = function (req, res) {
+    try {
+        viewBookingDA.aplusBookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelNewAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelNewAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCancelledAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.findCancelledAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.updateCancelledAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.updateCancelledAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findAplusDetails = function (req, res) {
+    try {
+        viewBookingDA.findAplusDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCompletedAplusBooking = function (req, res) {
+    try {
+        viewBookingDA.findCompletedAplusBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.findStatus = function (req, res) {
     try {
         viewBookingDA.findStatus(req, res)
