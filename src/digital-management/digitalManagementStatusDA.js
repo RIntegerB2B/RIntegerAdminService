@@ -2,22 +2,45 @@ var DigitalMgmtStatus = require('../model/digitalMgmtStatus.model');
 
 
 exports.addMonth = function(req,res) {
-    var digitalMgmtStatusData = new DigitalMgmtStatus(req.body);
-    digitalMgmtStatusData.bookingOrderId = req.body.bookingOrderId;
-    digitalMgmtStatusData.monthName = req.body.monthName;  
-    digitalMgmtStatusData.year = req.body.year;
-    digitalMgmtStatusData.save(
-        function (err, digtalMgmtData) {
-            if (err) { 
-                res.status(500).send({
-                    "result": 0
-                });
-            } else {
-                res.status(200).json(digtalMgmtData);
+    DigitalMgmtStatus.find({'bookingOrderId': req.body.bookingOrderId,
+    'monthName':req.body.monthName,
+    'year':req.body.year,
+}, function (err, data) {
+        if (err) {
+            res.status(500).send({
+                "result": 0
+            });
+        } else { 
+            if(data.length === 0) {
+                var digitalMgmtStatusData = new DigitalMgmtStatus(req.body);
+                digitalMgmtStatusData.bookingOrderId = req.body.bookingOrderId;
+                digitalMgmtStatusData.monthName = req.body.monthName;  
+                digitalMgmtStatusData.year = req.body.year;
+                digitalMgmtStatusData.save(
+                    function (err, digtalMgmtData) {
+                        if (err) { 
+                            res.status(500).send({
+                                "result": 0
+                            });
+                        } else {
+                          /*   var currentDate = new Date();
+                            var day = currentDate.getDate();
+                            var month = currentDate.getMonth() + 1;
+                            var year = currentDate.getFullYear();
+                            console.log(month); */
+                            res.status(200).json(digtalMgmtData);
+                        }
+                    });
             }
-        });
+            else{
+                res.status(200).json(data);
+            }
+            }
+    });
 }
+   
 exports.viewMonthlyPlan = function(req,res) {
+   
     DigitalMgmtStatus.find({'bookingOrderId': req.params.id,
     'monthName':req.params.month,
     'year':req.params.year,
@@ -34,7 +57,8 @@ exports.viewMonthlyPlan = function(req,res) {
 exports.addMonthlyPlan = function(req,res) {
     let monthlyplan = {
         planTitle: req.body.planTitle,
-        planDescription: req.body.planDescription
+        planDescription: req.body.planDescription,
+        status:'Planned'
     };
     DigitalMgmtStatus.findOneAndUpdate({
         bookingOrderId: req.body.bookingOrderId,
@@ -275,7 +299,7 @@ exports.viewWeeklyPlan = function(req,res) {
                     });
                 } else {
                    var monthlyvalue = monthlyData[0].weeklyPlan;
-                   
+                res.status(200).json(monthlyData);
                    /* monthlyvalue.find({'week':req.params.week},function(err,data){
                        if(err){
                            console.log(err)

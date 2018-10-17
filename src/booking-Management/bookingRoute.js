@@ -571,31 +571,4 @@ app.route('/completeditbooking')
 app.route('/itbooking/:id/view')
 .get(viewBookingMgr.findITDetails);
 
-
-
-/* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- */
 }

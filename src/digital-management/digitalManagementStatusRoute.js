@@ -16,16 +16,17 @@ module.exports = function (app) {
     app.route('/id/:id/monthid/:monthid') // add year
         .put(digitalManagementStatusMgr.editMonthlyPlan);
 
-    app.route('/id/:id/monthid/:monthid') // add year
+    app.route('/id/:id/monthid/:monthid') // delete year
         .delete(digitalManagementStatusMgr.deleteMonthlyPlan);
 
         app.route('/id/:id/month/:monthid/status/:status') // update status
         .get(digitalManagementStatusMgr.updateMonthlyStatus);
 
-        // weekly plan 
+       
     app.route('/id/:id/monthid/:monthid/week/:weekno')
-        .put(digitalManagementStatusMgr.copyMonthlyPlanToWeekly);
+        .get(digitalManagementStatusMgr.copyMonthlyPlanToWeekly);
 
+         // weekly plan 
     app.route('/id/:id/weekid/:weekid')
         .put(digitalManagementStatusMgr.editWeeklyPlan);     //edit weekly plan
 
