@@ -26,6 +26,7 @@ const ModelSchema = new mongoose.Schema({
     serviceProviderName: String,
     serviceProviderCompanyName: String,
     isActive: Boolean,
+    isScheduledBooking: Boolean,
     Id: String
 });
 

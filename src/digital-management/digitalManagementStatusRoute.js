@@ -28,16 +28,16 @@ module.exports = function (app) {
 
          // weekly plan 
     app.route('/id/:id/weekid/:weekid')
-        .put(digitalManagementStatusMgr.editWeeklyPlan);     //edit weekly plan
+        .put(digitalManagementStatusMgr.editWeeklyPlan);     //edit weekly plan  ..
 
-    app.route('/bookingid/:id/month/:month/year/:year/addweek')
+    app.route('/bookingid/:id/month/:month/year/:year/addweek') // ..
         .put(digitalManagementStatusMgr.addWeeklyPlan);
 
         app.route('/bookingid/:id/month/:month/year/:year/week/:week')  // view weekly plan ()
         .get(digitalManagementStatusMgr.viewWeeklyPlan);
 
     app.route('/id/:id/weekid/:weekid')
-        .delete(digitalManagementStatusMgr.deleteWeeklyPlan);
+        .delete(digitalManagementStatusMgr.deleteWeeklyPlan);  // ..
 
 
     app.route('/id/:id/weekid/:weekid/day/:day')
