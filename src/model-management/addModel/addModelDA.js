@@ -1,33 +1,32 @@
 var ModelDetail = require('../../model/model.model');
+var appSetting = require('../../config/appSetting');
 
 
 exports.createModel = function (req, res) {
- var modelDetail = new ModelDetail(req.body);
- modelDetail.isScheduledBooking = 0;
- modelDetail.save(function (err, contentData) {
+    var modelDetail = new ModelDetail(req.body);
+    modelDetail.isScheduledBooking = 0;
+    modelDetail.save(function (err, contentData) {
         if (err) {
             res.send(err);
         } else {
             res.send(contentData);
         }
     });
-} 
-exports.createecommerceImage = function(req,file,res) {
+}
+exports.createecommerceImage = function (req, file, res) {
     ModelDetail.findOne({
         'userName': req.params.modelName,
-        '_id':req.params.id
-    },function(err,modelDetail) {
-        if(err) {
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
             console.log(err);
 
-        }
-        else{
+        } else {
             modelDetail.ecommerceImageName.push(file);
-            modelDetail.save(function(err,data){
-                if(err) {
+            modelDetail.save(function (err, data) {
+                if (err) {
                     console.log(err);
-                }
-                else{
+                } else {
                     console.log(data);
                 }
             })
@@ -35,45 +34,20 @@ exports.createecommerceImage = function(req,file,res) {
     });
 
 }
-exports.createportraitImage = function(req,file,res) {
+exports.createportraitImage = function (req, file, res) {
     ModelDetail.findOne({
         'userName': req.params.modelName,
-        '_id':req.params.id
-    },function(err,modelDetail) {
-        if(err) {
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
             console.log(err);
 
-        }
-        else{
-            modelDetail.productImageName.push(file);
-            modelDetail.save(function(err,data){
-                if(err) {
-                    console.log(err);
-                }
-                else{
-                    console.log(data);
-                }
-            })
-        }
-    });
-
-}
-exports.createproductImage = function(req,file,res) {
-    ModelDetail.findOne({
-        'userName': req.params.modelName,
-        '_id':req.params.id
-    },function(err,modelDetail) {
-        if(err) {
-            console.log(err);
-
-        }
-        else{
+        } else {
             modelDetail.portraitImageName.push(file);
-            modelDetail.save(function(err,data){
-                if(err) {
+            modelDetail.save(function (err, data) {
+                if (err) {
                     console.log(err);
-                }
-                else{
+                } else {
                     console.log(data);
                 }
             })
@@ -81,22 +55,45 @@ exports.createproductImage = function(req,file,res) {
     });
 
 }
-exports.createportFolioImage = function(req,file,res) {
+exports.createproductImage = function (req, file, res) {
     ModelDetail.findOne({
         'userName': req.params.modelName,
-        '_id':req.params.id
-    },function(err,modelDetail) {
-        if(err) {
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
             console.log(err);
 
-        }
-        else{
-            modelDetail.portFolioImageName.push(file);
-            modelDetail.save(function(err,data){
-                if(err) {
+        } else {
+            modelDetail.productImageName.push(file);
+            modelDetail.save(function (err, data) {
+                if (err) {
                     console.log(err);
+                } else {
+                    console.log(data);
                 }
-                else{
+            })
+        }
+    });
+
+}
+exports.createportFolioImage = function (req, file, res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            res.status(500).send({
+                "result": 0
+            });
+
+        } else {
+            modelDetail.portFolioImageName.push(file);
+            modelDetail.save(function (err, data) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
                     console.log(data);
                 }
             })
@@ -109,7 +106,7 @@ exports.updateModel = function (req, res) {
     ModelDetail.findById(req.params.id, function (err, models) {
         if (err) return handleError(err);
         else {
-           // models.userName = req.body.userName;
+            // models.userName = req.body.userName;
             models.description = req.body.description;
             models.availability = req.body.availability;
             models.mobileNumber = req.body.mobileNumber;
@@ -117,9 +114,9 @@ exports.updateModel = function (req, res) {
             models.faceBook = req.body.faceBook;
             models.whatsapp = req.body.whatsapp;
             models.modelType = req.body.modelType;
-            models.categoryType  = req.body.categoryType;
+            models.categoryType = req.body.categoryType;
             models.save(
-                function (err,data) {
+                function (err, data) {
                     if (err) { // if it contains error return 0
                         res.status(500).send({
                             "result": 0
@@ -131,4 +128,51 @@ exports.updateModel = function (req, res) {
         }
     });
 
+}
+exports.scheduledBooking = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].isScheduledBooking = 'true';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                   
+                       /*  models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    res.status(200).json(models); */
+                }
+            })
+        }
+    });
+
+}
+exports.removeScheduledBooking = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].isScheduledBooking = 'false';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                   
+                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    res.status(200).json(models); */
+                }
+            })
+        }
+    });
 }

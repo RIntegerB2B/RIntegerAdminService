@@ -217,3 +217,20 @@ exports.updateModel = function (req, res) {
         console.log(error);
     }
 }
+exports.scheduledBooking = function (req, res) {
+    try {
+        addModelDA.scheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.removeScheduledBooking = function (req, res) {
+    try {
+        addModelDA.removeScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+

@@ -3,7 +3,7 @@ var appSetting = require('../../config/appSetting');
 
 
 exports.findImages = function (req, res) {
-    ModelDetail.findOne({
+    ModelDetail.find({
         'serviceProviderName': req.params.name,
         '_id': req.params.id
 
@@ -13,27 +13,27 @@ exports.findImages = function (req, res) {
                 message: 'some thing went wrong'
             })
         } else {
-            data.primeImage = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + data.primeImage;
+            data[0].primeImage = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + data[0].primeImage;
 
-            var ecommerceImages = data.ecommerceImageName;
+            var ecommerceImages = data[0].ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
             for (var i = 0; i <= arrayLength; i++) {
-                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + ecommerceImages[i];
+                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + ecommerceImages[i];
             }
-            var productImages = data.productImageName;
+            var productImages = data[0].productImageName;
             var productLength = productImages.length - 1;
             for (var i = 0; i <= productLength; i++) {
-                productImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + productImages[i];
+                productImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + productImages[i];
             }
-            var portraitImages = data.portraitImageName;
+            var portraitImages = data[0].portraitImageName;
             var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
-                portraitImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portraitImages[i];
+                portraitImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + portraitImages[i];
             }
-            var portFolioImages = data.portFolioImageName;
+            var portFolioImages = data[0].portFolioImageName;
             var portFolioLength = portFolioImages.length - 1;
             for (var i = 0; i <= portFolioLength; i++) {
-                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
+                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + portFolioImages[i];
             }
 
             res.status(200).json(data);
@@ -43,7 +43,7 @@ exports.findImages = function (req, res) {
 
 exports.deleteEcomImage = function (req, res) {
     var element = req.params.image;
-    ModelDetail.findOne({
+    ModelDetail.find({
         'serviceProviderName': req.params.name,
         '_id': req.params.id
 
@@ -53,39 +53,40 @@ exports.deleteEcomImage = function (req, res) {
                 message: 'some thing went wrong'
             })
         } else {
-            var list = data.ecommerceImageName;
+            var list = data[0].ecommerceImageName;
             const index = list.indexOf(element);
             if (index !== -1) {
                 list.splice(index, 1);
-                data.save(function (err, models) {
+                data[0].save(function (err, models) {
                     if (err) {
                         res.status(500).send({
                             message: "somethong went wrong while deleting data"
                         });
                     } else {
+                        console.log(models);
                         models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
-            var ecommerceImages = data.ecommerceImageName;
-            var arrayLength = ecommerceImages.length - 1;
-            for (var i = 0; i <= arrayLength; i++) {
-                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
-            }
-            var productImages = data.productImageName;
-            var productLength = productImages.length - 1;
-            for (var i = 0; i <= productLength; i++) {
-                productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
-            }
-            var portraitImages = data.portraitImageName;
-            var portraitLength = portraitImages.length - 1;
-            for (var i = 0; i <= portraitLength; i++) {
-                portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
-            }
-            var portFolioImages = data.portFolioImageName;
-            var portFolioLength = portFolioImages.length - 1;
-            for (var i = 0; i <= portFolioLength; i++) {
-                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
-            }
-             res.status(200).json(models);
+                        var ecommerceImages = data[0].ecommerceImageName;
+                        var arrayLength = ecommerceImages.length - 1;
+                        for (var i = 0; i <= arrayLength; i++) {
+                            ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
+                        }
+                        var productImages = data[0].productImageName;
+                        var productLength = productImages.length - 1;
+                        for (var i = 0; i <= productLength; i++) {
+                            productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
+                        }
+                        var portraitImages = data[0].portraitImageName;
+                        var portraitLength = portraitImages.length - 1;
+                        for (var i = 0; i <= portraitLength; i++) {
+                            portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+                        }
+                        var portFolioImages = data[0].portFolioImageName;
+                        var portFolioLength = portFolioImages.length - 1;
+                        for (var i = 0; i <= portFolioLength; i++) {
+                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portFolioImages[i];
+                        }
+                        res.status(200).json(data);
                     }
                 });
             } else {
@@ -138,7 +139,7 @@ exports.deletePortraitImage = function (req, res) {
                         var portFolioImages = data.portFolioImageName;
                         var portFolioLength = portFolioImages.length - 1;
                         for (var i = 0; i <= portFolioLength; i++) {
-                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
+                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portFolioImages[i];
                         }
                     }
                 });
@@ -153,7 +154,7 @@ exports.deletePortraitImage = function (req, res) {
 }
 exports.deleteProductImage = function (req, res) {
     var element = req.params.image;
-    ModelDetail.findOne({
+    ModelDetail.find({
         'serviceProviderName': req.params.name,
         '_id': req.params.id
 
@@ -163,11 +164,11 @@ exports.deleteProductImage = function (req, res) {
                 message: 'some thing went wrong'
             })
         } else {
-            var list = data.productImageName;
+            var list = data[0].productImageName;
             const index = list.indexOf(element);
             if (index !== -1) {
                 list.splice(index, 1);
-                data.save(function (err, models) {
+                data[0].save(function (err, models) {
                     if (err) {
                         res.status(500).send({
                             message: "somethong went wrong while deleting data"
@@ -175,40 +176,41 @@ exports.deleteProductImage = function (req, res) {
                     } else {
                         models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
-            var ecommerceImages = data.ecommerceImageName;
-            var arrayLength = ecommerceImages.length - 1;
-            for (var i = 0; i <= arrayLength; i++) {
-                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
-            }
-            var productImages = data.productImageName;
-            var productLength = productImages.length - 1;
-            for (var i = 0; i <= productLength; i++) {
-                productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
-            }
-            var portraitImages = data.portraitImageName;
-            var portraitLength = portraitImages.length - 1;
-            for (var i = 0; i <= portraitLength; i++) {
-                portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
-            }
-            var portFolioImages = data.portFolioImageName;
-            var portFolioLength = portFolioImages.length - 1;
-            for (var i = 0; i <= portFolioLength; i++) {
-                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
-            }
+                        var ecommerceImages = data[0].ecommerceImageName;
+                        var arrayLength = ecommerceImages.length - 1;
+                        for (var i = 0; i <= arrayLength; i++) {
+                            ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
+                        }
+                        var productImages = data[0].productImageName;
+                        var productLength = productImages.length - 1;
+                        for (var i = 0; i <= productLength; i++) {
+                            productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
+                        }
+                        var portraitImages = data[0].portraitImageName;
+                        var portraitLength = portraitImages.length - 1;
+                        for (var i = 0; i <= portraitLength; i++) {
+                            portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+                        }
+                        var portFolioImages = data[0].portFolioImageName;
+                        var portFolioLength = portFolioImages.length - 1;
+                        for (var i = 0; i <= portFolioLength; i++) {
+                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portFolioImages[i];
+                        }
+                        res.status(200).json(data);
                     }
                 });
+               
             } else {
-                res.status(500).send({
-                    message: "image is not there in the array"
-                })
+                /* res.status(200).json(data);
+                console.log(data); */
             }
 
         }
     })
 }
-exports.deletePortFolioImage = function(req,res) {
+exports.deletePortFolioImage = function (req, res) {
     var element = req.params.image;
-    ModelDetail.findOne({
+    ModelDetail.find({
         'serviceProviderName': req.params.name,
         '_id': req.params.id
 
@@ -218,11 +220,11 @@ exports.deletePortFolioImage = function(req,res) {
                 message: 'some thing went wrong'
             })
         } else {
-            var list = data.portFolioImageName;
+            var list = data[0].portFolioImageName;
             const index = list.indexOf(element);
             if (index !== -1) {
                 list.splice(index, 1);
-                data.save(function (err, models) {
+                data[0].save(function (err, models) {
                     if (err) {
                         res.status(500).send({
                             message: "somethong went wrong while deleting data"
@@ -230,26 +232,27 @@ exports.deletePortFolioImage = function(req,res) {
                     } else {
                         models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
 
-            var ecommerceImages = data.ecommerceImageName;
-            var arrayLength = ecommerceImages.length - 1;
-            for (var i = 0; i <= arrayLength; i++) {
-                ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
-            }
-            var productImages = data.productImageName;
-            var productLength = productImages.length - 1;
-            for (var i = 0; i <= productLength; i++) {
-                productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
-            }
-            var portraitImages = data.portraitImageName;
-            var portraitLength = portraitImages.length - 1;
-            for (var i = 0; i <= portraitLength; i++) {
-                portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
-            }
-            var portFolioImages = data.portFolioImageName;
-            var portFolioLength = portFolioImages.length - 1;
-            for (var i = 0; i <= portFolioLength; i++) {
-                portFolioImages[i] = appSetting.imageServerPath + 'SP_' + data.serviceProviderName + '_models' + '/' + data.userName + '/' + portFolioImages[i];
-            }
+                        var ecommerceImages = data[0].ecommerceImageName;
+                        var arrayLength = ecommerceImages.length - 1;
+                        for (var i = 0; i <= arrayLength; i++) {
+                            ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + ecommerceImages[i];
+                        }
+                        var productImages = data[0].productImageName;
+                        var productLength = productImages.length - 1;
+                        for (var i = 0; i <= productLength; i++) {
+                            productImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + productImages[i];
+                        }
+                        var portraitImages = data[0].portraitImageName;
+                        var portraitLength = portraitImages.length - 1;
+                        for (var i = 0; i <= portraitLength; i++) {
+                            portraitImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portraitImages[i];
+                        }
+                        var portFolioImages = data[0].portFolioImageName;
+                        var portFolioLength = portFolioImages.length - 1;
+                        for (var i = 0; i <= portFolioLength; i++) {
+                            portFolioImages[i] = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + portFolioImages[i];
+                        }
+                        res.status(200).json(data);
                     }
                 });
             } else {

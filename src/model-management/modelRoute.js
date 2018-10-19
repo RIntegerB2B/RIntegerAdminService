@@ -65,4 +65,11 @@ module.exports = function (app) {
   .delete(viewProfileMgr.deletePortFolioImage);
 
 
+  // update scheduled model
+  app.route('/scheduledbooking/:id/')
+  .get(addModelMgr.scheduledBooking);
+
+  app.route('/removescheduledbooking/:id/')
+  .get(addModelMgr.removeScheduledBooking);
+
 }
