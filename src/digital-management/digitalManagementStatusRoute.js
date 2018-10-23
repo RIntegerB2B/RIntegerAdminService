@@ -41,21 +41,21 @@ module.exports = function (app) {
 
 
     app.route('/id/:id/weekid/:weekid/day/:day')
-        .get(digitalManagementStatusMgr.copyWeeklyPlanToDaily);
+        .get(digitalManagementStatusMgr.copyWeeklyPlanToDaily);  //..
 
         app.route('/id/:id/week/:weekid/status/:status') // update status
-        .get(digitalManagementStatusMgr.updateWeeklyStatus);
+        .get(digitalManagementStatusMgr.updateWeeklyStatus);   //..
 
          // daily plan
 
-         app.route('/bookingid/:id/month/:month/year/:year/day')
+         app.route('/bookingid/:id/month/:month/year/:year/day')  // ...
          .put(digitalManagementStatusMgr.addDailyPlan);
 
          app.route('/id/:id/date/:dateid')
-         .put(digitalManagementStatusMgr.editDailyPlan);
+         .put(digitalManagementStatusMgr.editDailyPlan);   // ..
 
          app.route('/id/:id/dateid/:dateid')
-         .delete(digitalManagementStatusMgr.deleteDailyPlan);
+         .delete(digitalManagementStatusMgr.deleteDailyPlan);  // ..
 
          app.route('/id/:id/daily/:dailyid/status/:status') // update status
          .get(digitalManagementStatusMgr.updateDailyStatus);

@@ -571,4 +571,37 @@ app.route('/completeditbooking')
 app.route('/itbooking/:id/view')
 .get(viewBookingMgr.findITDetails);
 
+// scheduled booking
+
+app.route('/scheduledbooking')
+.get(viewBookingMgr.findScheduledBooking);
+
+app.route('/approvedscheduledbooking')
+.get(viewBookingMgr.findApprovedScheduledBooking);
+
+app.route('/scheduledbooking/:id/approve')   
+.get(viewBookingMgr.scheduledBookingApproval);
+
+app.route('/newscheduledbooking/:id/cancel')
+.get(viewBookingMgr.cancelNewScheduledBooking);
+
+app.route('/cancelledscheduledbooking')
+.get(viewBookingMgr.findCancelledScheduledBooking);
+
+app.route('/scheduledbooking/:id/cancel')
+.get(viewBookingMgr.cancelScheduledBooking);
+
+app.route('/cancelledscheduledbooking/:id/approve')
+.get(viewBookingMgr.updateCancelledScheduledBooking);
+
+
+app.route('/completedscheduledbooking')
+.get(viewBookingMgr.findCompletedScheduledBooking);
+
+
+app.route('/scheduledbooking/:id/view')
+.get(viewBookingMgr.findScheduledBookingDetails);
+
+
+
 }

@@ -66,10 +66,10 @@ module.exports = function (app) {
 
 
   // update scheduled model
-  app.route('/scheduledbooking/:id/')
+  app.route('/scheduledbooking/:id/serviceproviders/:spid')
   .get(addModelMgr.scheduledBooking);
 
-  app.route('/removescheduledbooking/:id/')
+  app.route('/removescheduledbooking/:id/serviceproviders/:spid')
   .get(addModelMgr.removeScheduledBooking);
 
 }

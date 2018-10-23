@@ -849,6 +849,86 @@ exports.findAplusStatus = function (req, res) {
         console.log(error);
     }
 }
+exports.findScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.findScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findApprovedScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.findApprovedScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.scheduledBookingApproval = function (req, res) {
+    try {
+        viewBookingDA.scheduledBookingApproval(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelNewScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelNewScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCancelledScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.findCancelledScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.cancelScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.cancelScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.updateCancelledScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.updateCancelledScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findCompletedScheduledBooking = function (req, res) {
+    try {
+        viewBookingDA.findCompletedScheduledBooking(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.findScheduledBookingDetails = function (req, res) {
+    try {
+        viewBookingDA.findScheduledBookingDetails(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
