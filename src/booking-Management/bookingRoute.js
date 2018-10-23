@@ -553,6 +553,7 @@ app.route('/approveditbooking')
 .get(viewBookingMgr.findApprovedITBooking);
 
 
+
 app.route('/newitbooking/:id/cancel')
 .get(viewBookingMgr.cancelNewITBooking);
 

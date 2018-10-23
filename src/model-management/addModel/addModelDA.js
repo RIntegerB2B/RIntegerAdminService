@@ -8,6 +8,7 @@ exports.createModel = function (req, res) {
     modelDetail.save(function (err, contentData) {
         if (err) {
             res.send(err);
+            console.log(err);
         } else {
             res.send(contentData);
         }

@@ -291,7 +291,7 @@ exports.cancelNewEditingBooking = function (req, res) {
                             "result": 'Some error occured'
                         });
                     } else {
-                        BookingDetail.find({'bookingType':'Model Booking',
+                        BookingDetail.find({'bookingType':'Editing Booking',
                         'bookingStatus':  'Waiting for approval'}).select().exec(function (err, detail) {
                             if (err) {
                                 res.status(500).send({
