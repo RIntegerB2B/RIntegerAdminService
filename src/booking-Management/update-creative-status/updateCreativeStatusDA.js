@@ -393,17 +393,28 @@ exports.creativeMaterialReturnCompletedStatus = function (req, res) {
                         message: 1
                     });
                 } else {
-                    CreativeStatus.find({
-                        'mobileNumber': req.params.no,
-                        'bookingOrderId': req.params.id,
-                    }, function (err, data) {
+                    BookingDetail.find({'bookingOrderId': req.params.id},function(err,details) {
+                        details[0].bookingStatus = "Order Completed";
+                        details[0].save({}, function (err, savedData) {
                         if (err) {
                             res.status(500).send({
-                                message: 1
+                                message: 0
                             });
                         } else {
-                            res.status(200).send(data);
+                            CreativeStatus.find({
+                                'mobileNumber': req.params.no,
+                                'bookingOrderId': req.params.id,
+                            }, function (err, data) {
+                                if (err) {
+                                    res.status(500).send({
+                                        message: 1
+                                    });
+                                } else {
+                                    res.status(200).send(data);
+                                }
+                            })
                         }
+                    }) 
                     })
                 }
             })
