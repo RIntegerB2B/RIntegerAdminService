@@ -233,4 +233,21 @@ exports.removeScheduledBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.modelAvailable = function (req, res) {
+    try {
+        addModelDA.modelAvailable(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+exports.notAvailable = function (req, res) {
+    try {
+        addModelDA.notAvailable(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 

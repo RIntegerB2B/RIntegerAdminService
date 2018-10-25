@@ -72,4 +72,12 @@ module.exports = function (app) {
   app.route('/removescheduledbooking/:id/serviceproviders/:spid')
   .get(addModelMgr.removeScheduledBooking);
 
+
+  // update available
+
+  app.route('/avaialble/:id/serviceproviders/:spid')
+  .get(addModelMgr.modelAvailable);
+
+  app.route('/notavailable/:id/serviceproviders/:spid')
+  .get(addModelMgr.notAvailable);
 }

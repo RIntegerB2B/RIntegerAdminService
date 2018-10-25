@@ -206,3 +206,80 @@ exports.removeScheduledBooking = function (req, res) {
         }
     });
 }
+exports.modelAvailable = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].availability = 'Yes';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                    ModelDetail.find({
+                        'serviceProviderId': req.params.spid
+                    }, function (err, models) {
+                        if (err) {
+                            res.status(500).send({
+                                "result": 0
+                            });
+                        } else {
+                            var arraylength =models.length-1;
+                            for (var i= 0; i<=arraylength; i++)
+                            {
+                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            }
+                            res.status(200).json(models);
+                        }
+                    });
+                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    res.status(200).json(models); */
+                }
+            })
+        }
+    });
+}
+
+exports.notAvailable = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].availability = 'No';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                    ModelDetail.find({
+                        'serviceProviderId': req.params.spid
+                    }, function (err, models) {
+                        if (err) {
+                            res.status(500).send({
+                                "result": 0
+                            });
+                        } else {
+                            var arraylength =models.length-1;
+                            for (var i= 0; i<=arraylength; i++)
+                            {
+                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            }
+                            res.status(200).json(models);
+                        }
+                    });
+                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    res.status(200).json(models); */
+                }
+            })
+        }
+    });
+}
