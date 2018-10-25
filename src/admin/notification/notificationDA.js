@@ -152,6 +152,7 @@ exports.pushNotificationToUsers = function (req, res) {
                     "icon": req.body.imageUrl != null ? req.body.imageUrl : appSetting.imageUrl,
                     "vibrate": [100, 50, 100],
                     "data": {
+                        "url": req.body.linkUrl != null ? req.body.linkUrl : appSetting.serviceUrl,
                         "dateOfArrival": Date.now(),
                         "primaryKey": 1
                     },
