@@ -52,8 +52,12 @@ module.exports = function (app) {
 
         app.route('/pushnotification')
                 .post(notificationMgr.pushNotification);
+        app.route('/pushnotificationtoany')
+                .post(notificationMgr.pushNotificationToAny);
+
 
         app.route('/pushnotificationsubscribe')
                 .post(notificationMgr.addPushSubscriber);
+                
 
 } 

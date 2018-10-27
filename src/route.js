@@ -7,6 +7,8 @@ var agencyRoutes = require('./agency-management/agencyRoute');
 var catalogRoutes = require('./catalog-settings/catalogRoute');
 var subscribeRoutes = require('./subscribe/subscribeRoute');
 var digitalMgmtRoutes = require('./digital-management/digitalManagementStatusRoute');
+var marketCustomerRoutes = require('./crm/marketcustomer-management/marketCustomerRoute');
+var crmCustomerRoutes = require('./crm/customer-management/customerRoute');
 
 exports.loadRoutes = function (app) {
     accountRoutes(app);
@@ -18,4 +20,6 @@ exports.loadRoutes = function (app) {
     catalogRoutes(app);
     subscribeRoutes(app);
     digitalMgmtRoutes(app);
+    marketCustomerRoutes(app);
+    crmCustomerRoutes(app);
 };

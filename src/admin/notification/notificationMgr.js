@@ -25,6 +25,14 @@ exports.bookingStatus = function (req, res) {
         console.log(error);
     }
 }
+exports.pushNotificationToAny = function (req, res) {
+    try {
+        notificationDA.pushNotificationToAny(req, res)
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 exports.pushNotification = function (req, res) {
     if (req.body.isAdmin)

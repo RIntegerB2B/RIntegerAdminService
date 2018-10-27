@@ -177,6 +177,48 @@ exports.pushNotificationToUsers = function (req, res) {
         }
     });
 };
+exports.pushNotificationToAny = function (req, res) {
+    
+    var notificationDetail = new NotificationDetail(req.body);
+    var mobNos = req.body.mobileNumber.toString().split(',');
+    NotificationDetail.find({
+        'mobileNumber': {
+            '$in': mobNos
+        }
+    }, function (err, subscriptionData) {
+        if (err) {
+            res.status(500).send({
+                message: "Some error occurred while retrieving notes."
+            });
+        } else {
+           /*  console.log('Total subscriptions', subscriptionData); */
+
+            const notificationPayload = {
+                "notification": {
+                    "title": req.body.title,
+                    "body": req.body.notificationBody,
+                    "icon": req.body.imageUrl != null ? req.body.imageUrl : appSetting.imageUrl,
+                    "vibrate": [100, 50, 100],
+                    "data": {
+                        "url": req.body.imageUrl ,
+                        "dateOfArrival": Date.now(),
+                        "primaryKey": 1
+                    },
+                }
+            };
+            Promise.all(subscriptionData.map(sub => webpush.sendNotification(
+                    sub.userSubscriptions, JSON.stringify(notificationPayload))))
+                .then(() => res.status(200).json({
+                    message: subscriptionData
+                }))
+                .catch(err => {
+                    console.error("Error sending notification, reason: ", err);
+                    res.sendStatus(500);
+                });
+                
+        }
+    });
+};
 
 exports.notificationSubscription = function (req, res) {
     NotificationDetail.findOne({
