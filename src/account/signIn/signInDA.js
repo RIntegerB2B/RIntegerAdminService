@@ -7,7 +7,7 @@ exports.signInToSite = function (req, res) {
     AdminAccount.find({
         'userName': req.body.userName,
         'password': req.body.password,
-        'isActive': 1
+        'isActive':1
     }, function (err, userDetail) {
         if (err) {
             res.status(500).send({
@@ -19,38 +19,38 @@ exports.signInToSite = function (req, res) {
                     result: 1
                 });
             } else {
-                RolePermssionAccount.findOne({
-                    'role': userDetail.role
+            RolePermssionAccount.findOne({
+                'role': userDetail.role
                 }, function (err, fullData) {
                     if (err) {
                         res.status(500).send({
                             message: "Some error occurred while retrieving notes."
                         });
                     } else {
-
-                        // accountDetails.push(userDetail);
-                        userDetail.push(fullData)
-                        res.status(200).send(userDetail);
-                        console.log(userDetail);
+                        var  accountDetails = [];
+                        accountDetails.push(userDetail);
+                        accountDetails.push(fullData)
+                        res.status(200).send(accountDetails);
+                        console.log(accountDetails);
                     }
                 });
-            }
         }
+    }
     });
 
 };
 
 exports.create = function (req, res) {
     var adminAccount = new AdminAccount(req.body);
-    adminAccount.role = 'admin';
-    adminAccount.isActive = 1;
+ adminAccount.role = 'admin';
+ adminAccount.isActive = 1;
     adminAccount.save(function (err, contentData) {
         if (err) {
             res.send(err);
             console.log(err);
         } else {
             res.send(contentData);
-
+         
         }
     });
 };
@@ -60,7 +60,7 @@ exports.signIn = function (req, res) {
     AdminAccount.findOne({
         'userName': req.body.userName,
         'password': req.body.password,
-
+       
     }, function (err, userDetail) {
         if (err) {
             res.status(500).send({
