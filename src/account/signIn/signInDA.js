@@ -1,6 +1,7 @@
 'use strict';
 var AdminAccount = require('../../model/adminAccount.model');
 var ServiceProvider = require('../../model/serviceProvider.model');
+var RolePermssionAccount = require('../../model/permission.model');
 
 exports.signInToSite = function (req, res) {
     AdminAccount.findOne({
@@ -13,17 +14,19 @@ exports.signInToSite = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            ServiceProvider.findOne({
-                    'userName': req.body.userName,
-                    'password': req.body.password,
-                    'isActive':1
-                }, function (err, userDetail) {
+            RolePermssionAccount.findOne({
+                'role': userDetail.role
+                }, function (err, fullData) {
                     if (err) {
                         res.status(500).send({
                             message: "Some error occurred while retrieving notes."
                         });
                     } else {
-                            res.send(userDetail);
+                        var  accountDetails = [];
+                        accountDetails.push(userDetail);
+                        accountDetails.push(fullData)
+                        res.status(200).send(accountDetails);
+                        console.log(accountDetails);
                     }
                 });
         }
