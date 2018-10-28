@@ -9,6 +9,7 @@ var subscribeRoutes = require('./subscribe/subscribeRoute');
 var digitalMgmtRoutes = require('./digital-management/digitalManagementStatusRoute');
 var marketCustomerRoutes = require('./crm/marketcustomer-management/marketCustomerRoute');
 var crmCustomerRoutes = require('./crm/customer-management/customerRoute');
+var contactRoutes = require('./contact-us/contactUsRoute');
 
 exports.loadRoutes = function (app) {
     accountRoutes(app);
@@ -22,4 +23,5 @@ exports.loadRoutes = function (app) {
     digitalMgmtRoutes(app);
     marketCustomerRoutes(app);
     crmCustomerRoutes(app);
+    contactRoutes(app);
 };
