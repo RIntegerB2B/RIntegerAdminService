@@ -4,7 +4,7 @@ var ServiceProvider = require('../../model/serviceProvider.model');
 var RolePermssionAccount = require('../../model/permission.model');
 
 exports.signInToSite = function (req, res) {
-    AdminAccount.find({
+    AdminAccount.findOne({
         'userName': req.body.userName,
         'password': req.body.password,
         'isActive':1
@@ -14,7 +14,7 @@ exports.signInToSite = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            if (!userDetail[0]) {
+            if (!userDetail) {
                 res.status(500).send({
                     result: 1
                 });
@@ -29,7 +29,7 @@ exports.signInToSite = function (req, res) {
                     } else {
                         var  accountDetails = [];
                         accountDetails.push(userDetail);
-                        accountDetails.push(fullData)
+                        accountDetails.push(fullData);
                         res.status(200).send(accountDetails);
                         console.log(accountDetails);
                     }
