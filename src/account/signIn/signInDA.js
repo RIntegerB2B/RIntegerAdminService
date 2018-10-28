@@ -61,7 +61,6 @@ exports.signIn = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            console.log(userDetail);
             res.status(200).json(userDetail);
         }
     });
