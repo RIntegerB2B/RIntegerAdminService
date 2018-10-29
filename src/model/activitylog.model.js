@@ -3,7 +3,7 @@ var MonthlyPlan = require('./monthlyPlan.model');
 var WeeklyPlan = require('./weeklyPlan.model');
 var DailyPlan = require('./dailyPlan.model');
 
-const DigitalMgmtStatusSchema = new mongoose.Schema({
+const ActivityLogSchema = new mongoose.Schema({
     bookingOrderId: String,
    monthName:String,
    year: String,
@@ -12,7 +12,7 @@ const DigitalMgmtStatusSchema = new mongoose.Schema({
    dailyPlan:[DailyPlan]
 });
 
-const DigitalMgmtStatus = mongoose.model('digitalmgmtstatus', DigitalMgmtStatusSchema);
-module.exports = DigitalMgmtStatus;
+const ActivityLog = mongoose.model('activitylog', ActivityLogSchema);
+module.exports = ActivityLog;
 
 

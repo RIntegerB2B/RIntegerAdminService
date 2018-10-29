@@ -1,8 +1,8 @@
-var DigitalMgmtStatus = require('../model/digitalMgmtStatus.model');
+var ActivityLog = require('../model/activitylog.model');
 
 
 exports.addMonth = function(req,res) {
-    DigitalMgmtStatus.find({'bookingOrderId': req.body.bookingOrderId,
+    ActivityLog.find({'bookingOrderId': req.body.bookingOrderId,
     'monthName':req.body.monthName,
     'year':req.body.year,
 }, function (err, data) {
@@ -12,7 +12,7 @@ exports.addMonth = function(req,res) {
             });
         } else { 
             if(data.length === 0) {
-                var digitalMgmtStatusData = new DigitalMgmtStatus(req.body);
+                var digitalMgmtStatusData = new ActivityLog(req.body);
                 digitalMgmtStatusData.bookingOrderId = req.body.bookingOrderId;
                 digitalMgmtStatusData.monthName = req.body.monthName;  
                 digitalMgmtStatusData.year = req.body.year;
@@ -41,7 +41,7 @@ exports.addMonth = function(req,res) {
    
 exports.viewMonthlyPlan = function(req,res) {
    
-    DigitalMgmtStatus.find({'bookingOrderId': req.params.id,
+    ActivityLog.find({'bookingOrderId': req.params.id,
     'monthName':req.params.month,
     'year':req.params.year,
 }, function (err, data) {
@@ -60,7 +60,7 @@ exports.addMonthlyPlan = function(req,res) {
         planDescription: req.body.planDescription,
         status:'Planned'
     };
-    DigitalMgmtStatus.findOneAndUpdate({
+    ActivityLog.findOneAndUpdate({
         bookingOrderId: req.body.bookingOrderId,
         monthName: req.body.monthName,
         year:req.body.year
@@ -75,7 +75,7 @@ exports.addMonthlyPlan = function(req,res) {
                     "result": 0
                 });
             } else {
-                DigitalMgmtStatus.find({'bookingOrderId': req.body.bookingOrderId,
+                ActivityLog.find({'bookingOrderId': req.body.bookingOrderId,
                 'monthName':req.body.monthName}, function (err, data) {
                     if (err) {
                         res.status(500).send({
@@ -90,7 +90,7 @@ exports.addMonthlyPlan = function(req,res) {
     )
 }
 exports.deleteWeeklyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id, function (err, monthlyData) {
+    ActivityLog.findById(req.params.id, function (err, monthlyData) {
         if (err) {
             res.status(500).send({
                 "result": 0
@@ -104,7 +104,7 @@ exports.deleteWeeklyPlan = function(req,res) {
                         "result": 0
                     });
                 } else {
-                    DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                    ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                         if (err) {
                             res.status(500).json({
                                 "result": 0
@@ -120,7 +120,7 @@ exports.deleteWeeklyPlan = function(req,res) {
     });
 }
 exports.editMonthlyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
 , function (err, monthlyData) {
         if (err) {
             res.status(500).send({
@@ -136,7 +136,7 @@ exports.editMonthlyPlan = function(req,res) {
                         "result": 0
                     });
                 } else {
-                    DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                    ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                         if (err) {
                             res.status(500).json({
                                 "result": 0
@@ -151,7 +151,7 @@ exports.editMonthlyPlan = function(req,res) {
     });
 }
 exports.deleteMonthlyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id, function (err, monthlyData) {
+    ActivityLog.findById(req.params.id, function (err, monthlyData) {
         if (err) {
             res.status(500).send({
                 "result": 0
@@ -165,7 +165,7 @@ exports.deleteMonthlyPlan = function(req,res) {
                         "result": 0
                     });
                 } else {
-                    DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                    ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                         if (err) {
                             res.status(500).json({
                                 "result": 0
@@ -181,7 +181,7 @@ exports.deleteMonthlyPlan = function(req,res) {
     });
 }
 exports.updateMonthlyStatus = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -196,7 +196,7 @@ exports.updateMonthlyStatus = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
@@ -213,7 +213,7 @@ exports.updateMonthlyStatus = function(req,res) {
     
 }
 exports.copyMonthlyPlanToWeekly = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -226,7 +226,7 @@ exports.copyMonthlyPlanToWeekly = function(req,res) {
                     planTitle: monthlyValue.planTitle,
                     planDescription: monthlyValue.planDescription
                 };
-                DigitalMgmtStatus.findByIdAndUpdate(req.params.id,
+                ActivityLog.findByIdAndUpdate(req.params.id,
                     {
                         $push: {
                             weeklyPlan: weeklyplan
@@ -238,7 +238,7 @@ exports.copyMonthlyPlanToWeekly = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
@@ -260,7 +260,7 @@ exports.addWeeklyPlan = function(req,res) {
         planDescription: req.body.planDescription,
         status:'Planned'
     };
-    DigitalMgmtStatus.findOneAndUpdate({
+    ActivityLog.findOneAndUpdate({
         bookingOrderId: req.params.id,
         monthName:req.params.month,
         year:req.params.year,
@@ -276,7 +276,7 @@ exports.addWeeklyPlan = function(req,res) {
                     "result": 0
                 });
             } else {
-                DigitalMgmtStatus.find({'bookingOrderId': req.params.id,
+                ActivityLog.find({'bookingOrderId': req.params.id,
                 'monthName':req.params.month,'year':req.params.year}, function (err, data) {
                     if (err) {
                         res.status(500).send({
@@ -292,7 +292,7 @@ exports.addWeeklyPlan = function(req,res) {
 }
 
 exports.viewWeeklyPlan = function(req,res) {
-    DigitalMgmtStatus.find({'bookingOrderId': req.params.id,
+    ActivityLog.find({'bookingOrderId': req.params.id,
     'monthName':req.params.month,
     'year':req.params.year}
         , function (err, monthlyData) {
@@ -307,7 +307,7 @@ exports.viewWeeklyPlan = function(req,res) {
 
 } 
 exports.editWeeklyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -324,7 +324,7 @@ exports.editWeeklyPlan = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
@@ -339,7 +339,7 @@ exports.editWeeklyPlan = function(req,res) {
             });
 }
 exports.copyWeeklyPlanToDaily = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -352,7 +352,7 @@ exports.copyWeeklyPlanToDaily = function(req,res) {
                     planTitle: monthlyValue.planTitle,
                     planDescription: monthlyValue.planDescription
                 };
-                DigitalMgmtStatus.findByIdAndUpdate(req.params.id,
+                ActivityLog.findByIdAndUpdate(req.params.id,
                     {
                         $push: {
                             dailyPlan: dailyPlan
@@ -364,7 +364,7 @@ exports.copyWeeklyPlanToDaily = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}, function (err, data) {
+                            ActivityLog.find({'_id':req.params.id}, function (err, data) {
                                 if (err) {
                                     res.status(500).send({
                                         "result": 0
@@ -380,7 +380,7 @@ exports.copyWeeklyPlanToDaily = function(req,res) {
             });
 }
 exports.updateWeeklyStatus = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -395,7 +395,7 @@ exports.updateWeeklyStatus = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
@@ -415,7 +415,7 @@ exports.addDailyPlan = function(req,res) {
         planTitle: req.body.planTitle,
         planDescription: req.body.planDescription
     };
-    DigitalMgmtStatus.findOneAndUpdate({
+    ActivityLog.findOneAndUpdate({
        
         bookingOrderId: req.params.id,
         monthName: req.params.month,
@@ -431,7 +431,7 @@ exports.addDailyPlan = function(req,res) {
                     "result": 0
                 });
             } else {
-                DigitalMgmtStatus.find({'bookingOrderId': req.params.id,
+                ActivityLog.find({'bookingOrderId': req.params.id,
                 'monthName':req.params.month}, function (err, data) {
                     if (err) {
                         res.status(500).send({
@@ -446,7 +446,7 @@ exports.addDailyPlan = function(req,res) {
     )
 }
 exports.editDailyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -462,7 +462,7 @@ exports.editDailyPlan = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
@@ -478,7 +478,7 @@ exports.editDailyPlan = function(req,res) {
 }
 
 exports.deleteDailyPlan = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id, function (err, monthlyData) {
+    ActivityLog.findById(req.params.id, function (err, monthlyData) {
         if (err) {
             res.status(500).send({
                 "result": 0
@@ -492,7 +492,7 @@ exports.deleteDailyPlan = function(req,res) {
                         "result": 0
                     });
                 } else {
-                    DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                    ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                         if (err) {
                             res.status(500).json({
                                 "result": 0
@@ -508,7 +508,7 @@ exports.deleteDailyPlan = function(req,res) {
     });
 }
 exports.updateDailyStatus = function(req,res) {
-    DigitalMgmtStatus.findById(req.params.id
+    ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -523,7 +523,7 @@ exports.updateDailyStatus = function(req,res) {
                                 "result": 0
                             });
                         } else {
-                            DigitalMgmtStatus.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
+                            ActivityLog.find({'_id':req.params.id}).select('').exec(function (err, createdPlan) {
                                 if (err) {
                                     res.status(500).json({
                                         "result": 0
