@@ -33,7 +33,8 @@ const RolePermssionSchema = new mongoose.Schema({
         whatsapp: Boolean,
         subscribe: Boolean,
         permission: Boolean,
-        register: Boolean
+        register: Boolean,
+        contact: Boolean
     }],
 });
 const RolePermssionDetail = mongoose.model('userpermission', RolePermssionSchema);

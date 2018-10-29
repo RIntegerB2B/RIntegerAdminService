@@ -14,11 +14,6 @@ exports.signInToSite = function (req, res) {
                 message: "Some error occurred while retrieving notes."
             });
         } else {
-            if (!userDetail) {
-                res.status(500).send({
-                    result: 1
-                });
-            } else {
             RolePermssionAccount.findOne({
                 'role': userDetail.role
                 }, function (err, fullData) {
@@ -28,14 +23,19 @@ exports.signInToSite = function (req, res) {
                         });
                     } else {
                         var  accountDetails = [];
+                        if(fullData !== null)
+                        {
                         accountDetails.push(userDetail);
                         accountDetails.push(fullData);
+                        }else
+                        {
+                            accountDetails.push(userDetail);
+                        }
                         res.status(200).send(accountDetails);
                         console.log(accountDetails);
                     }
                 });
         }
-    }
     });
 
 };
