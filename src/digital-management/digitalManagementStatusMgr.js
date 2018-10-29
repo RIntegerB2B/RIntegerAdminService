@@ -74,6 +74,14 @@ exports.viewWeeklyPlan = function(req,res) {
         console.log(error);
     }
 } 
+exports.viewAllWeeklyPlan = function(req,res) {
+    try{
+        digtalManagementStatusDA.viewAllWeeklyPlan(req,res)
+    }
+    catch(error) {
+        console.log(error);
+    }
+} 
 
 exports.deleteWeeklyPlan = function(req,res) {
     try{

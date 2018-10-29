@@ -36,6 +36,9 @@ module.exports = function (app) {
         app.route('/bookingid/:id/month/:month/year/:year/week/:week')  // view weekly plan ()
         .get(digitalManagementStatusMgr.viewWeeklyPlan);
 
+        app.route('/bookingid/:id/month/:month/year/:year/viewweek')  // view all weekly plan ()
+        .get(digitalManagementStatusMgr.viewAllWeeklyPlan);
+
     app.route('/id/:id/weekid/:weekid')
         .delete(digitalManagementStatusMgr.deleteWeeklyPlan);  // ..
 

@@ -224,7 +224,8 @@ exports.copyMonthlyPlanToWeekly = function(req,res) {
                    let weeklyplan = {
                     week:req.params.weekno,
                     planTitle: monthlyValue.planTitle,
-                    planDescription: monthlyValue.planDescription
+                    planDescription: monthlyValue.planDescription,
+                    status:'Planned'
                 };
                 ActivityLog.findByIdAndUpdate(req.params.id,
                     {
@@ -306,6 +307,20 @@ exports.viewWeeklyPlan = function(req,res) {
             });
 
 } 
+exports.viewAllWeeklyPlan = function(req,res) {
+    ActivityLog.find({'bookingOrderId': req.params.id,
+    'monthName':req.params.month,
+    'year':req.params.year}
+        , function (err, monthlyData) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                  res.status(200).json(monthlyData);
+                }
+            });
+} 
 exports.editWeeklyPlan = function(req,res) {
     ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
@@ -350,7 +365,8 @@ exports.copyWeeklyPlanToDaily = function(req,res) {
                    let dailyPlan = {
                     date:req.params.day,
                     planTitle: monthlyValue.planTitle,
-                    planDescription: monthlyValue.planDescription
+                    planDescription: monthlyValue.planDescription,
+                    status:'Planned'
                 };
                 ActivityLog.findByIdAndUpdate(req.params.id,
                     {
@@ -413,7 +429,8 @@ exports.addDailyPlan = function(req,res) {
     let dailyplan = {
         date:req.body.date,
         planTitle: req.body.planTitle,
-        planDescription: req.body.planDescription
+        planDescription: req.body.planDescription,
+        status:'Planned'
     };
     ActivityLog.findOneAndUpdate({
        
