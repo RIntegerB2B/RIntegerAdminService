@@ -3,7 +3,6 @@ var appSetting = require('../../config/appSetting');
 
 exports.viewModels = function (req, res) {
     ModelDetail.find({
-        'serviceProviderId': req.params.id
     }, function (err, models) {
         if (err) {
             res.status(500).send({
