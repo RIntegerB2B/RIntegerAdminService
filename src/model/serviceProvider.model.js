@@ -10,6 +10,7 @@ const ServiceProviderSchema = new mongoose.Schema({
     website: String,
     location: String,
     password: String,
+    role: String,
     isActive: Boolean
 });
 
