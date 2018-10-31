@@ -36,7 +36,7 @@ exports.signInToSite = function (req, res) {
                             );
                         }
                         else{
-                            UserRegister.findOne({
+                            ServiceProvider.findOne({
                                 'userName': req.body.userName,
                                 'password': req.body.password,
                                 'isActive': 1

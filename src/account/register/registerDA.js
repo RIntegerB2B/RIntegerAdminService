@@ -13,7 +13,7 @@ exports.spcreate = function (req, res,registeredId) {
     spAccount.website = req.body.website;
     spAccount.location = req.body.location;
     spAccount.password= req.body.password;
-    spAccount.role= 'admin';
+    spAccount.role = 'Service Provider';
     spAccount.isActive = 1;
     spAccount.save(function (err, spData) {
         if (err) {
@@ -25,7 +25,7 @@ exports.spcreate = function (req, res,registeredId) {
     adminAccount.password = req.body.password;
     adminAccount.emailId = req.body.emailId;
     adminAccount.mobileNumber = req.body.mobileNumber;
-    adminAccount.role = 'admin';
+    adminAccount.role = 'Service Provider';
     adminAccount.isActive = 1;
 adminAccount.save(function (err, registeredData){
     if (err) {
