@@ -200,7 +200,7 @@ exports.pushNotificationToAny = function (req, res) {
                     "icon": req.body.imageUrl != null ? req.body.imageUrl : appSetting.imageUrl,
                     "vibrate": [100, 50, 100],
                     "data": {
-                        "url": req.body.imageUrl ,
+                        "url": req.body.linkUrl != null ? req.body.linkUrl : appSetting.linkUrl ,
                         "dateOfArrival": Date.now(),
                         "primaryKey": 1
                     },
