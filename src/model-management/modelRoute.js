@@ -80,4 +80,10 @@ module.exports = function (app) {
 
   app.route('/notavailable/:id/serviceproviders/:spid')
   .get(addModelMgr.notAvailable);
+
+
+  // scheduled date
+
+  app.route('/scheduleddate/:id/serviceproviders/:spid/date/:date')
+  .get(addModelMgr.scheduledDate);
 }

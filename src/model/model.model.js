@@ -17,9 +17,16 @@ const ModelSchema = new mongoose.Schema({
     modelType: String,
     categoryType: String,
     height: String,
-    measurements: String,
+    bust: String,
+    chest: String,
+    waist: String,
+    hips: String,
+    hair: String,
+    eyes: String,
     shoulder: String,
     shoeSize: String,
+    topsize: String,
+    bottomsize: String,
     password: String,
     modelId: String,
     serviceProviderId: String,
@@ -27,7 +34,8 @@ const ModelSchema = new mongoose.Schema({
     serviceProviderCompanyName: String,
     isActive: Boolean,
     isScheduledBooking: Boolean,
-    Id: String
+    Id: String,
+    scheduledDate: String
 });
 
  const ModelDetail = mongoose.model('model', ModelSchema);

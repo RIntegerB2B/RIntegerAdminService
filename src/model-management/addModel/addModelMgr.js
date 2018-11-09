@@ -233,6 +233,16 @@ exports.removeScheduledBooking = function (req, res) {
         console.log(error);
     }
 }
+exports.scheduledDate = function (req, res) {
+    try {
+        addModelDA.scheduledDate(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 exports.modelAvailable = function (req, res) {
     try {
         addModelDA.modelAvailable(req, res)
