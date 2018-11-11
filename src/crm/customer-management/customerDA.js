@@ -1,4 +1,5 @@
 var CustomerDetail = require('../../model/customerDetail.model');
+var SubscribeDetail = require('../../model/subscribe.model');
 
 exports.singleCustomer = function (req, res) {
     var singCustomer = new CustomerDetail();
@@ -132,3 +133,31 @@ exports.customerDuplicateData = function (req, res) {
         });
     });
 };
+
+exports.subcribeCustomerData = function (req, res) {
+        SubscribeDetail.distinct("mobileNumber"
+        , function (err, subscribeMobile) {
+            if (err) {
+                res.status(500).send({
+                    message: "Some error occurred while retrieving notes."
+                });
+            } else {
+                console.log('subscribeMobile: ', subscribeMobile);
+                CustomerDetail.find({
+                    'mobileNumber': {
+                        '$in': subscribeMobile
+                    }
+                }, function (err, subscribeData) {
+                    if (err) {
+                        res.status(500).send({
+                            message: "Some error occurred while retrieving notes."
+                        });
+                    } else {
+                        console.log('subscribeUserData: ', subscribeData);
+                        res.status(200).json(subscribeData)
+                    }
+                });
+
+            }
+        });
+    }

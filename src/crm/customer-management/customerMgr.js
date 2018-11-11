@@ -42,4 +42,12 @@ var customerDA = require('./customerDA');
             console.log(error);
         }
     
+    
+}
+exports.subcribeCustomerData = function (req, res) {
+    try {
+        customerDA.subcribeCustomerData(req, res);
+    } catch (error) {
+        console.log(error);
+    }
 }

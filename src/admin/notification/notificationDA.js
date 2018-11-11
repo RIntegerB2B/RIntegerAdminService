@@ -39,10 +39,6 @@ exports.pushNotificationOld = function (req, res) {
                 });
         }
     });
-
-
-
-
 };
 
 exports.bookingStatus = function (req, res) {
