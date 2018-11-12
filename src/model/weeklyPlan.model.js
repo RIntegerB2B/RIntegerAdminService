@@ -4,7 +4,8 @@ const WeeklyPlanSchema = new mongoose.Schema({
     status: String,
     week:String,
     planTitle: String,
-    planDescription: String
+    planDescription: String,
+    monthId: String
    
 });
 module.exports = WeeklyPlanSchema;

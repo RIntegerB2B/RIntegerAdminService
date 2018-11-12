@@ -202,7 +202,6 @@ exports.updateMonthlyStatus = function(req,res) {
                                         "result": 0
                                     })
                                 } else {
-                                    console.log(createdPlan);
                                     res.status(200).json(createdPlan)
                                 }
                             })
@@ -213,7 +212,7 @@ exports.updateMonthlyStatus = function(req,res) {
     
 }
 exports.copyMonthlyPlanToWeekly = function(req,res) {
-    ActivityLog.findById(req.params.id
+     ActivityLog.findById(req.params.id
         , function (err, monthlyData) {
                 if (err) {
                     res.status(500).send({
@@ -222,6 +221,7 @@ exports.copyMonthlyPlanToWeekly = function(req,res) {
                 } else {
                     var monthlyValue = monthlyData.monthlyPlan.id(req.params.monthid);
                    let weeklyplan = {
+                    monthId: req.params.monthid,
                     week:req.params.weekno,
                     planTitle: monthlyValue.planTitle,
                     planDescription: monthlyValue.planDescription,
@@ -551,6 +551,49 @@ exports.updateDailyStatus = function(req,res) {
                             })
                         }
                     });
+                }
+            });
+}
+
+exports.copyToDailyPlan = function(req,res) {
+    ActivityLog.findById(req.params.id
+        , function (err, monthlyData) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                    var monthlyValue = monthlyData.dailyPlan.id(req.params.dailyid);
+                   let dailyPlan = {
+                    date:req.params.date,
+                    planTitle: monthlyValue.planTitle,
+                    planDescription: monthlyValue.planDescription,
+                    status:'Planned'
+                };
+                ActivityLog.findByIdAndUpdate(req.params.id,
+                    {
+                        $push: {
+                            dailyPlan: dailyPlan
+                        }
+                    },
+                    function (err, addedData) {
+                        if (err) { 
+                            res.status(500).send({
+                                "result": 0
+                            });
+                        } else {
+                            ActivityLog.find({'_id':req.params.id}, function (err, data) {
+                                if (err) {
+                                    res.status(500).send({
+                                        "result": 0
+                                    });
+                                } else {
+                                    res.status(200).json(data);
+                                }
+                            });
+                        }
+                    }
+                )
                 }
             });
 }

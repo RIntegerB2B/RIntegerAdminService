@@ -62,5 +62,8 @@ module.exports = function (app) {
 
          app.route('/id/:id/daily/:dailyid/status/:status') // update status
          .get(digitalManagementStatusMgr.updateDailyStatus);
+
+         app.route('/id/:id/daily/:dailyid/copy/:date') // update status
+         .get(digitalManagementStatusMgr.copyToDailyPlan);
  
 }

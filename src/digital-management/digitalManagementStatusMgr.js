@@ -151,5 +151,14 @@ exports.updateDailyStatus = function(req,res) {
     }
 }
 
+exports.copyToDailyPlan = function(req,res) {
+    try{
+        digtalManagementStatusDA.copyToDailyPlan(req,res)
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
 
 
