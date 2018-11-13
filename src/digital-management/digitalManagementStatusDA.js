@@ -473,6 +473,7 @@ exports.editDailyPlan = function(req,res) {
                     var monthlyValue = monthlyData.dailyPlan.id(req.params.dateid);
                     monthlyValue.planTitle = req.body.planTitle;
                     monthlyValue.planDescription = req.body.planDescription;
+                    monthlyValue.date = req.body.date;
                     monthlyData.save(function (err, editedData) {
                         if (err) {
                             res.status(201).send({
