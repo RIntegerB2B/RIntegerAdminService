@@ -51,3 +51,12 @@ exports.subcribeCustomerData = function (req, res) {
         console.log(error);
     }
 }
+
+exports.subcribeCustomerDelete = function (req, res) {
+    try {
+        customerDA.subcribeCustomerDelete(req, res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+

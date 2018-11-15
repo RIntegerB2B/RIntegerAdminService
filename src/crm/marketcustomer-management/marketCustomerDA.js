@@ -123,7 +123,6 @@ exports.marketCustomerDuplicateData = function (req, res) {
         for (var i = 0; i < data.length; i++) {
             duplicatePhoneNos.push(data[i]._id.mobileNumber);
         }
-        console.log(duplicatePhoneNos);
         // Please write the query to get all the records with this duplicateNos
 
         MarketCustomer.find({
@@ -136,7 +135,6 @@ exports.marketCustomerDuplicateData = function (req, res) {
                     message: "Some error occurred while retrieving notes."
                 });
             } else {
-                console.log('duplicateDetails: ', duplicateData);
                 res.status(200).json(duplicateData)
             }
         });

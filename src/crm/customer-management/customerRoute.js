@@ -15,4 +15,7 @@ module.exports = function (app) {
         .post(customerMgr.singleCustomer);
     app.route('/subscribecustomers')
         .get(customerMgr.subcribeCustomerData);
+
+        app.route('/subscribedcustomers/:id')
+        .delete(customerMgr.subcribeCustomerDelete);
 }
