@@ -35,6 +35,42 @@ exports.createecommerceImage = function (req, file, res) {
     });
 
 }
+
+exports.editPrime = function (req, file, res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        'serviceProviderName': req.params.spName
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail.primeImage = file;
+            modelDetail.save(function (err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(data);
+                }
+            })
+        }
+    });
+
+}
+
+exports.checkecommerceImage = function (req, res) {
+    ModelDetail.findOne({
+        'userName': req.params.modelName,
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            console.log(modelDetail.ecommerceImageName)
+        }
+    });
+}
 exports.createportraitImage = function (req, file, res) {
     ModelDetail.findOne({
         'userName': req.params.modelName,

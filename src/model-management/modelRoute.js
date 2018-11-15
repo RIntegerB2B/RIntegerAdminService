@@ -35,7 +35,7 @@ module.exports = function (app) {
      app.route('/portFolioImage/:sp/id/:id/name/:modelName')
         .put(addModelMgr.createportFolioImage);
 
-    app.route('/model/:id/sp/:name')
+    app.route('/model/:id/sp/:name/model/:modelname')
         .delete(viewModelMgr.deleteModel);
 
     app.route('/model/:id')
@@ -49,7 +49,7 @@ module.exports = function (app) {
   .get(viewProfileMgr.findImages);
 
   //delete  ecommerce images from sp
-  app.route('/serviceprovider/:name/model/:id/ecomm/:image')
+  app.route('/serviceprovider/:name/model/:id/ecomm/:image/modelname/:modelname')
   .delete(viewProfileMgr.deleteEcomImage);
 
   // delete portrait images from sp
@@ -57,11 +57,11 @@ module.exports = function (app) {
   .delete(viewProfileMgr.deletePortraitImage);
 
   //delete product images from sp
-  app.route('/serviceprovider/:name/model/:id/product/:image')
+  app.route('/serviceprovider/:name/model/:id/product/:image/modelname/:modelname')
   .delete(viewProfileMgr.deleteProductImage);
 
   //delete portFolio images from sp
-  app.route('/serviceprovider/:name/model/:id/portFolio/:image')
+  app.route('/serviceprovider/:name/model/:id/portFolio/:image/modelname/:modelname')
   .delete(viewProfileMgr.deletePortFolioImage);
 
 
@@ -86,4 +86,15 @@ module.exports = function (app) {
 
   app.route('/scheduleddate/:id/serviceproviders/:spid/date/:date')
   .get(addModelMgr.scheduledDate);
+
+
+  // check images for ecommerce
+  app.route('/checkecommerceImage/:sp/id/:id/name/:modelName')
+  .put(addModelMgr.checkecommerceImage);
+
+
+  // edit prime image
+  app.route('/editprimeimage/:modelName/sp/:spName')
+  .put(addModelMgr.editPrime);
+  
 }

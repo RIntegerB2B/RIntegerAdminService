@@ -1,8 +1,9 @@
 var addModelDA = require('./addModelDA');
 const multer = require('multer');
+var fs = require('fs');
 var mkdirp = require('mkdirp');
 var appSetting = require('../../config/appSetting');
-var ecommerceImage 
+
 
 exports.createModel = function (req, res) {
     try {
@@ -15,10 +16,9 @@ exports.createModel = function (req, res) {
 exports.createPrime = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-       // const IMG = '/mainimage'
-        const PATH = DIR + 'SP_'+ req.params.spName + '_models'+ '/' + req.params.modelName ;
-       // const PATH1 = PATH + IMG;
-     mkdirp(PATH);
+        const PATH = DIR + 'SP_'+ req.params.spName + '_models'+ '/' + req.params.modelName  ;
+
+        mkdirp(PATH);
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
@@ -49,11 +49,50 @@ exports.createPrime = function (req, res) {
         console.log(error);
     }
 }
+exports.editPrime = function (req, res) {
+    try {
+        const DIR = appSetting.imageUploadPath;
+        const PATH = DIR + 'SP_'+ req.params.spName + '_models'+ '/' + req.params.modelName  ;
+
+        mkdirp(PATH);
+        let storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, PATH);
+                addModelDA.editPrime(req,file.originalname,res);
+            },
+            filename: (req, file, cb) => {
+                cb(null, file.originalname);
+                console.log(file.originalname);
+            }
+        });
+        let upload = multer({
+            storage: storage
+        }).single('file');
+        upload(req, res, function (err) {
+            if (err) {
+                console.log(err);
+                return res.status(501).json({
+                    error: err
+                });
+            }
+            //do all database record saving activity
+           /*  return res.json({
+                originalname: req.file.originalname,
+                uploadname: req.file.filename,
+                path: PATH
+            }); */
+        });
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 exports.createecommerceImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName +  '/' + 'ecommerce' ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
@@ -90,10 +129,21 @@ exports.createecommerceImage = function (req, res) {
     }
     
 }
+
+
+
+exports.checkecommerceImage = function (req, res) {
+    try {
+        addModelDA.checkecommerceImage(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 exports.createportraitImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName +  '/' + 'portrait';
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
@@ -133,7 +183,7 @@ exports.createportraitImage = function (req, res) {
 exports.createproductImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName +  '/' + 'product' ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
@@ -173,7 +223,7 @@ exports.createproductImage = function (req, res) {
 exports.createportFolioImage = function (req, res) {
     try {
         const DIR = appSetting.imageUploadPath;
-        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName ;
+        const PATH = DIR + 'SP_'+ req.params.sp + '_models'+ '/' + req.params.modelName +  '/' + 'portfolio' ;
 
         mkdirp(PATH);
         let storage = multer.diskStorage({
