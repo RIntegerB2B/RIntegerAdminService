@@ -7,6 +7,6 @@ module.exports = function (app) {
     .get(dataAnalysisMgr.onlySubscribed);
 
 
-    /* app.route('/notsubscribedcustomers')
-    .get(dataAnalysisMgr.notSubscribed); */
+    app.route('/notsubscribedcustomers')
+    .get(dataAnalysisMgr.notSubscribed);
 } 

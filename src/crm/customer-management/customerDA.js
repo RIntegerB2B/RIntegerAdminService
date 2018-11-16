@@ -134,29 +134,28 @@ exports.customerDuplicateData = function (req, res) {
 };
 
 exports.subcribeCustomerData = function (req, res) {
-        SubscribeDetail.distinct("mobileNumber"
-        , function (err, subscribeMobile) {
+    SubscribeDetail.aggregate([
+        {
+           $lookup:
+           {
+               "from": "customerdetails",
+               "localField": "mobileNumber",
+               "foreignField": "mobileNumber",
+               "as": "joinedtable" 
+            
+           },
+        },{
+            $match: { "joinedtable": { $ne: [] } } 
+        }
+        ]).exec(function (err, subscribed) { 
             if (err) {
                 res.status(500).send({
                     message: "Some error occurred while retrieving notes."
-                });
-            } else {
-                CustomerDetail.find({
-                    'mobileNumber': {
-                        '$in': subscribeMobile
-                    }
-                }, function (err, subscribeData) {
-                    if (err) {
-                        res.status(500).send({
-                            message: "Some error occurred while retrieving notes."
-                        });
-                    } else {
-                        res.status(200).json(subscribeData)
-                    }
-                });
-
-            }
-        });
+                })
+} else {
+    res.status(200).json(subscribed);
+}
+        })
     }
     exports.subcribeCustomerDelete = function (req, res) {
         SubscribeDetail.findOneAndRemove({'mobileNumber':req.params.id}, function (err) {

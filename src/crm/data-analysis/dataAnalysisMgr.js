@@ -8,3 +8,12 @@ exports.onlySubscribed = function (req, res) {
         console.log(error);
     }
 }
+
+exports.notSubscribed = function (req, res) {
+    try {
+        dataAnalysisDA.notSubscribed(req, res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
