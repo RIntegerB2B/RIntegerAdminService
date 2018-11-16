@@ -14,24 +14,21 @@ exports.findImages = function (req, res) {
             })
         } else {
             data[0].primeImage = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + data[0].primeImage;
-            data[0].ecommerceImages = data[0].ecommerceImageName;
             var ecommerceImages = data[0].ecommerceImageName;
+          /*   data[0].ecommerceImages = data[0].ecommerceImageName; */
             var arrayLength = ecommerceImages.length - 1;
             for (var i = 0; i <= arrayLength; i++) {
                 ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'ecommerce' + '/' + ecommerceImages[i];
             }
-            data[0].productImages = data[0].productImageName;
             var productImages = data[0].productImageName;
             var productLength = productImages.length - 1;
             for (var i = 0; i <= productLength; i++) {
                 productImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'product' + '/' + productImages[i];
             }
-            var portraitImages = data[0].portraitImageName;
-            var portraitLength = portraitImages.length - 1;
+            /* var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'portrait' + '/' + portraitImages[i];
-            }
-            data[0].portFolioImages = data[0].portFolioImageName;
+            } */
             var portFolioImages = data[0].portFolioImageName;
             var portFolioLength = portFolioImages.length - 1;
             for (var i = 0; i <= portFolioLength; i++) {
@@ -71,8 +68,7 @@ exports.deleteEcomImage = function (req, res) {
                                 });
                             } else {
                                 data[0].primeImage = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + data[0].primeImage;
-        
-                    var ecommerceImages = data[0].ecommerceImageName;
+                                var ecommerceImages = data[0].ecommerceImageName;
                     var arrayLength = ecommerceImages.length - 1;
                     for (var i = 0; i <= arrayLength; i++) {
                         ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'ecommerce' + '/' + ecommerceImages[i];
@@ -82,11 +78,10 @@ exports.deleteEcomImage = function (req, res) {
                     for (var i = 0; i <= productLength; i++) {
                         productImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'product' + '/' + productImages[i];
                     }
-                    var portraitImages = data[0].portraitImageName;
-                    var portraitLength = portraitImages.length - 1;
+                   /*  var portraitLength = portraitImages.length - 1;
                     for (var i = 0; i <= portraitLength; i++) {
                         portraitImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'portrait' + '/' + portraitImages[i];
-                    }
+                    } */
                     var portFolioImages = data[0].portFolioImageName;
                     var portFolioLength = portFolioImages.length - 1;
                     for (var i = 0; i <= portFolioLength; i++) {
@@ -157,8 +152,7 @@ exports.deleteProductImage = function (req, res) {
                         });
                     } else {
                         data[0].primeImage = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + data[0].primeImage;
-
-            var ecommerceImages = data[0].ecommerceImageName;
+                        var ecommerceImages = data[0].ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
             for (var i = 0; i <= arrayLength; i++) {
                 ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'ecommerce' + '/' + ecommerceImages[i];
@@ -168,11 +162,10 @@ exports.deleteProductImage = function (req, res) {
             for (var i = 0; i <= productLength; i++) {
                 productImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'product' + '/' + productImages[i];
             }
-            var portraitImages = data[0].portraitImageName;
-            var portraitLength = portraitImages.length - 1;
+            /* var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'portrait' + '/' + portraitImages[i];
-            }
+            } */
             var portFolioImages = data[0].portFolioImageName;
             var portFolioLength = portFolioImages.length - 1;
             for (var i = 0; i <= portFolioLength; i++) {
@@ -222,8 +215,7 @@ exports.deletePortFolioImage = function (req, res) {
                         });
                     } else {
                         data[0].primeImage = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + data[0].primeImage;
-
-            var ecommerceImages = data[0].ecommerceImageName;
+                        var ecommerceImages = data[0].ecommerceImageName;
             var arrayLength = ecommerceImages.length - 1;
             for (var i = 0; i <= arrayLength; i++) {
                 ecommerceImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'ecommerce' + '/' + ecommerceImages[i];
@@ -233,11 +225,10 @@ exports.deletePortFolioImage = function (req, res) {
             for (var i = 0; i <= productLength; i++) {
                 productImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'product' + '/' + productImages[i];
             }
-            var portraitImages = data[0].portraitImageName;
-            var portraitLength = portraitImages.length - 1;
+            /* var portraitLength = portraitImages.length - 1;
             for (var i = 0; i <= portraitLength; i++) {
                 portraitImages[i] = appSetting.imageServerPath + 'SP_' + data[0].serviceProviderName + '_models' + '/' + data[0].userName + '/' + 'portrait' + '/' + portraitImages[i];
-            }
+            } */
             var portFolioImages = data[0].portFolioImageName;
             var portFolioLength = portFolioImages.length - 1;
             for (var i = 0; i <= portFolioLength; i++) {

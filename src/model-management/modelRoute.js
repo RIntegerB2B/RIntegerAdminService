@@ -89,7 +89,7 @@ module.exports = function (app) {
 
 
   // check images for ecommerce
-  app.route('/checkecommerceImage/:sp/id/:id/name/:modelName')
+  app.route('/checkecommerceImage/:sp/id/:modelid')
   .put(addModelMgr.checkecommerceImage);
 
 

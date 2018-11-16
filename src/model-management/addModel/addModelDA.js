@@ -60,13 +60,14 @@ exports.editPrime = function (req, file, res) {
 
 exports.checkecommerceImage = function (req, res) {
     ModelDetail.findOne({
-        'userName': req.params.modelName,
-        '_id': req.params.id
+        'serviceProviderName': req.params.sp,
+        '_id': req.params.modelid
     }, function (err, modelDetail) {
         if (err) {
             console.log(err);
 
         } else {
+          /*   req.body. */
             console.log(modelDetail.ecommerceImageName)
         }
     });
