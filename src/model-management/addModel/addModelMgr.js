@@ -98,7 +98,7 @@ exports.createecommerceImage = function (req, res) {
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                 addModelDA.createecommerceImage(req,file.originalname,res);
+                 addModelDA.createecommerceImage(req,file,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);
@@ -149,7 +149,7 @@ exports.createportraitImage = function (req, res) {
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                addModelDA.createportraitImage(req,file.originalname,res);
+                addModelDA.createportraitImage(req,file,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);
@@ -189,7 +189,7 @@ exports.createproductImage = function (req, res) {
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                addModelDA.createproductImage(req,file.originalname,res);
+                addModelDA.createproductImage(req,file,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);
@@ -229,7 +229,7 @@ exports.createportFolioImage = function (req, res) {
         let storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, PATH);
-                addModelDA.createportFolioImage(req,file.originalname,res);
+                addModelDA.createportFolioImage(req,file,res);
             },
             filename: (req, file, cb) => {
                 cb(null, file.originalname);

@@ -23,14 +23,25 @@ exports.createecommerceImage = function (req, file, res) {
             console.log(err);
 
         } else {
-            modelDetail.ecommerceImageName.push(file);
-            modelDetail.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(data);
-                }
-            })
+           
+            var ID = file.originalname;
+            var i =  modelDetail.ecommerceImageName.indexOf(ID);
+            if(i > -1){
+             console.log('Exist');
+            }
+            else{
+                modelDetail.ecommerceImageName.push(file.originalname);
+                modelDetail.save(function (err, data) {
+                    if (err) {
+                        res.status(500).send({
+                            "result": 0
+                        });
+                    } else {
+                        console.log(data);
+                    }
+                })
+            }
+            
         }
     });
 
@@ -81,14 +92,23 @@ exports.createportraitImage = function (req, file, res) {
             console.log(err);
 
         } else {
-            modelDetail.portraitImageName.push(file);
-            modelDetail.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(data);
-                }
-            })
+            var ID = file.originalname;
+            var j =  modelDetail.portraitImageName.indexOf(ID);
+            if(j > -1){
+             console.log('Exist');
+            }
+            else{
+                modelDetail.portraitImageName.push(file.originalname);
+                modelDetail.save(function (err, data) {
+                    if (err) {
+                        res.status(500).send({
+                            "result": 0
+                        });
+                    } else {
+                        console.log(data);
+                    }
+                })
+            }
         }
     });
 
@@ -102,14 +122,23 @@ exports.createproductImage = function (req, file, res) {
             console.log(err);
 
         } else {
-            modelDetail.productImageName.push(file);
-            modelDetail.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(data);
-                }
-            })
+            var ID = file.originalname;
+            var k =  modelDetail.productImageName.indexOf(ID);
+            if(k > -1){
+             console.log('Exist');
+            }
+            else{
+                modelDetail.productImageName.push(file.originalname);
+                modelDetail.save(function (err, data) {
+                    if (err) {
+                        res.status(500).send({
+                            "result": 0
+                        });
+                    } else {
+                        console.log(data);
+                    }
+                })
+            }
         }
     });
 
@@ -125,16 +154,23 @@ exports.createportFolioImage = function (req, file, res) {
             });
 
         } else {
-            modelDetail.portFolioImageName.push(file);
-            modelDetail.save(function (err, data) {
-                if (err) {
-                    res.status(500).send({
-                        "result": 0
-                    });
-                } else {
-                    console.log(data);
-                }
-            })
+            var ID = file.originalname;
+            var l =  modelDetail.portFolioImageName.indexOf(ID);
+            if(l > -1){
+             console.log('Exist');
+            }
+            else{
+                modelDetail.portFolioImageName.push(file.originalname);
+                modelDetail.save(function (err, data) {
+                    if (err) {
+                        res.status(500).send({
+                            "result": 0
+                        });
+                    } else {
+                        console.log(data);
+                    }
+                })
+            }
         }
     });
 
