@@ -5,4 +5,5 @@ module.exports = {
   imageUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/app/rinteger-admin/Rinteger-admin/images/' ,
     imageUrl: process.env.IMAGE_URL_PATH || 'https://rinteger.com/assets/images/logohomepage.jpg',
     serviceUrl: 'https://rinteger.com/dashboard/statusView/',
+    notificationUrl: 'https://rinteger.com/admin/navheader/analysis'
   }

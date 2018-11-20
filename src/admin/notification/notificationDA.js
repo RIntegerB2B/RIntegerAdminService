@@ -255,6 +255,7 @@ exports.notificationSubscription = function (req, res) {
                                             "icon": req.body.imageUrl != null ? req.body.imageUrl : appSetting.imageUrl,
                                             "vibrate": [100, 50, 100],
                                             "data": {
+                                                "url": appSetting.notificationUrl ,
                                                 "dateOfArrival": Date.now(),
                                                 "primaryKey": 1
                                             }
