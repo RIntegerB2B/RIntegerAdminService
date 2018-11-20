@@ -7,7 +7,7 @@ exports.onlySubscribed = function (req, res) {
           
            $lookup:
            {
-               "from": "customerDetail",
+               "from": "customerdetails",
                "localField": "mobileNumber",
                "foreignField": "mobileNumber",
                "as": "joinedtable" 
