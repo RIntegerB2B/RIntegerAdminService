@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 const ModelSchema = new mongoose.Schema({
+    position: String,
     userName: String,
     description: String,
     availability: String,

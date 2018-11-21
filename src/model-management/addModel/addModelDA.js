@@ -5,6 +5,7 @@ var appSetting = require('../../config/appSetting');
 exports.createModel = function (req, res) {
     var modelDetail = new ModelDetail(req.body);
     modelDetail.isScheduledBooking = 0;
+
     modelDetail.save(function (err, contentData) {
         if (err) {
             res.send(err);
@@ -23,13 +24,12 @@ exports.createecommerceImage = function (req, file, res) {
             console.log(err);
 
         } else {
-           
+
             var ID = file.originalname;
-            var i =  modelDetail.ecommerceImageName.indexOf(ID);
-            if(i > -1){
-             console.log('Exist');
-            }
-            else{
+            var i = modelDetail.ecommerceImageName.indexOf(ID);
+            if (i > -1) {
+                console.log('Exist');
+            } else {
                 modelDetail.ecommerceImageName.push(file.originalname);
                 modelDetail.save(function (err, data) {
                     if (err) {
@@ -41,7 +41,7 @@ exports.createecommerceImage = function (req, file, res) {
                     }
                 })
             }
-            
+
         }
     });
 
@@ -78,7 +78,7 @@ exports.checkecommerceImage = function (req, res) {
             console.log(err);
 
         } else {
-          /*   req.body. */
+            /*   req.body. */
             console.log(modelDetail.ecommerceImageName)
         }
     });
@@ -93,11 +93,10 @@ exports.createportraitImage = function (req, file, res) {
 
         } else {
             var ID = file.originalname;
-            var j =  modelDetail.portraitImageName.indexOf(ID);
-            if(j > -1){
-             console.log('Exist');
-            }
-            else{
+            var j = modelDetail.portraitImageName.indexOf(ID);
+            if (j > -1) {
+                console.log('Exist');
+            } else {
                 modelDetail.portraitImageName.push(file.originalname);
                 modelDetail.save(function (err, data) {
                     if (err) {
@@ -123,11 +122,10 @@ exports.createproductImage = function (req, file, res) {
 
         } else {
             var ID = file.originalname;
-            var k =  modelDetail.productImageName.indexOf(ID);
-            if(k > -1){
-             console.log('Exist');
-            }
-            else{
+            var k = modelDetail.productImageName.indexOf(ID);
+            if (k > -1) {
+                console.log('Exist');
+            } else {
                 modelDetail.productImageName.push(file.originalname);
                 modelDetail.save(function (err, data) {
                     if (err) {
@@ -155,11 +153,10 @@ exports.createportFolioImage = function (req, file, res) {
 
         } else {
             var ID = file.originalname;
-            var l =  modelDetail.portFolioImageName.indexOf(ID);
-            if(l > -1){
-             console.log('Exist');
-            }
-            else{
+            var l = modelDetail.portFolioImageName.indexOf(ID);
+            if (l > -1) {
+                console.log('Exist');
+            } else {
                 modelDetail.portFolioImageName.push(file.originalname);
                 modelDetail.save(function (err, data) {
                     if (err) {
@@ -181,6 +178,7 @@ exports.updateModel = function (req, res) {
         if (err) return handleError(err);
         else {
             // models.userName = req.body.userName;
+            models.position = req.body.position;
             models.description = req.body.description;
             models.availability = req.body.availability;
             models.mobileNumber = req.body.mobileNumber;
@@ -231,21 +229,22 @@ exports.scheduledBooking = function (req, res) {
                 } else {
                     ModelDetail.find({
                         'serviceProviderId': req.params.spid
-                    }, function (err, models) {
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
                         if (err) {
                             res.status(500).send({
-                                "result": 0
+                                message: "Some error occurred while retrieving notes."
                             });
                         } else {
-                            var arraylength =models.length-1;
-                            for (var i= 0; i<=arraylength; i++)
-                            {
-                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
                             }
                             res.status(200).json(models);
                         }
-                    });
-                   
+                    })
+
                 }
             })
         }
@@ -270,21 +269,22 @@ exports.removeScheduledBooking = function (req, res) {
                 } else {
                     ModelDetail.find({
                         'serviceProviderId': req.params.spid
-                    }, function (err, models) {
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
                         if (err) {
                             res.status(500).send({
-                                "result": 0
+                                message: "Some error occurred while retrieving notes."
                             });
                         } else {
-                            var arraylength =models.length-1;
-                            for (var i= 0; i<=arraylength; i++)
-                            {
-                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
                             }
                             res.status(200).json(models);
                         }
-                    });
-                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    })
+                    /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
                     res.status(200).json(models); */
                 }
             })
@@ -314,15 +314,14 @@ exports.scheduledDate = function (req, res) {
                                 "result": 0
                             });
                         } else {
-                            var arraylength =models.length-1;
-                            for (var i= 0; i<=arraylength; i++)
-                            {
-                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
                             }
                             res.status(200).json(models);
                         }
                     });
-                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
                     res.status(200).json(models); */
                 }
             })
@@ -346,21 +345,22 @@ exports.modelAvailable = function (req, res) {
                 } else {
                     ModelDetail.find({
                         'serviceProviderId': req.params.spid
-                    }, function (err, models) {
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
                         if (err) {
                             res.status(500).send({
-                                "result": 0
+                                message: "Some error occurred while retrieving notes."
                             });
                         } else {
-                            var arraylength =models.length-1;
-                            for (var i= 0; i<=arraylength; i++)
-                            {
-                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
                             }
                             res.status(200).json(models);
                         }
-                    });
-                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    })
+                    /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
                     res.status(200).json(models); */
                 }
             })
@@ -387,21 +387,22 @@ exports.notAvailable = function (req, res) {
                 } else {
                     ModelDetail.find({
                         'serviceProviderId': req.params.spid
-                    }, function (err, models) {
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
                         if (err) {
                             res.status(500).send({
-                                "result": 0
+                                message: "Some error occurred while retrieving notes."
                             });
                         } else {
-                            var arraylength =models.length-1;
-                            for (var i= 0; i<=arraylength; i++)
-                            {
-                                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
                             }
                             res.status(200).json(models);
                         }
-                    });
-                      /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
+                    })
+                    /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
                     res.status(200).json(models); */
                 }
             })

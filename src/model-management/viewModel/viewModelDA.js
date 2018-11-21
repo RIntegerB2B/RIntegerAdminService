@@ -4,11 +4,13 @@ var appSetting = require('../../config/appSetting');
 var rmdir = require('rmdir');
 
 exports.viewModels = function (req, res) {
-    ModelDetail.find({
-    }, function (err, models) {
+ ModelDetail.find({
+    }).sort({
+        position: 1
+    }).exec(function (err, models) {
         if (err) {
             res.status(500).send({
-                "result": 0
+                message: "Some error occurred while retrieving notes."
             });
         } else {
             var arraylength =models.length-1;
@@ -18,7 +20,7 @@ exports.viewModels = function (req, res) {
             }
             res.status(200).json(models);
         }
-    });
+    }) 
 }
 
 exports.findModels = function (req, res) {
@@ -54,7 +56,10 @@ if(err) {
         "result": 0
     });
 } else{
-    ModelDetail.find({'serviceProviderName':req.params.name}).select('').exec(function (err, models) {
+    ModelDetail.find({'serviceProviderName':req.params.name
+    }).sort({
+        position: 1
+    }).exec(function (err, models) {
         if (err) {
             res.status(500).send({
                 message: "Some error occurred while retrieving notes."
@@ -63,11 +68,11 @@ if(err) {
             var arraylength =models.length-1;
             for (var i= 0; i<=arraylength; i++)
             {
-                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                models[i].primeImage = appSetting.imageServerPath  + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
             }
             res.status(200).json(models);
         }
-    });
+    }) 
 }
           }) ;
         }
