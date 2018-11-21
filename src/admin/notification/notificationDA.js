@@ -217,11 +217,12 @@ exports.pushNotificationToAny = function (req, res) {
     });
 };
 
-exports.notificationSubscription = function (req, res) {
+exports.notificationSubscription = function (req, res, date) {
     NotificationDetail.findOne({
         'mobileNumber': req.body.mobileNumber,
         'userSubscriptions':req.body.userSubscriptions,
-        'user':req.body.user
+      
+        /* 'date':  */
     }, function (err, notificationDetail) {
         if (err) {
             res.status(500).send({
@@ -230,6 +231,7 @@ exports.notificationSubscription = function (req, res) {
         } else {
             if (notificationDetail == null) {
                 var notification = new NotificationDetail(req.body);
+                notification.date  = date;
                 notification.save(
                     function (err,notificationData) {
                         if (err) {

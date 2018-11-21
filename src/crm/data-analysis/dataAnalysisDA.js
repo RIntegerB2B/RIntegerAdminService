@@ -52,3 +52,24 @@ exports.notSubscribed = function (req, res) {
 }
         })
 }
+
+exports.deleteSubscribedNumber = function (req, res) {
+    SubscribeDetail.findOneAndRemove({'_id':req.params.id}, function (err) {
+        if (err) {
+            res.status(500).send({
+                "result": 0
+            });
+        } else {
+            SubscribeDetail.find({}, function (err, details) {
+                if(err) {
+                    res.status(500).send({
+                        "result" : 0
+                    })
+                } 
+                else {
+                    res.status(200).json(details)
+                }
+            })
+        }
+    });
+}

@@ -9,4 +9,7 @@ module.exports = function (app) {
 
     app.route('/notsubscribedcustomers')
     .get(dataAnalysisMgr.notSubscribed);
+
+    app.route('/subscribednumber/:id')
+    .delete(dataAnalysisMgr.deleteSubscribedNumber);
 } 

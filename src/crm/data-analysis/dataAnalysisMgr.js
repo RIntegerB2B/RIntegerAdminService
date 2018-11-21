@@ -17,3 +17,11 @@ exports.notSubscribed = function (req, res) {
     }
 }
 
+exports.deleteSubscribedNumber = function (req, res) {
+    try {
+        dataAnalysisDA.deleteSubscribedNumber(req, res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+

@@ -45,7 +45,11 @@ exports.addPushSubscriber = function (req, res) {
 
     const sub = req.body;
 
-   /*  console.log('Received Subscription on the server: ', sub); */
-
-    notificationDA.notificationSubscription(req, res);
+var currentDate = new Date();
+var day = currentDate.getDate();
+var month = currentDate.getMonth() + 1;
+var year = currentDate.getFullYear();
+var date = day + "/" + month + "/" + year;
+console.log(date);
+    notificationDA.notificationSubscription(req, res, date);
 }
