@@ -39,7 +39,8 @@ const ModelSchema = new mongoose.Schema({
     isActive: Boolean,
     isScheduledBooking: Boolean,
     Id: String,
-    scheduledDate: String
+    scheduledDate: String,
+    isProjectionModel: Boolean
 });
 
  const ModelDetail = mongoose.model('model', ModelSchema);

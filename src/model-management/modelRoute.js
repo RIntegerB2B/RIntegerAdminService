@@ -73,6 +73,13 @@ module.exports = function (app) {
   .get(addModelMgr.removeScheduledBooking);
 
 
+    // update projection model
+    app.route('/projectionmodel/:id/serviceproviders/:spid')
+    .get(addModelMgr.projectionModel);
+  
+    app.route('/removeprojectionmodel/:id/serviceproviders/:spid')
+    .get(addModelMgr.removeProjectionModel);
+
   // update available
 
   app.route('/avaialble/:id/serviceproviders/:spid')

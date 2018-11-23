@@ -5,6 +5,7 @@ var appSetting = require('../../config/appSetting');
 exports.createModel = function (req, res) {
     var modelDetail = new ModelDetail(req.body);
     modelDetail.isScheduledBooking = 0;
+    modelDetail.isProjectionModel = 0;
 
     modelDetail.save(function (err, contentData) {
         if (err) {
@@ -404,6 +405,82 @@ exports.notAvailable = function (req, res) {
                     })
                     /*   models.primeImage = appSetting.imageServerPath + 'SP_' + models.serviceProviderName + '_models' + '/' + models.userName + '/' + models.primeImage;
                     res.status(200).json(models); */
+                }
+            })
+        }
+    });
+}
+
+exports.projectionModel = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].isProjectionModel = 'true';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                    ModelDetail.find({
+                        'serviceProviderId': req.params.spid
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
+                        if (err) {
+                            res.status(500).send({
+                                message: "Some error occurred while retrieving notes."
+                            });
+                        } else {
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            }
+                            res.status(200).json(models);
+                        }
+                    })
+                }
+            })
+        }
+    });
+}
+
+exports.removeProjectionModel = function (req, res) {
+    ModelDetail.find({
+        '_id': req.params.id
+    }, function (err, modelDetail) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            modelDetail[0].isProjectionModel = 'false';
+            modelDetail[0].save(function (err, models) {
+                if (err) {
+                    res.status(500).send({
+                        "result": 0
+                    });
+                } else {
+                    ModelDetail.find({
+                        'serviceProviderId': req.params.spid
+                    }).sort({
+                        position: 1
+                    }).exec(function (err, models) {
+                        if (err) {
+                            res.status(500).send({
+                                message: "Some error occurred while retrieving notes."
+                            });
+                        } else {
+                            var arraylength = models.length - 1;
+                            for (var i = 0; i <= arraylength; i++) {
+                                models[i].primeImage = appSetting.imageServerPath + 'SP_' + models[i].serviceProviderName + '_models' + '/' + models[i].userName + '/' + models[i].primeImage;
+                            }
+                            res.status(200).json(models);
+                        }
+                    })
                 }
             })
         }

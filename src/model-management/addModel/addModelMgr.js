@@ -310,4 +310,21 @@ exports.notAvailable = function (req, res) {
     }
 }
 
+exports.projectionModel = function (req, res) {
+    try {
+        addModelDA.projectionModel(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.removeProjectionModel = function (req, res) {
+    try {
+        addModelDA.removeProjectionModel(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
 
