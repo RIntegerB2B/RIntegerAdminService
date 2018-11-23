@@ -40,7 +40,8 @@ const ModelSchema = new mongoose.Schema({
     isScheduledBooking: Boolean,
     Id: String,
     scheduledDate: String,
-    isProjectionModel: Boolean
+    isProjectionModel: Boolean,
+    scheduledLocation: String
 });
 
  const ModelDetail = mongoose.model('model', ModelSchema);

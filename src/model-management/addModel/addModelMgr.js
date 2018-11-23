@@ -291,6 +291,15 @@ exports.scheduledDate = function (req, res) {
         console.log(error);
     }
 }
+exports.scheduledLocation = function (req, res) {
+    try {
+        addModelDA.scheduledLocation(req, res)
+   
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 exports.modelAvailable = function (req, res) {
