@@ -11,6 +11,7 @@ var marketCustomerRoutes = require('./crm/marketcustomer-management/marketCustom
 var crmCustomerRoutes = require('./crm/customer-management/customerRoute');
 var contactRoutes = require('./contact-us/contactUsRoute');
 var dataAnalysisRoutes = require('./crm/data-analysis/dataAnalysisRoute');
+var bannerRoutes = require('./settings/settingsRoute');
 
 exports.loadRoutes = function (app) {
     accountRoutes(app);
@@ -26,4 +27,5 @@ exports.loadRoutes = function (app) {
     crmCustomerRoutes(app);
     contactRoutes(app);
     dataAnalysisRoutes(app);
+    bannerRoutes(app);
 };
