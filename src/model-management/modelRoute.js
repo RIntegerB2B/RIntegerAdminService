@@ -103,5 +103,11 @@ module.exports = function (app) {
   // edit prime image
   app.route('/editprimeimage/:modelName/sp/:spName')
   .put(addModelMgr.editPrime);
+
+
+  // 
+
+  app.route('/scheduled/:id/serviceproviders/:spid/location/:location')
+  .get(addModelMgr.scheduledLocation);
   
 }
