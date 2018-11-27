@@ -1,5 +1,5 @@
 'use strict';
-var SuperCategory = require('../../model/superCategory.model');
+var SuperCategory = require('../../model/supercategory.model');
 
 exports.mainCategoryInsert = function (req, res) {
     let mainCat = {

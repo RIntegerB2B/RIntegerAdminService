@@ -1,5 +1,5 @@
 'use strict';
-var SuperCategory = require('../../model/superCategory.model');
+var SuperCategory = require('../../model/supercategory.model');
 var MainCategory = require('../../model/mainCategory.model')
 var Portfolio = require('../../model/portfolioimages.model')
 
