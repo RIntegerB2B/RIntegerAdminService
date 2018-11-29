@@ -1,11 +1,16 @@
 'use strict';
-var SuperCategory = require('../../model/superCategory.model');
+var SuperCategory = require('../../model/supercategory.model');
+var appSetting = require('../../config/appSetting');
+var fs = require('fs');
+var rmdir = require('rmdir');
+var mkdirp = require('mkdirp');
 
 exports.superCategoryInsert = function (req, res) {
 
     var superCategoryData = new SuperCategory(req.body);
     superCategoryData.categoryName = req.body.categoryName;
-
+    const PATH = appSetting.workUplaodPath + '/' + req.body.categoryName;
+mkdirp(PATH);
     superCategoryData.save(
         function (err, superCat) {
             if (err) { // if it contains error return 0
@@ -71,6 +76,8 @@ exports.superCategoryDelete = function (req, res) {
                 "result": 0
             });
         } else {
+            const PATH = appSetting.workUplaodPath +  '/' + req.params.name;
+            rmdir(PATH);
             SuperCategory.find({}).select().exec(function (err, superCat) {
                 if (err) {
                     res.status(500).send({

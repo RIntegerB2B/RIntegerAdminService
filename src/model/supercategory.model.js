@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var MainCategory = require('./mainCategory.model');
+var MainCategory = require('./maincategory.model');
 
 const SuperCategorySchema = new mongoose.Schema({
     
