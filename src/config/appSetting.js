@@ -8,7 +8,7 @@ module.exports = {
     workUplaodPath: './ourwork/', */
     imageOurWorkServerPath: process.env.IMAGE_SERVER_PATH || 'https://rinteger.com/qa/admin/images/ourwork/',
     imageOurWorkUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/qa/rinteger-admin/Rinteger-admin/images/ourwork/' ,
-    imageUrl: process.env.IMAGE_URL_PATH || 'https://rinteger.com/assets/images/logohomepage.jpg',
+    imageUrl: process.env.IMAGE_URL_PATH || 'https://rinteger.com/qa/assets/images/logohomepage.jpg',
     serviceUrl: 'https://rinteger.com/qa/dashboard/statusView/',
     notificationUrl: 'https://rinteger.com/qa/admin/navheader/analysis'
   };
