@@ -1,5 +1,9 @@
 'use strict';
-var SuperCategory = require('../../model/superCategory.model');
+var SuperCategory = require('../../model/supercategory.model');
+var appSetting = require('../../config/appSetting');
+var fs = require('fs');
+var rmdir = require('rmdir');
+var mkdirp = require('mkdirp');
 
 exports.mainCategoryInsert = function (req, res) {
     let mainCat = {
@@ -26,6 +30,8 @@ exports.mainCategoryInsert = function (req, res) {
                         "result": 0
                     });
                 } else {
+                    const PATH = appSetting.imageOurWorkUploadPath +  superCat.categoryName + '/' + req.body.mainCategoryName;
+                    mkdirp(PATH);
                     res.status(200).json(superCat.mainCategory[superCat.mainCategory.length -1]);
                 }
             });
@@ -43,25 +49,34 @@ exports.mainCategoryDelete = function (req, res) {
                 "result": 0
             });
         } else {
-            
-            category.mainCategory.id(req.params.mainCategoryId).remove();
-            category.save(function (err) {
-                if (err) {
-                    res.status(201).send({
-                        "result": 0
-                    });
-                } else {
-                    SuperCategory.findById(req.params.categoryId).select('mainCategory').exec(function (err, createdCatalog) {
+           
+           
+            var maincategory =  category.mainCategory.id(req.params.mainCategoryId);
+            maincategory.remove();
+const PATH = appSetting.imageOurWorkUploadPath +  category.categoryName + '/' + maincategory.mainCategoryName ;
+            rmdir(PATH , function (err, dirs) {
+                if (err) {throw err;} 
+                else {
+                    category.save(function (err) {
                         if (err) {
-                            res.status(500).json({
+                            res.status(201).send({
                                 "result": 0
-                            })
+                            });
                         } else {
-                            res.status(200).json(createdCatalog)
+                            SuperCategory.find({_id: req.params.categoryId }).select('mainCategory').exec(function (err, createdCatalog) {
+                                if (err) {
+                                    res.status(500).json({
+                                        "result": 0
+                                    })
+                                } else {
+                                    res.status(200).json(createdCatalog)
+                                }
+                            })
                         }
-                    })
+                    });
                 }
             });
+            
 
         }
     });
@@ -85,7 +100,7 @@ exports.mainCategoryUpdate = function (req, res) {
                         "result": 0
                     });
                 } else {
-                    SuperCategory.findById(req.params.categoryId).select('mainCategory').exec(function (err, createdCatalog) {
+                    SuperCategory.find({_id: req.params.categoryId }).select('mainCategory').exec(function (err, createdCatalog) {
                         if (err) {
                             res.status(500).json({
                                 "result": 0
@@ -103,7 +118,7 @@ exports.mainCategoryUpdate = function (req, res) {
 
 
 exports.getMainCategory = function (req, res) {
-    SuperCategory.findById(req.params.id, function (err, category) {
+    SuperCategory.find({_id: req.params.id }, function (err, category) {
         if (err) {
             res.status(500).send({
                 "result": 0
