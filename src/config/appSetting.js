@@ -4,11 +4,11 @@ module.exports = {
    imageServerPath: process.env.IMAGE_SERVER_PATH || 'https://rinteger.com/admin/images/',
   imageUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/app/rinteger-admin/Rinteger-admin/images/' ,
     
-  /* imageOurWorkServerPath: 'http://localhost/RIntegerWorks/',
+/*   imageOurWorkServerPath: 'http://localhost/RIntegerWorks/',
   imageOurWorkUploadPath: './ourwork/', */
     imageOurWorkServerPath: process.env.IMAGE_SERVER_PATH || 'https://rinteger.com/admin/images/ourwork/',
     imageOurWorkUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/rinteger-admin/Rinteger-admin/images/ourwork/' ,
     imageUrl: process.env.IMAGE_URL_PATH || 'https://rinteger.com/assets/images/logohomepage.jpg',
     serviceUrl: 'https://rinteger.com/dashboard/statusView/',
-    notificationUrl: 'https://rinteger.com/admin/navheader/analysis'
+    notificationUrl: 'http://localhost:4200/navheader/crmsubscribe'
   }

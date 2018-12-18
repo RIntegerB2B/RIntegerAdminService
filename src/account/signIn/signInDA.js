@@ -59,12 +59,12 @@ exports.signInToSite = function (req, res) {
                                             if (fullData !== null) {
                                                 accountDetails.push(userDetail);
                                                 accountDetails.push(fullData);
-                                                console.log(accountDetails);
+                                               /*  console.log(accountDetails); */
                                             } else {
                                                 accountDetails.push(userDetail);
                                             }
                                             res.status(200).send(accountDetails);
-                                            console.log(accountDetails);
+                                            /* console.log(accountDetails); */
                                         }
                                     });
                             } 

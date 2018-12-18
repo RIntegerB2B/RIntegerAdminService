@@ -23,6 +23,7 @@ exports.onlySubscribed = function (req, res) {
                 })
 } else {
     res.status(200).json(subscribed);
+   
 }
          })  
 }
