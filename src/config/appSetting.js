@@ -10,5 +10,5 @@ module.exports = {
     imageOurWorkUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/rinteger-admin/Rinteger-admin/images/ourwork/' ,
     imageUrl: process.env.IMAGE_URL_PATH || 'https://rinteger.com/assets/images/logohomepage.jpg',
     serviceUrl: 'https://rinteger.com/dashboard/statusView/',
-    notificationUrl: 'http://localhost:4200/navheader/crmsubscribe'
+    notificationUrl: 'https://rinteger.com/admin/navheader/crmsubscribe'
   }
