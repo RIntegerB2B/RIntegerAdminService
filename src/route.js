@@ -13,6 +13,7 @@ var contactRoutes = require('./contact-us/contactUsRoute');
 var dataAnalysisRoutes = require('./crm/data-analysis/dataAnalysisRoute');
 var bannerRoutes = require('./settings/settingsRoute');
 var ourWorkRoutes = require('./our-work/ourworkRoute');
+var videoPortfolioRoutes = require('./video-portfolio/video-portfolioRoute');
 
 exports.loadRoutes = function (app) {
     accountRoutes(app);
@@ -30,4 +31,5 @@ exports.loadRoutes = function (app) {
     dataAnalysisRoutes(app);
     bannerRoutes(app);
     ourWorkRoutes(app);
+    videoPortfolioRoutes(app);
 };

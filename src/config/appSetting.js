@@ -1,10 +1,10 @@
 module.exports = {
-/*  imageServerPath: 'http://localhost/RInteger/serviceproviders/',
+ /* imageServerPath: 'http://localhost/RInteger/serviceproviders/',
         imageUploadPath: './models/serviceproviders/', */
    imageServerPath: process.env.IMAGE_SERVER_PATH || 'https://rinteger.com/admin/images/',
   imageUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/app/rinteger-admin/Rinteger-admin/images/' ,
     
-/*   imageOurWorkServerPath: 'http://localhost/RIntegerWorks/',
+  /* imageOurWorkServerPath: 'http://localhost/RIntegerWorks/',
   imageOurWorkUploadPath: './ourwork/', */
     imageOurWorkServerPath: process.env.IMAGE_SERVER_PATH || 'https://rinteger.com/admin/images/ourwork/',
     imageOurWorkUploadPath:process.env.IMAGE_UPLOAD_PATH || '/home/ubuntu/rinteger-admin/Rinteger-admin/images/ourwork/' ,
