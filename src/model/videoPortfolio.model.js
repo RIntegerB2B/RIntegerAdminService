@@ -5,4 +5,4 @@ const CategorySchema = new mongoose.Schema({
     videosUrl: String
 });
 
-module.exports = CategorySchema; 
+module.exports = CategorySchema;
