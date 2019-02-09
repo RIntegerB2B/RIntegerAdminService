@@ -3,8 +3,13 @@ var AdminAccount = require('../../model/adminAccount.model');
 var ServiceProvider = require('../../model/serviceProvider.model');
 var UserRegister = require('../../model/userRegister.model');
 var RolePermssionAccount = require('../../model/permission.model');
+var jwt = require('jsonwebtoken');
 
 exports.signInToSite = function (req, res) {
+    var secretKey='123456789?*!^sghd';
+    var token = jwt.sign({ id: req.body.userName }, secretKey, {
+        expiresIn: 43200 // expires in 12 hours
+      });
     AdminAccount.findOne({
         'userName': req.body.userName,
         'password': req.body.password,
@@ -57,6 +62,7 @@ exports.signInToSite = function (req, res) {
                                         } else {
                                             var accountDetails = [];
                                             if (fullData !== null) {
+                                                fullData.token=token;
                                                 accountDetails.push(userDetail);
                                                 accountDetails.push(fullData);
                                                /*  console.log(accountDetails); */
