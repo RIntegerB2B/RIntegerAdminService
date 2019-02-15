@@ -11,7 +11,8 @@ const ServiceProviderSchema = new mongoose.Schema({
     location: String,
     password: String,
     role: String,
-    isActive: Boolean
+    isActive: Boolean,
+    tokenKey: String
 });
 
 const ServiceProviderDetailSchema = mongoose.model('serviceProvider', ServiceProviderSchema);

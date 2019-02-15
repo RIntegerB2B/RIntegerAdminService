@@ -51,7 +51,6 @@ exports.signInToSite = function (req, res) {
                                         message: "Some error occurred while retrieving notes."
                                     });
                                 } else {
-                                    console.log(fullDeatails);
                                     RolePermssionAccount.findOne({
                                         'role': fullDeatails.role
                                     }, function (err, fullData) {
@@ -62,15 +61,14 @@ exports.signInToSite = function (req, res) {
                                         } else {
                                             var accountDetails = [];
                                             if (fullData !== null) {
-                                                fullData.token=token;
+                                                userDetail.tokenKey= token;
                                                 accountDetails.push(userDetail);
                                                 accountDetails.push(fullData);
-                                               /*  console.log(accountDetails); */
+                                            
                                             } else {
                                                 accountDetails.push(userDetail);
                                             }
                                             res.status(200).send(accountDetails);
-                                            /* console.log(accountDetails); */
                                         }
                                     });
                             } 
@@ -102,8 +100,7 @@ exports.create = function (req, res) {
 exports.signIn = function (req, res) {
     AdminAccount.findOne({
         'userName': req.body.userName,
-        'password': req.body.password,
-
+        'password': req.body.password
     }, function (err, userDetail) {
         if (err) {
             res.status(500).send({
@@ -113,5 +110,4 @@ exports.signIn = function (req, res) {
             res.status(200).json(userDetail);
         }
     });
-
 };
