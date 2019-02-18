@@ -5,6 +5,9 @@ var express = require('express'),
 var cors = require('cors');
 var exec = require('child_process').exec;
 var routes=require('./route');
+var tokenAuthMgr=require('./account/tokenAuthenticaton/tokenAuthenticationMgr');
+
+
 
 app.use(bodyParser.json({
     limit: '50mb'
@@ -16,6 +19,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(cors());
 routes.loadRoutes(app);
+app.use(tokenAuthMgr.validateToken);
 app.listen(port);
 
 
@@ -31,10 +35,10 @@ mongoose.connection.on('error', function () {
 
 mongoose.connection.once('open', function () {
     console.log("Successfully connected to the database");
-})
+});
 
 app.get('/test', function (req, res) {
     res.send("Success!");
-})
+});
 
 console.log('RInteger-Admin Service started on: ' + port);
