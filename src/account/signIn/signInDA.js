@@ -5,6 +5,7 @@ var UserRegister = require('../../model/userRegister.model');
 var RolePermssionAccount = require('../../model/permission.model');
 var jwt = require('jsonwebtoken');
 
+
 exports.signInToSite = function (req, res) {
     var secretKey='123456789?*!^sghd';
     var token = jwt.sign({ id: req.body.userName }, secretKey, {
