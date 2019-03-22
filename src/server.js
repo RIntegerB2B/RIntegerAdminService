@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(cors());
 
-app.use(tokenAuthMgr.validateToken);
 routes.loadRoutes(app);
+app.use(tokenAuthMgr.validateToken);
 app.listen(port);
 
 

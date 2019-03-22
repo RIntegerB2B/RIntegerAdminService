@@ -42,37 +42,25 @@ exports.signInToSite = function (req, res) {
                             );
                         }
                         else{
-                            ServiceProvider.findOne({
-                                'userName': req.body.userName,
-                                'password': req.body.password,
-                                'isActive': 1
-                            }, function (err, fullDeatails) {
+                            RolePermssionAccount.findOne({
+                                'role': userDetail.role
+                            }, function (err, fullData) {
                                 if (err) {
                                     res.status(500).send({
                                         message: "Some error occurred while retrieving notes."
                                     });
                                 } else {
-                                    RolePermssionAccount.findOne({
-                                        'role': fullDeatails.role
-                                    }, function (err, fullData) {
-                                        if (err) {
-                                            res.status(500).send({
-                                                message: "Some error occurred while retrieving notes."
-                                            });
-                                        } else {
-                                            var accountDetails = [];
-                                            if (fullData !== null) {
-                                                userDetail.tokenKey= token;
-                                                accountDetails.push(userDetail);
-                                                accountDetails.push(fullData);
-                                            
-                                            } else {
-                                                accountDetails.push(userDetail);
-                                            }
-                                            res.status(200).send(accountDetails);
-                                        }
-                                    });
-                            } 
+                                    var accountDetails = [];
+                                    if (fullData !== null) {
+                                        userDetail.tokenKey= token;
+                                        accountDetails.push(userDetail);
+                                        accountDetails.push(fullData);
+                                    
+                                    } else {
+                                        accountDetails.push(userDetail);
+                                    }
+                                    res.status(200).send(accountDetails);
+                                }
                             });
                         }
                     }
