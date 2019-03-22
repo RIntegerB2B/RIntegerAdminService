@@ -7,14 +7,23 @@ var updateCreativeStatusMgr = require('./update-creative-status/updateCreativeSt
 var updateCatalogStatusMgr = require('./update-catalog-status/updateCatalogStatusMgr');
 var updateRegistrationStatusMgr = require('./update-registration-status/updateRegistrationStatusMgr');
 var updateAplusStatusMgr = require('./update-aplus-status/updateAplusStatusMgr');
+var updatebookingMgr = require('./../updatebooking/updatebookingMgr');
+var cancelBookingMgr = require('./../updateBookingCancelled/cancelledBookingMgr');
+
 
 module.exports = function (app) {
 
+     app.route('/approve/:id').put(updatebookingMgr.updateBooking);
+
+
+    app.route('/cancel/:id').put(cancelBookingMgr.cancelBooking); 
+    
+    
     app.route('/booking')
         .get(viewBookingMgr.findBooking);
         
      
-    app.route('/booking/:id/approve')   // product shoot approval
+    app.route('/booking/:id/')   // product shoot approval
         .get(viewBookingMgr.bookingApproval);
 
    

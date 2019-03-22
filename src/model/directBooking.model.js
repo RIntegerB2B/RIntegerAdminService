@@ -11,7 +11,8 @@ const DirectBookingSchema = new mongoose.Schema({
     productType: [String],
     productDescription: String,
     quantityDescription: String,
-    bookingDate: String
+    bookingDate: String,
+    bookingStatus: String
 });
 
 const DirectBooking = mongoose.model('directBooking', DirectBookingSchema);

@@ -4,7 +4,7 @@ var viewAgencyMgr = require('./view-agency/viewAgencyMgr');
 var approvalMgr = require('../agency-management/agency-approval/approvalMgr')
 
 module.exports = function (app) {
-
+ 
 
     app.route('/agency')
         .get(viewAgencyMgr.findAgency);  //unapproved agency
