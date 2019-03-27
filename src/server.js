@@ -39,7 +39,7 @@ mongoose.connection.once('open', function () {
 });
 
 app.get('/test', function (req, res) {
-    res.send("Success!");
+    res.send("Success123!");
 });
 
 console.log('RInteger-Admin Service started on: ' + port);
