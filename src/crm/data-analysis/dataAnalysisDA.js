@@ -4,7 +4,6 @@ var SubscribeDetail = require('../../model/notification.model');
 exports.onlySubscribed = function (req, res) {
     SubscribeDetail.aggregate([
         {
-          
            $lookup:
            {
                "from": "customerdetails",
@@ -13,7 +12,7 @@ exports.onlySubscribed = function (req, res) {
                "as": "joinedtable" 
             
            },
-        },{
+        }, {
             $match: { "joinedtable": { $eq: [] } } 
         }
         ]).exec(function (err, subscribed) { 
@@ -40,7 +39,7 @@ exports.notSubscribed = function (req, res) {
                "as": "joinedtable" 
             
            },
-        },{
+        }, {
             $match: { "joinedtable": { $eq: [] } } 
         }
         ]).exec(function (err, subscribed) { 

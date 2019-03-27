@@ -22,7 +22,7 @@ exports.updateProductBooking = function (req, res) {
                             "result": 'Some error occured'
                         });
                     } else {
-                        directbookings.findOne({ 'bookingOrderId': req.params.id },
+                        directbookings.findOne({ bookingOrderId : req.params.id },
                             function (err, directdetails) {
                                 if (err) return handleError(err);
                                 else {
