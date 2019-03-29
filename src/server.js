@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 routes.loadRoutes(app);
-/* app.use(tokenAuthMgr.validateToken); */
+app.use(tokenAuthMgr.validateToken);
 app.listen(port);
 
 
