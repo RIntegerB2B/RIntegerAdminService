@@ -41,5 +41,6 @@ mongoose.connection.once('open', function () {
 app.get('/test', function (req, res) {
     res.send("Success123!");
 });
+module.exports = app;
 
 console.log('RInteger-Admin Service started on: ' + port);
